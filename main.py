@@ -21,7 +21,7 @@ class PepperController:
 
         self.root = root
         self.root.option_add('*Font', 'Arial 12')
-        self.root.geometry("400x400")
+        self.root.geometry("400x425")
         self.root.title("Pepper Controller " + self.configuration.conf["configuration"]["version"])
         self.root.resizable(False, False)
 
@@ -112,11 +112,15 @@ class PepperController:
         self.button_app_2 = Button(self.group_application, text=self.configuration.conf["application_2"]["name"])
         self.button_app_3 = Button(self.group_application, text=self.configuration.conf["application_3"]["name"])
         self.button_app_4 = Button(self.group_application, text=self.configuration.conf["application_4"]["name"])
+        self.button_app_5 = Button(self.group_application, text=self.configuration.conf["application_5"]["name"])
+        self.button_app_6 = Button(self.group_application, text=self.configuration.conf["application_6"]["name"])
 
         self.button_app_1.grid(row=0, column=1, sticky=NSEW)
         self.button_app_2.grid(row=1, column=1, sticky=NSEW)
         self.button_app_3.grid(row=2, column=1, sticky=NSEW)
         self.button_app_4.grid(row=3, column=1, sticky=NSEW)
+        self.button_app_5.grid(row=4, column=1, sticky=NSEW)
+        self.button_app_6.grid(row=5, column=1, sticky=NSEW)
 
         self.root.grid_columnconfigure(0, weight=1)
 

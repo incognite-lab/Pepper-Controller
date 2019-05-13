@@ -5,11 +5,17 @@ application_2:
   name: Přednáška
   package: this2/that2
 application_3:
-  name: Fotostánek
+  name: Vyfoť se
   package: this3/that3
 application_4:
-  name: Kvíz
+  name: Hádej zvíře
   package: this4/that4
+application_5:
+  name: Vtipy
+  package: this/5that5
+application_6:
+  name: O firmě
+  package: this6/that6
 configuration:
   default_ip: 10.37.1.227
   default_port: 9559
