@@ -102,7 +102,7 @@ class Pepper:
         else:
             print("Disabling the autonomous life")
             self.autonomous_life_service.setState("disabled")
-            self.stay()
+            self.stand()
 
     def restart_robot(self):
         """Restart robot (it takes several minutes)"""
