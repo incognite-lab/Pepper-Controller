@@ -261,7 +261,7 @@ class Pepper:
         """
         Starts a behavior stored on robot
 
-        :param behavior: Behavior name
+        :param behavior: Behavior name (id/behavior_1 (first part in Choregraphe)
         :type behavior: string
         """
         self.behavior_service.startBehavior(behavior)

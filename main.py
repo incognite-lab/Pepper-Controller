@@ -108,12 +108,12 @@ class PepperController:
         self.group_application = LabelFrame(root, text="Aplikace")
         self.group_application.grid(row=4, column=2, columnspan=1, rowspan=1, padx=5, pady=5, sticky=NSEW)
 
-        self.button_app_1 = Button(self.group_application, text=self.configuration.conf["application_1"]["name"])
-        self.button_app_2 = Button(self.group_application, text=self.configuration.conf["application_2"]["name"])
-        self.button_app_3 = Button(self.group_application, text=self.configuration.conf["application_3"]["name"])
-        self.button_app_4 = Button(self.group_application, text=self.configuration.conf["application_4"]["name"])
-        self.button_app_5 = Button(self.group_application, text=self.configuration.conf["application_5"]["name"])
-        self.button_app_6 = Button(self.group_application, text=self.configuration.conf["application_6"]["name"])
+        self.button_app_1 = Button(self.group_application, text=self.configuration.conf["application_1"]["name"], command=lambda: self.robot.start_behavior(self.configuration.conf["application_1"]["package"]))
+        self.button_app_2 = Button(self.group_application, text=self.configuration.conf["application_2"]["name"], command=lambda: self.robot.start_behavior(self.configuration.conf["application_2"]["package"]))
+        self.button_app_3 = Button(self.group_application, text=self.configuration.conf["application_3"]["name"], command=lambda: self.robot.start_behavior(self.configuration.conf["application_3"]["package"]))
+        self.button_app_4 = Button(self.group_application, text=self.configuration.conf["application_4"]["name"], command=lambda: self.robot.start_behavior(self.configuration.conf["application_4"]["package"]))
+        self.button_app_5 = Button(self.group_application, text=self.configuration.conf["application_5"]["name"], command=lambda: self.robot.start_behavior(self.configuration.conf["application_5"]["package"]))
+        self.button_app_6 = Button(self.group_application, text=self.configuration.conf["application_6"]["name"], command=lambda: self.robot.start_behavior(self.configuration.conf["application_6"]["package"]))
 
         self.button_app_1.grid(row=0, column=1, sticky=NSEW)
         self.button_app_2.grid(row=1, column=1, sticky=NSEW)
