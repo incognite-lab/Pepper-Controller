@@ -86,6 +86,10 @@ class Pepper:
     def show_web(self, website):
     	print("Showing a website on the tablet")
     	self.tablet_service.showWebview(website)
+    	
+    def reset_tablet(self):
+    	print("Resetting a tablet view")
+    	self.tablet_service.hideWebview()
 
     def stop_behaviour(self):
         """Stop all behaviours currently running"""

@@ -96,12 +96,14 @@ class PepperController:
         self.button_stop_all = Button(self.group_tool, text="Ukonči aplikace", command=lambda: self.robot.stop_behaviour())
         self.button_show_web = Button(self.group_tool, text="Zobraz web", command=lambda: self.robot.show_web(self.configuration.conf["configuration"]["default_web"]))
         self.button_teleoperation = Button(self.group_tool, text="Teleoperace")
+        self.button_web_reset = Button(self.group_tool, text="Reset tablet", command=lambda: self.robot.reset_tablet())
 
         self.button_switch_al.grid(row=0, column=0, sticky=EW)
         self.button_battery.grid(row=0, column=1, sticky=EW)
         self.button_stop_all.grid(row=1, column=0, sticky=EW)
         self.button_show_web.grid(row=1, column=1, sticky=EW)
         self.button_teleoperation.grid(row=2, column=0, sticky=EW)
+        self.button_web_reset.grid(row=2, column=1, sticky=EW)
 
         self.group_application = LabelFrame(root, text="Aplikace")
         self.group_application.grid(row=4, column=2, columnspan=1, rowspan=1, padx=5, pady=5, sticky=NSEW)
