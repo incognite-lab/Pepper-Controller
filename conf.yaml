@@ -14,9 +14,9 @@ configuration:
   default_ip: 10.37.1.227
   default_port: 9559
   default_sentence: Ahoj, jmenuji se Pepper a jsem humanoidní robot
-  default_web: https://www.google.com
-  version: 1.1.0
-  virtual: True
+  default_web: http://www.panattonieurope.com/cz/zeme/ceska-republika-slovensko/
+  version: 1.2.0
+  virtual: False
 language:
   yes_list:
     - 'ano'
@@ -25,15 +25,12 @@ language:
     - 'to souhlasí'
   no_list:
     - 'ne'
-    - 'nikoli'
     - 'to tedy ne'
     - 'nesouhlasím'
   dont_know_list:
     - 'bohužel nevím'
     - 'omlouvám se, ale nevím'
-    - 'to jsme ve škole pro roboty neměli'
     - 'netuším'
-    - 'správnou odpoveď bych si musel vymyslet'
   welcome:
     - 'dobrý den, víteje na konferenci'
     - 'ahoj ve spolek, jmenuji se Pepper'

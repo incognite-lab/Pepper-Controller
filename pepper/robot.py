@@ -48,7 +48,7 @@ class Pepper:
         self.battery_service = self.session.service("ALBattery")
         self.awareness_service = self.session.service("ALBasicAwareness")
         self.led_service = self.session.service("ALLeds")
-
+        self.tablet_service = self.session.service("ALTabletService")
         self.animation_service = self.session.service("ALAnimationPlayer")
         self.behavior_service = self.session.service("ALBehaviorManager")
 
@@ -60,12 +60,12 @@ class Pepper:
 
     def stand(self):
         """Get robot into default standing position known as `StandInit` or `Stand`"""
-        self.posture_service.goToPosture("Stand", 0.5)
+        self.posture_service.goToPosture("Stand", 1.0)
         print("[INFO]: Robot is in default position")
 
     def rest(self):
         """Get robot into default resting position know as `Crouch`"""
-        self.posture_service.goToPosture("Crouch", 0.5)
+        self.posture_service.goToPostures("Crouch", 1.0)
         print("[INFO]: Robot is in resting position")
 
     def greet(self):
@@ -82,6 +82,10 @@ class Pepper:
         except Exception as error:
             print(error)
             return False
+            
+    def show_web(self, website):
+    	print("Showing a website on the tablet")
+    	self.tablet_service.showWebview(website)
 
     def stop_behaviour(self):
         """Stop all behaviours currently running"""

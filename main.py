@@ -94,7 +94,7 @@ class PepperController:
                                        command=lambda: self.robot.autonomous_life())
         self.button_battery = Button(self.group_tool, text="Stav baterie", command=lambda: self.robot.battery_status())
         self.button_stop_all = Button(self.group_tool, text="Ukonči aplikace", command=lambda: self.robot.stop_behaviour())
-        self.button_show_web = Button(self.group_tool, text="Zobraz web")
+        self.button_show_web = Button(self.group_tool, text="Zobraz web", command=lambda: self.robot.show_web(self.configuration.conf["configuration"]["default_web"]))
         self.button_teleoperation = Button(self.group_tool, text="Teleoperace")
 
         self.button_switch_al.grid(row=0, column=0, sticky=EW)
