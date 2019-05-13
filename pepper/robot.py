@@ -53,6 +53,7 @@ class Pepper:
         self.behavior_service = self.session.service("ALBehaviorManager")
 
         print("[INFO]: Robot is initialized at " + ip_address + ":" + str(port))
+    	
 
     def say(self, text):
         """Animated say text"""
@@ -67,6 +68,14 @@ class Pepper:
         """Get robot into default resting position know as `Crouch`"""
         self.posture_service.goToPostures("Crouch", 1.0)
         print("[INFO]: Robot is in resting position")
+        
+    def turn_around(self, speed):
+        """
+        Turn around its axis
+        :param speed: Positive values to right, negative to left
+        :type speed: float
+        """
+        self.motion_service.move(0, 0, speed)
 
     def greet(self):
         """
@@ -256,6 +265,14 @@ class Pepper:
         except Exception as error:
             print(error)
             return False
+            
+    def move_forward(self, speed):
+        """
+        Move forward with certain speed
+        :param speed: Positive values forward, negative backwards
+        :type speed: float
+        """
+        self.motion_service.move(speed, 0, 0)
 
     def start_behavior(self, behavior):
         """

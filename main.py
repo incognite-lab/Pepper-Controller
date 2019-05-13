@@ -4,6 +4,7 @@ from Tkinter import *
 import yaml
 from pepper.robot import Pepper
 import numpy as np
+from pepper import teleoperation
 
 
 class Configuration:
@@ -95,7 +96,7 @@ class PepperController:
         self.button_battery = Button(self.group_tool, text="Stav baterie", command=lambda: self.robot.battery_status())
         self.button_stop_all = Button(self.group_tool, text="Ukonči aplikace", command=lambda: self.robot.stop_behaviour())
         self.button_show_web = Button(self.group_tool, text="Zobraz web", command=lambda: self.robot.show_web(self.configuration.conf["configuration"]["default_web"]))
-        self.button_teleoperation = Button(self.group_tool, text="Teleoperace")
+        self.button_teleoperation = Button(self.group_tool, text="Teleoperace", command=lambda: teleoperation.teleoperate_robot(self.robot))
         self.button_web_reset = Button(self.group_tool, text="Reset tablet", command=lambda: self.robot.reset_tablet())
 
         self.button_switch_al.grid(row=0, column=0, sticky=EW)
