@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 """
 This is a wrapper around `qi` framework by Aldebaran
 to control Pepper the humanoid robot with Python 2.7.
@@ -143,7 +145,7 @@ class Pepper:
     def battery_status(self):
         """Say a battery status"""
         battery = self.battery_service.getBatteryCharge()
-        self.say("I have " + str(battery) + " percent of battery")
+        self.say("Mám nabitých " + str(battery) + " procent baterie")
 
     def set_awareness(self, state):
         """
