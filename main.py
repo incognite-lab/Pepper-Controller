@@ -70,7 +70,7 @@ class PepperController:
         self.button_say_custom_text = Button(self.group_interaction, text="Říct text", command=lambda: self.robot.say(
                                          self.entry_say_text.get().encode("utf-8")))
         self.button_stay = Button(self.group_interaction, text="Stůj", command=lambda: self.robot.stand())
-        self.button_rest = Button(self.group_interaction, text="Odpočívej", command=lambda: self.robot.rest())
+        self.button_rest = Button(self.group_interaction, text="Blikání", command=lambda: self.robot.autonomous_blinking())
         self.button_wave = Button(self.group_interaction, text="Zamávej", command=lambda: self.robot.start_animation(
             np.random.choice(["Hey_1", "Hey_3", "Hey_4", "Hey_6"])
         ))

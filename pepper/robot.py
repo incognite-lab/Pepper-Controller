@@ -51,6 +51,9 @@ class Pepper:
         self.tablet_service = self.session.service("ALTabletService")
         self.animation_service = self.session.service("ALAnimationPlayer")
         self.behavior_service = self.session.service("ALBehaviorManager")
+        self.autonomous_blinking_service = self.session.service("ALAutonomousBlinking")
+        self.speech_service = self.session.service("ALSpeechRecognition")
+        self.eye_blinking_enabled = True
 
         print("[INFO]: Robot is initialized at " + ip_address + ":" + str(port))
     	
@@ -76,6 +79,17 @@ class Pepper:
         :type speed: float
         """
         self.motion_service.move(0, 0, speed)
+        
+    def autonomous_blinking(self):
+        self.eye_blinking_enabled = not self.eye_blinking_enabled
+        if self.speech_service.getAudioExpression():
+        	print("Disable eye blinking and beeping when listening...")
+	        self.speech_service.setAudioExpression(False)
+	        self.speech_service.setVisualExpression(False)
+        else:
+    		print("Enable eye blinking and beeping when listening...")
+    		self.speech_service.setAudioExpression(True)
+    		self.speech_service.setVisualExpression(True)
 
     def greet(self):
         """
@@ -259,8 +273,17 @@ class Pepper:
         :rtype: bool
         """
         try:
+        
+            if self.eye_blinking_enabled:
+		    	self.speech_service.setAudioExpression(True)
+		    	self.speech_service.setVisualExpression(True)
+            else:
+                self.speech_service.setAudioExpression(False)
+                self.speech_service.setVisualExpression(False)
+        
             animation_finished = self.animation_service.run("animations/[posture]/Gestures/" + animation, _async=True)
             animation_finished.value()
+            
             return True
         except Exception as error:
             print(error)
