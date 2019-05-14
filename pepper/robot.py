@@ -35,7 +35,7 @@ class Pepper:
     """
     def __init__(self, ip_address, port=9559):
         self.session = qi.Session()
-        print("tcp://{0}:{1}".format(ip_address, port))
+
         self.session.connect("tcp://{0}:{1}".format(ip_address, port))
 
         self.ip_address = ip_address
@@ -56,7 +56,10 @@ class Pepper:
         self.eye_blinking_enabled = True
 
         print("[INFO]: Robot is initialized at " + ip_address + ":" + str(port))
-    	
+        
+        
+    def show_image(self, image):
+        self.tablet_service.showImage(image)
 
     def say(self, text):
         """Animated say text"""
@@ -109,7 +112,7 @@ class Pepper:
     def show_web(self, website):
     	print("Showing a website on the tablet")
     	self.tablet_service.showWebview(website)
-    	
+	
     def reset_tablet(self):
     	print("Resetting a tablet view")
     	self.tablet_service.hideWebview()
@@ -348,4 +351,5 @@ class Pepper:
                 print("[INFO]: Hand " + hand + "is opened")
         else:
             print("[INFO]: Cannot move a hand")
+            
 
