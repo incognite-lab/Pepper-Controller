@@ -22,7 +22,7 @@ class PepperController:
 
         self.root = root
         self.root.option_add('*Font', 'Arial 12')
-        self.root.geometry("400x425")
+        self.root.geometry("400x485")
         self.root.title("Pepper Controller " + self.configuration.conf["configuration"]["version"])
         self.root.resizable(False, False)
 
