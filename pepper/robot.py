@@ -63,8 +63,8 @@ class Pepper:
 
     def say(self, text):
         """Animated say text"""
-        speed = 74
-        shape = 124
+        speed = 100
+        shape = 100
         self.tts_service.say(
             "\\RSPD={0}\\ \\VCT={1} \\{2}".format(speed, shape, text)
         )
