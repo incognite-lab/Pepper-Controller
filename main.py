@@ -124,6 +124,13 @@ class PepperController:
         self.button_app_6.grid(row=5, column=1, sticky=NSEW)
 
         self.root.grid_columnconfigure(0, weight=1)
+        
+        self.voice_shaping_scale = Scale(from_=0, to=200, orient=HORIZONTAL, label="Výška hlasu")
+        self.voice_speed_scale = Scale(from_=0, to=200, orient=HORIZONTAL, label="Rychlost hlasu")
+        self.voice_speed_scale.grid(row=5, column=0)
+        self.voice_shaping_scale.grid(row=5, column=1)
+        self.test_say_button = Button(self.root, text="Testuj parametry hlasu", command=lambda: self.robot.test_say(speed=self.voice_speed_scale.get(), shape=self.voice_shaping_scale.get()))
+        self.test_say_button.grid(row=6, column=0)
 
     def connect(self):
         ip_address = self.entry_address.get()

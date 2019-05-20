@@ -63,7 +63,16 @@ class Pepper:
 
     def say(self, text):
         """Animated say text"""
-        self.tts_service.say(text)
+        speed = 100
+        shape = 100
+        self.tts_service.say(
+            "\\RSPD={0}\\ \\VCT={1} \\Ahoj, tohle je moje zkouška hlasu!".format(speed, shape)
+        )
+        
+    def test_say(self, speed=100, shape=100):
+        self.tts_service.say(
+            "\\RSPD={0}\\ \\VCT={1} \\Ahoj, tohle je moje zkouška hlasu!".format(speed, shape)
+        )
 
     def stand(self):
         """Get robot into default standing position known as `StandInit` or `Stand`"""
