@@ -63,10 +63,10 @@ class Pepper:
 
     def say(self, text):
         """Animated say text"""
-        speed = 100
-        shape = 100
+        speed = 74
+        shape = 124
         self.tts_service.say(
-            "\\RSPD={0}\\ \\VCT={1} \\Ahoj, tohle je moje zkouška hlasu!".format(speed, shape)
+            "\\RSPD={0}\\ \\VCT={1} \\{2}".format(speed, shape, text)
         )
         
     def test_say(self, speed=100, shape=100):
