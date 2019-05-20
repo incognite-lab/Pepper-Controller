@@ -21,7 +21,7 @@ configuration:
   default_port: 9559
   default_sentence: Dobrý den, jsem nová posila Panatony Jurop, Jmenuji se Pepper a jsem humanoidní robot.
   logo: https://i.imgur.com/T8iAo8e.png
-  version: 1.5.0
+  version: 1.5.1
   virtual: False
 language:
   yes_list:
