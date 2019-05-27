@@ -53,6 +53,7 @@ class Pepper:
         self.behavior_service = self.session.service("ALBehaviorManager")
         self.autonomous_blinking_service = self.session.service("ALAutonomousBlinking")
         self.speech_service = self.session.service("ALSpeechRecognition")
+        self.dialog_service = self.session.service("ALDialog")
         self.eye_blinking_enabled = True
 
         print("[INFO]: Robot is initialized at " + ip_address + ":" + str(port))
@@ -60,6 +61,14 @@ class Pepper:
         
     def show_image(self, image):
         self.tablet_service.showImage(image)
+        
+    def set_czech_language(self):
+        self.dialog_service.setLanguage("Czech")
+        print("Czech language was set up")
+
+    def set_english_language(self):
+	    self.dialog_service.setLanguage("English")
+	    print("English language was set up")
 
     def say(self, text):
         """Animated say text"""

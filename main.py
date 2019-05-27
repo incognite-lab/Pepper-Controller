@@ -22,7 +22,7 @@ class PepperController:
 
         self.root = root
         self.root.option_add('*Font', 'Arial 12')
-        self.root.geometry("400x485")
+        self.root.geometry("400x600")
         self.root.title("Pepper Controller " + self.configuration.conf["configuration"]["version"])
         self.root.resizable(False, False)
 
@@ -129,8 +129,19 @@ class PepperController:
         self.voice_speed_scale = Scale(from_=0, to=200, orient=HORIZONTAL, label="Rychlost hlasu")
         self.voice_speed_scale.grid(row=5, column=0)
         self.voice_shaping_scale.grid(row=5, column=1)
-        self.test_say_button = Button(self.root, text="Testuj parametry hlasu", command=lambda: self.robot.test_say(speed=self.voice_speed_scale.get(), shape=self.voice_shaping_scale.get()))
+        self.test_say_button = Button(self.root, text="Test hlasu", command=lambda: self.robot.test_say(speed=self.voice_speed_scale.get(), shape=self.voice_shaping_scale.get()))
         self.test_say_button.grid(row=6, column=0)
+        
+        self.language_button_cz = Button(self.root, text="Nastav češtinu", 
+			command=lambda: self.robot.set_czech_language()
+		)
+        self.language_button_en = Button(
+			self.root, text="Nastav angličtinu", 
+			command=lambda: self.robot.set_english_language()
+		)
+		
+        self.language_button_cz.grid(row=7, column=0)
+        self.language_button_en.grid(row=7, column=1)
 
     def connect(self):
         ip_address = self.entry_address.get()
