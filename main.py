@@ -19,6 +19,7 @@ class PepperController:
     def __init__(self, root):
         self.configuration = Configuration()
         self.robot = None
+        self.language = self.configuration.conf["language"]["lang"]
 
         self.root = root
         self.root.option_add('*Font', 'Arial 12')
@@ -51,20 +52,20 @@ class PepperController:
         self.group_interaction.grid(row=2, column=0, columnspan=4, rowspan=2, padx=5, pady=5)
         self.button_say_no = Button(self.group_interaction, text="Ne", command=lambda: self.robot.say(
                                          str(np.random.choice(
-                                             self.configuration.conf["language"]["no_list"]).encode("utf-8"))))
+                                             self.configuration.conf["language"][self.language]["no_list"]).encode("utf-8"))))
         self.button_say_yes = Button(self.group_interaction, text="Ano",
                                      command=lambda: self.robot.say(
                                          str(np.random.choice(
-                                             self.configuration.conf["language"]["yes_list"]).encode("utf-8"))))
+                                             self.configuration.conf["language"][self.language]["yes_list"]).encode("utf-8"))))
         self.button_say_dont_know = Button(self.group_interaction, text="Nevím", command=lambda: self.robot.say(
                                          str(np.random.choice(
-                                             self.configuration.conf["language"]["dont_know_list"]).encode("utf-8"))))
+                                             self.configuration.conf["language"][self.language]["dont_know_list"]).encode("utf-8"))))
         self.button_say_hello = Button(self.group_interaction, text="Pozdrav", command=lambda: self.robot.say(
                                          str(np.random.choice(
-                                             self.configuration.conf["language"]["hello"]).encode("utf-8"))))
+                                             self.configuration.conf["language"][self.language]["hello"]).encode("utf-8"))))
         self.button_say_welcome = Button(self.group_interaction, text="Vítej", command=lambda: self.robot.say(
                                          str(np.random.choice(
-                                             self.configuration.conf["language"]["welcome"]).encode("utf-8"))))
+                                             self.configuration.conf["language"][self.language]["welcome"]).encode("utf-8"))))
         self.entry_say_text = Entry(self.group_interaction)
         self.entry_say_text.insert(END, self.configuration.conf["configuration"]["default_sentence"])
         self.button_say_custom_text = Button(self.group_interaction, text="Říct text", command=lambda: self.robot.say(
@@ -115,6 +116,7 @@ class PepperController:
         self.button_app_4 = Button(self.group_application, text=self.configuration.conf["application_4"]["name"], command=lambda: self.robot.start_behavior(self.configuration.conf["application_4"]["package"]))
         self.button_app_5 = Button(self.group_application, text=self.configuration.conf["application_5"]["name"], command=lambda: self.robot.start_behavior(self.configuration.conf["application_5"]["package"]))
         self.button_app_6 = Button(self.group_application, text=self.configuration.conf["application_6"]["name"], command=lambda: self.robot.start_behavior(self.configuration.conf["application_6"]["package"]))
+        self.button_app_7 = Button(self.group_application, text=self.configuration.conf["application_7"]["name"], command=lambda: self.robot.start_behavior(self.configuration.conf["application_7"]["package"]))
 
         self.button_app_1.grid(row=0, column=1, sticky=NSEW)
         self.button_app_2.grid(row=1, column=1, sticky=NSEW)
@@ -122,6 +124,7 @@ class PepperController:
         self.button_app_4.grid(row=3, column=1, sticky=NSEW)
         self.button_app_5.grid(row=4, column=1, sticky=NSEW)
         self.button_app_6.grid(row=5, column=1, sticky=NSEW)
+        self.button_app_7.grid(row=6, column=1, sticky=NSEW)
 
         self.root.grid_columnconfigure(0, weight=1)
         
@@ -129,15 +132,15 @@ class PepperController:
         self.voice_speed_scale = Scale(from_=0, to=200, orient=HORIZONTAL, label="Rychlost hlasu")
         self.voice_speed_scale.grid(row=5, column=0)
         self.voice_shaping_scale.grid(row=5, column=1)
-        self.test_say_button = Button(self.root, text="Test hlasu", command=lambda: self.robot.test_say(speed=self.voice_speed_scale.get(), shape=self.voice_shaping_scale.get()))
+        self.test_say_button = Button(self.root, text="Test hlasu", command=lambda: self.robot.test_say(speed=self.voice_speed_scale.get(), shape=self.voice_shaping_scale.get(), sentence=self.configuration.conf["language"][self.language]["test_sentence"]))
         self.test_say_button.grid(row=6, column=0)
         
         self.language_button_cz = Button(self.root, text="Nastav češtinu", 
-			command=lambda: self.robot.set_czech_language()
+			command=lambda: self.change_language("cz")
 		)
         self.language_button_en = Button(
 			self.root, text="Nastav angličtinu", 
-			command=lambda: self.robot.set_english_language()
+			command=lambda: self.change_language("en")
 		)
 		
         self.language_button_cz.grid(row=7, column=0)
@@ -147,6 +150,12 @@ class PepperController:
         ip_address = self.entry_address.get()
         port = self.entry_port.get()
         self.robot = Pepper(ip_address, port)
+        self.change_language(self.language)
+
+    def change_language(self, lang):
+        fncts = {"cz": self.robot.set_czech_language, "en": self.robot.set_english_language}
+        fncts[lang]()
+        self.language = lang
 
 
 if __name__ == "__main__":

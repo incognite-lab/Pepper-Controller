@@ -16,6 +16,10 @@ application_5:
 application_6:
   name: Source go
   package: comehere-0540c9/behavior_1
+application_7:
+  name: Alquist
+  package: alquist-9640b1/behavior_2
+
 configuration:
   default_ip: 10.37.1.227
   default_port: 9559
@@ -24,36 +28,65 @@ configuration:
   version: 1.5.1
   virtual: False
 language:
-  yes_list:
-    - 'yes'
-    - 'sure'
-    - 'of course'
-    - 'yeah'
-    - 'that is true'
-    - 'i agree'
-    - 'you are right'
-    - 'yes sir'
-    - 'yes, of course'
-  no_list:
-    - 'no'
-    - 'nope'
-    - 'no way'
-    - 'i do not agree'
-    - 'this is not correct'
-  dont_know_list:
-    - 'i have no idea'
-    - 'i do not know'
-    - 'sorry, have no idea'
-    - 'i am not sure'
-    - 'not sure about this'
-    - 'i do not know correct answer'
-  welcome:
-    - 'Hello, my name is pepper and I am a humanoid robot from czech institute of informatics, robotics and cybernetics '
-  hello:
-    - 'hello'
-    - 'hi everybody'
-    - 'nice to be here'
-    - 'nice to meet you'
-    - 'hello my friend'
-    - 'it is a plesure to meet you'
-    - 'what an honour to see you'
+  lang: "cz"
+  cz:
+    test_sentence: "Ahoj, tohle je moje zkouška hlasu."
+    yes_list:
+      - 'ano'
+      - 'jistě'
+      - 'samozřejmě'
+      - 'to souhlasí'
+      - 'souhlasím'
+      - 'na tom se shodneme'
+    no_list:
+      - 'ne'
+      - 'to nesouhlasí'  
+      - 'nesouhlasím'
+    dont_know_list:
+      - 'bohužel nevím'
+      - 'omlouvám se, ale nevím'
+      - 'netuším'
+    welcome:
+      - 'Dobrý den, dovoluji si Vás pozvat na stánek Panattoni Europe, kde Vám nabídneme výbornou kávu. Panattoni Europe je dle mého skromného názoru nejlepší developer pro Průmysl čtyři nula.'
+    hello:
+      - 'dobrý den'
+      - 'tady jsem, ahoj'
+      - 'zdravím'
+      - 'zdravíčko'
+      - 'dobrý den ve spolek'
+      - 'vítejte u stánku Panatony Jurop'
+  en:
+    test_sentence: "Hello, this is the test of my voice."
+    yes_list:
+      - 'yes'
+      - 'sure'
+      - 'of course'
+      - 'yeah'
+      - 'that is true'
+      - 'i agree'  
+      - 'you are right'
+      - 'yes sir'
+      - 'yes, of course'
+    no_list:
+      - 'no'
+      - 'nope'
+      - 'no way'
+      - 'i do not agree'
+      - 'this is not correct'
+    dont_know_list:
+      - 'i have no idea'
+      - 'i do not know'
+      - 'sorry, have no idea'
+      - 'i am not sure'
+      - 'not sure about this'
+      - 'i do not know correct answer'
+    welcome:
+      - 'Hello, my name is pepper and I am a humanoid robot from czech institute of informatics, robotics and cybernetics '
+    hello:
+      - 'hello'
+      - 'hi everybody'
+      - 'nice to be here'
+      - 'nice to meet you'
+      - 'hello my friend'
+      - 'it is a plesure to meet you'
+      - 'what an honour to see you'  

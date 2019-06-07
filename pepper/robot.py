@@ -78,9 +78,9 @@ class Pepper:
             "\\RSPD={0}\\ \\VCT={1} \\{2}".format(speed, shape, text)
         )
         
-    def test_say(self, speed=100, shape=100):
+    def test_say(self, sentence, speed=100, shape=100):
         self.tts_service.say(
-            "\\RSPD={0}\\ \\VCT={1} \\Ahoj, tohle je moje zkouška hlasu!".format(speed, shape)
+            ("\\RSPD={0}\\ \\VCT={1} \\" + sentence).format(speed, shape)
         )
 
     def stand(self):
