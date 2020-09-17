@@ -1,0 +1,122 @@
+application_1:
+  name: Kvíz
+  package: quiz3-c3efd0/behavior_1
+application_2:
+  name: Tancuj
+  package: red_ball_tracking-9622dc/behavior_1
+application_3:
+  name: Pantomima
+  package: guessanimal-1b35ac/behavior_1
+application_4:
+  name: Foto
+  package: photograher-9ce6a1/behavior_1
+application_5:
+  name: Vtipy
+  package: joketeller-9fe592/SayJoke
+application_6:
+  name: Source go
+  package: comehere-0540c9/behavior_1
+application_7:
+  name: Alquist
+  package: alquist-9640b1/behavior_2
+
+configuration:
+  default_ip: 192.168.0.183
+  default_port: 9559
+  default_sentence: Hello, I am so glad to be here
+  logo: http://people.ciirc.cvut.cz/sejnogab/logo.jpg
+  pozvanka: http://people.ciirc.cvut.cz/sejnogab/sovicka.JPG
+  version: 1.5.1
+  virtual: False
+language:
+  lang: "cz"
+  cz:
+    test_sentence: "Ahoj, tohle je moje zkouška hlasu."
+    yes_list:
+      - 'ano'
+      - 'jistě'
+      - 'samozřejmě'
+      - 'to souhlasí'
+      - 'souhlasím'
+      - 'na tom se shodneme'
+    no_list:
+      - 'ne'
+      - 'to nesouhlasí'  
+      - 'nesouhlasím'
+    dont_know_list:
+      - 'bohužel nevím'
+      - 'omlouvám se, ale nevím'
+      - 'netuším'
+    welcome:
+      - 'Dobrý den, dovoluji si Vás pozvat na stánek Panattoni Europe, kde Vám nabídneme výbornou kávu. Panattoni Europe je dle mého skromného názoru nejlepší developer pro Průmysl čtyři nula.'
+    invitation_morning:
+      - "program konference je opravdu nabitý, ale rozhodně si nenechte ujít přednášku pavla sovičky s názvem udržitelný přístup k výstavbě průmyslových budov"
+    slosovani:
+      - "pokud chcete vyhrát některou ze zajímavých cen, odevzdejte prosím svou vizitku. Slosování bude ještě dnes odpoledne."
+    stavitel:
+      - "Panatony je nejaktivnější stavitel průmyslových zón v Evropě"
+    breeam:
+      - "Díky důslednému dodržování požadavků certifikace b r e e a m, Panatony využil rekordní objem druhotných surovin při revitalizaci braunfíldu v připravovaném parku Ostrov North."
+    specialista:
+      - "Panatony je specialista  na revitalizaci braunfíldů a ekologickou výstavbu"
+    oceneni:
+      - "Panatony získal ocenění v soutěži ministerstva průmyslu a obchodu za projekt Panatony Ostrov North."
+    hello:
+      - 'dobrý den'
+      - 'zdravím'
+      - 'zdravíčko'
+      - 'Dobrý den. já nejsem Bond, žejms Bond. jsem Tony Panatony.'
+    name:
+      - 'Já nejsem Bond, žejms Bond. jsem Tony Panatony.'
+      - 'Já nejsem Bond, žejms Bond. jsem Tony Panatony.'
+      - 'Já nejsem Bond, žejms Bond. jsem Tony Panatony.'
+      - 'Já jsem tony. Tony Panatony.'
+  en:
+    test_sentence: "Hello, this is the test of my voice."
+    yes_list:
+      - 'yes'
+      - 'sure'
+      - 'of course'
+      - 'yeah'
+      - 'that is true'
+      - 'i agree'  
+      - 'you are right'
+      - 'yes sir'
+      - 'yes, of course'
+    no_list:
+      - 'no'
+      - 'nope'
+      - 'no way'
+      - 'i do not agree'
+      - 'this is not correct'
+    dont_know_list:
+      - 'i have no idea'
+      - 'i do not know'
+      - 'sorry, have no idea'
+      - 'i am not sure'
+      - 'not sure about this'
+      - 'i do not know correct answer'
+    welcome:
+      - 'Hello, my name is pepper and I am a humanoid robot from czech institute of informatics, robotics and cybernetics '
+    invitation_morning:
+      - 'Please come to the talk'
+    slosovani:
+      - 'Please come to some other action.'
+    stavitel:
+      - ""
+    breeam:
+      - ""
+    specialista:
+      - ""
+    oceneni:
+      - ""
+    hello:
+      - 'hello'
+      - 'hi everybody'
+      - 'nice to be here'
+      - 'nice to meet you'
+      - 'hello my friend'
+      - 'it is a plesure to meet you'
+      - 'what an honour to see you'  
+    name:
+      - 'I am not james bond. i am tony puna tony.'
