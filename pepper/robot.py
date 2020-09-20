@@ -988,6 +988,18 @@ class Pepper:
             except KeyboardInterrupt:
                 self.set_awareness(True)
 
+    def streamCamera(self):
+        self.subscribe_camera("camera_top", 2, 30)
+
+        while True:
+            image = self.get_camera_frame(show=False)
+            cv2.imshow("frame", image)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
+        self.unsubscribe_camera()
+        cv2.destroyAllWindows()
+
     class VirtualPepper:
         """Virtual robot for testing"""
 

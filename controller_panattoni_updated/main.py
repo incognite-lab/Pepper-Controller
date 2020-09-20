@@ -91,6 +91,7 @@ class PepperController:
                                          str(np.random.choice(
                                              self.configuration.conf["language"][self.language]["oceneni"]).encode("utf-8"))))
         self.button_blinking = Button(self.group_interaction, text="Blikání", command=lambda: self.robot.autonomous_blinking())
+        self.button_obraz = Button(self.group_interaction, text="Obraz", command=lambda: self.robot.streamCamera())
 
         self.entry_say_text.grid(row=0, column=0, columnspan=6, sticky=NSEW)
 
@@ -115,6 +116,7 @@ class PepperController:
         #row 4
         self.button_slosovani.grid(row=4, column=0, sticky=EW)
         self.button_oceneni.grid(row=4, column=1, sticky=NSEW)
+        self.button_obraz.grid(row=4, column=2, sticky=NSEW)
 
 
         self.group_tool = LabelFrame(root, text="Nástroje")

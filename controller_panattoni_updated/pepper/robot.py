@@ -13,6 +13,7 @@ It also includes a virtual robot for testing purposes.
 import qi
 import time
 import numpy
+import cv2
 
 
 class Pepper:
@@ -54,7 +55,9 @@ class Pepper:
         self.autonomous_blinking_service = self.session.service("ALAutonomousBlinking")
         self.speech_service = self.session.service("ALSpeechRecognition")
         self.dialog_service = self.session.service("ALDialog")
+        self.camera_device = self.session.service("ALVideoDevice")
         self.eye_blinking_enabled = True
+
 
         print("[INFO]: Robot is initialized at " + ip_address + ":" + str(port))
         
@@ -371,5 +374,50 @@ class Pepper:
                 print("[INFO]: Hand " + hand + "is opened")
         else:
             print("[INFO]: Cannot move a hand")
-            
+
+    def subscribe_camera(self, camera, resolution, fps):
+        color_space = 13
+
+        camera_index = None
+        if camera == "camera_top":
+            camera_index = 0
+        elif camera == "camera_bottom":
+            camera_index = 1
+        elif camera == "camera_depth":
+            camera_index = 2
+            resolution = 1
+            color_space = 11
+
+        self.camera_link = self.camera_device.subscribeCamera("Camera_Stream" + str(numpy.random.random()),
+                                                              camera_index, resolution, color_space, fps)
+        if self.camera_link:
+            print("[INFO]: Camera is initialized")
+        else:
+            print("[ERROR]: Camera is not initialized properly")
+
+    def unsubscribe_camera(self):
+        self.camera_device.unsubscribe(self.camera_link)
+        print("[INFO]: Camera was unsubscribed")
+
+    def get_camera_frame(self, show):
+        image_raw = self.camera_device.getImageRemote(self.camera_link)
+        image = numpy.frombuffer(image_raw[6], numpy.uint8).reshape(image_raw[1], image_raw[0], 3)
+
+        if show:
+            cv2.imshow("Pepper Camera", image)
+            cv2.waitKey(-1)
+            cv2.destroyAllWindows()
+
+        return image
+
+    def streamCamera(self):
+        self.subscribe_camera("camera_top", 2, 30)
+        while True:
+            image = self.get_camera_frame(show=False)
+            cv2.imshow("frame", image)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
+        self.unsubscribe_camera()
+        cv2.destroyAllWindows()
 
