@@ -93,6 +93,19 @@ class PepperController:
         self.button_blinking = Button(self.group_interaction, text="Blikání", command=lambda: self.robot.autonomous_blinking())
         self.button_obraz = Button(self.group_interaction, text="Obraz", command=lambda: self.robot.streamCamera())
 
+        self.voice_tools = LabelFrame(root, text="Hlas")
+        self.voice_tools.grid(row=7, column=0, columnspan=2, rowspan=3, padx=5, pady=5)
+        self.voice_shaping_scale = Scale(self.voice_tools, from_=0, to=200, orient=HORIZONTAL)
+        self.voice_speed_scale = Scale(self.voice_tools, from_=0, to=200, orient=HORIZONTAL)
+        self.voice_volume_scale = Scale(self.voice_tools, from_=0, to=100, orien=HORIZONTAL)
+        self.button_confirm = Button(self.voice_tools, text="OK", command=lambda: self.robot.changeVoice(
+            self.voice_volume_scale.get(), self.voice_speed_scale.get(), self.voice_shaping_scale.get()))
+        # labels for scales
+        self.label_shaping = Label(self.voice_tools, text="Výška hlasu")
+        self.label_speed = Label(self.voice_tools, text="Rychlost hlasu")
+        self.label_volume = Label(self.voice_tools, text="Hlasitost")
+
+
         self.entry_say_text.grid(row=0, column=0, columnspan=6, sticky=NSEW)
 
         # row 1
@@ -118,6 +131,14 @@ class PepperController:
         self.button_oceneni.grid(row=4, column=1, sticky=NSEW)
         self.button_obraz.grid(row=4, column=2, sticky=NSEW)
 
+        #row7
+        self.label_speed.grid(row=7,column=0)
+        self.voice_speed_scale.grid(row=7, column=1)
+        self.label_shaping.grid(row=7, column=2)
+        self.voice_shaping_scale.grid(row=7, column=3)
+        self.label_volume.grid(row=7, column=4)
+        self.voice_volume_scale.grid(row=7, column=5)
+        self.button_confirm.grid(row=7, column=7)
 
         self.group_tool = LabelFrame(root, text="Nástroje")
         self.group_tool.grid(row=4, column=0, columnspan=2, rowspan=3, padx=5, pady=5)
@@ -178,6 +199,7 @@ class PepperController:
         port = self.entry_port.get()
         self.robot = Pepper(ip_address, port)
         self.change_language(self.language)
+        self.setScales()
 
     def invitation(self):
         self.robot.show_image(self.configuration.conf["configuration"]["pozvanka"])
@@ -187,6 +209,11 @@ class PepperController:
         fncts = {"cz": self.robot.set_czech_language, "en": self.robot.set_english_language}
         fncts[lang]()
         self.language = lang
+
+    def setScales(self):
+        self.voice_speed_scale.set(self.robot.getVoiceSpeed())
+        self.voice_shaping_scale.set(self.robot.getVoiceShape())
+        self.voice_volume_scale.set(self.robot.getVoiceVolume())
 
 
 if __name__ == "__main__":

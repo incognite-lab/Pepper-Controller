@@ -57,11 +57,22 @@ class Pepper:
         self.dialog_service = self.session.service("ALDialog")
         self.camera_device = self.session.service("ALVideoDevice")
         self.eye_blinking_enabled = True
+        self.audio_device = self.session.service("ALAudioDevice")
 
+        self.voice_speed = 100
+        self.voice_shape = 100
 
         print("[INFO]: Robot is initialized at " + ip_address + ":" + str(port))
         
-        
+    def getVoiceSpeed(self):
+        return self.voice_speed
+
+    def getVoiceShape(self):
+        return self.voice_shape
+
+    def getVoiceVolume(self):
+        return self.audio_device.getOutputVolume()
+
     def show_image(self, image):
         self.tablet_service.showImage(image)
         
@@ -75,10 +86,8 @@ class Pepper:
 
     def say(self, text):
         """Animated say text"""
-        speed = 100
-        shape = 100
         self.tts_service.say(
-            "\\RSPD={0}\\ \\VCT={1} \\{2}".format(speed, shape, text)
+            "\\RSPD={0}\\ \\VCT={1} \\{2}".format(self.voice_speed, self.voice_shape, text)
         )
         
     def test_say(self, sentence, speed=100, shape=100):
@@ -197,7 +206,7 @@ class Pepper:
         :type volume: integer
         """
         self.audio_device.setOutputVolume(volume)
-        self.say("Volume is set to " + str(volume) + " percent")
+        #self.say("Volume is set to " + str(volume) + " percent")
 
     def battery_status(self):
         """Say a battery status"""
@@ -421,3 +430,9 @@ class Pepper:
         self.unsubscribe_camera()
         cv2.destroyAllWindows()
 
+    def changeVoice(self, volume, speed, shape):
+        self.set_volume(volume)
+        #if self.voice_shape
+        self.voice_speed = speed
+        self.voice_shape = shape
+        self.say("Zkouška hlasu")
