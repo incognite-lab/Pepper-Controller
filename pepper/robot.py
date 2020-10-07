@@ -88,6 +88,9 @@ class Pepper:
         self.autonomous_blinking_service = self.session.service("ALAutonomousBlinking")
         self.eye_blinking_enabled = True
 
+        self.voice_speed = 100
+        self.voice_shape = 100
+
         print("[INFO]: Robot is initialized at " + ip_address + ":" + str(port))
 
     def show_image(self, image):
@@ -103,11 +106,18 @@ class Pepper:
 
     def say(self, text):
         """Animated say text"""
-        speed = 100
-        shape = 100
         self.tts_service.say(
-            "\\RSPD={0}\\ \\VCT={1} \\{2}".format(speed, shape, text)
+            "\\RSPD={0}\\ \\VCT={1} \\{2}".format(self.voice_speed, self.voice_shape, text)
         )
+
+    def getVoiceSpeed(self):
+        return self.voice_speed
+
+    def getVoiceShape(self):
+        return self.voice_shape
+
+    def getVoiceVolume(self):
+        return self.audio_device.getOutputVolume()
 
     def test_say(self, sentence, speed=100, shape=100):
         self.tts_service.say(
@@ -1009,6 +1019,84 @@ class Pepper:
         print "record over"
         self.download_file("speech.wav")
         return self.speech_to_text("speech.wav")
+
+    def changeVoice(self, volume, speed, shape):
+        self.set_volume(volume)
+        self.voice_speed = speed
+        self.voice_shape = shape
+        self.say("Zkouška hlasu")
+
+    def set_awareness(self, on=True):
+        """
+        Turn on or off the basic awareness of the robot,
+        e.g. looking for humans, self movements etc.
+
+        :param state: If True set on, if False set off
+        :type state: bool
+        """
+        if on is True:
+            self.awareness_service.resumeAwareness()
+            print("[INFO]: Awareness is turned on")
+        else:
+            self.awareness_service.pauseAwareness()
+            print("[INFO]: Awareness is paused")
+
+    def move_forward(self, speed):
+        """
+        Move forward with certain speed
+        :param speed: Positive values forward, negative backwards
+        :type speed: float
+        """
+        self.motion_service.move(speed, 0, 0)
+
+    def set_security_distance(self, distance=0.05):
+        """
+        Set security distance. Lower distance for passing doors etc.
+
+        .. warning:: It is not wise to turn `security distance` off.\
+        Robot may fall from stairs or bump into any fragile objects.
+
+        :Example:
+
+        >>> pepper.set_security_distance(0.01)
+
+        :param distance: Distance from the objects in meters
+        :type distance: float
+        """
+        self.motion_service.setOrthogonalSecurityDistance(distance)
+        print("[INFO]: Security distance set to " + str(distance) + " m")
+
+    def move_head_down(self):
+        """Look down"""
+        self.motion_service.setAngles("HeadPitch", 0.46, 0.2)
+
+    def move_head_up(self):
+        """Look up"""
+        self.motion_service.setAngles("HeadPitch", -0.4, 0.2)
+
+    def move_head_default(self):
+        """Put head into default position in 'StandInit' pose"""
+        self.motion_service.setAngles("HeadPitch", 0.0, 0.2)
+
+    def move_to_circle(self, clockwise, t=10):
+        """
+        Move a robot into circle for specified time
+
+        .. note:: This example only count on time not finished circles.
+
+        >>> pepper.move_to_circle(clockwise=True, t=5)
+
+        :param clockwise: Specifies a direction to turn around
+        :type clockwise: bool
+        :param t: Time in seconds (default 10)
+        :type t: float
+        """
+        if clockwise:
+            self.motion_service.moveToward(0.5, 0.0, 0.6)
+        else:
+            self.motion_service.moveToward(0.5, 0.0, -0.6)
+        time.sleep(t)
+        self.motion_service.stopMove()
 
     class VirtualPepper:
         """Virtual robot for testing"""
