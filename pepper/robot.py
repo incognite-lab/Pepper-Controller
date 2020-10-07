@@ -1000,6 +1000,16 @@ class Pepper:
         self.unsubscribe_camera()
         cv2.destroyAllWindows()
 
+    def recordSound(self):
+        self.audio_recorder.stopMicrophonesRecording()
+        print "start recording"
+        self.audio_recorder.startMicrophonesRecording("/home/nao/speech.wav", "wav", 48000, (0, 0, 1, 0))
+        time.sleep(5)
+        self.audio_recorder.stopMicrophonesRecording()
+        print "record over"
+        self.download_file("speech.wav")
+        return self.speech_to_text("speech.wav")
+
     class VirtualPepper:
         """Virtual robot for testing"""
 
