@@ -1124,7 +1124,7 @@ class Pepper:
             with speech_recognition.Microphone() as source:
                 print("[INFO]: Say something...")
                 audio = recognizer.listen(source)
-                speech = recognizer.recognize_google(audio, language="en-US")
+                speech = recognizer.recognize_google(audio, language="cs-CZ")
 
                 return speech
 
