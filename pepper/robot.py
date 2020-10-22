@@ -977,7 +977,7 @@ class Pepper:
         audio_file = speech_recognition.AudioFile("/tmp/" + audio_file)
         with audio_file as source:
             audio = self.recognizer.record(source)
-            recognized = self.recognizer.recognize_google(audio, language="en_US")
+            recognized = self.recognizer.recognize_google(audio, language="cs-CZ")
         return recognized
 
     def chatbot(self):
