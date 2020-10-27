@@ -197,7 +197,7 @@ class Pepper:
     def dance(self):
         """Start dancing with robot"""
         print("Robot is about to dance a little")
-        self.behavior_service.startBehavior("date_dance-215e31/.")
+        self.behavior_service.startBehavior("date_dance-896e88/.")
 
     def autonomous_life(self):
         """
@@ -246,7 +246,8 @@ class Pepper:
         :type volume: integer
         """
         self.audio_device.setOutputVolume(volume)
-        self.say("Volume is set to " + str(volume) + " percent")
+        #self.say("Volume is set to " + str(volume) + " percent")
+        #self.say("Volume is set to " + str(volume) + " percent")
 
     def battery_status(self):
         """Say a battery status"""
@@ -1012,11 +1013,11 @@ class Pepper:
 
     def recordSound(self):
         self.audio_recorder.stopMicrophonesRecording()
-        print "start recording"
+        print ("start recording")
         self.audio_recorder.startMicrophonesRecording("/home/nao/speech.wav", "wav", 48000, (0, 0, 1, 0))
         time.sleep(5)
         self.audio_recorder.stopMicrophonesRecording()
-        print "record over"
+        print ("record over")
         self.download_file("speech.wav")
         return self.speech_to_text("speech.wav")
 
@@ -1124,7 +1125,7 @@ class Pepper:
             with speech_recognition.Microphone() as source:
                 print("[INFO]: Say something...")
                 audio = recognizer.listen(source)
-                speech = recognizer.recognize_google(audio, language="cs-CZ")
+                speech = recognizer.recognize_google(audio, language="en-US")
 
                 return speech
 
