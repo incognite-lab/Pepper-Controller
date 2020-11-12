@@ -3,12 +3,14 @@
 from Tkinter import *
 
 import cv2
+import numpy
 import yaml
 from PIL import ImageTk, Image
 
 from pepper.robot import Pepper
 import numpy as np
 import demoForClass as foto
+import threading
 
 
 class Configuration:
@@ -259,26 +261,33 @@ class PepperController:
         self.drawLines(x=440, y=170, len=560, vertical=False)
         self.drawLines(x=440, y=250, len=560, vertical=False)
         '''
-        camera
+        camera'''
+        self.group_camera = LabelFrame(root, text="camera")
         lmain = Label(self.root)
         lmain.grid()
-        cap = cv2.VideoCapture(0)
-        self.video_stream(lmain, cap)
-        '''
-        self.button_obraz = Button(self.root, text="Obraz", command=lambda: self.robot.streamCamera(), width=7, height=2)
+        self.group_camera.grid(row=1, column=20)
+        self.group_camera.place(x=450, y =280)
+
+        x = threading.Thread(target=self.streamVideo)
+
+        self.button_obraz = Button(self.root, text="Obraz", command=lambda: x.start(), width=7, height=2)
         self.button_obraz.place(x=450, y=260)
 
         self.set_colour_for_frame([], [self.button_obraz])
 
+    def streamVideo(self):
+        self.robot.subscribe_camera("camera_top", 2, 30)
+        while True:
+            image = self.robot.get_camera_frame(show=False)
+            im = Image.fromarray(image)
+            name = "camera.jpg"
+            im.save(name)
+            load = Image.open(name)
+            render = ImageTk.PhotoImage(load)
+            img = Label(self.root, image=render)
+            img.image = render
+            img.place(x=450, y=350)
 
-    def video_stream(self, lmain, cap):
-        _, frame = cap.read()
-        cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-        img = Image.fromarray(cv2image)
-        imgtk = ImageTk.PhotoImage(image=img)
-        lmain.imgtk = imgtk
-        lmain.configure(image=imgtk)
-        lmain.after(1, self.video_stream)
 
     def drawLines(self, x, y, len, vertical):
         if vertical:
