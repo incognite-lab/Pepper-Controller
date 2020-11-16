@@ -279,6 +279,7 @@ class PepperController:
         self.robot.subscribe_camera("camera_top", 2, 30)
         while True:
             image = self.robot.get_camera_frame(show=False)
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             im = Image.fromarray(image)
             name = "camera.jpg"
             im.save(name)
