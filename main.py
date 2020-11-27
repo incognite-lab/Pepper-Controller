@@ -305,6 +305,7 @@ class PepperController:
     def takePicture(self):
         self.robot.subscribe_camera("camera_top", 2, 30)
         img = self.robot.get_camera_frame(show=False)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.robot.unsubscribe_camera()
         self.robot.play_sound("/home/nao/camera1.ogg")
         im = Image.fromarray(img)
