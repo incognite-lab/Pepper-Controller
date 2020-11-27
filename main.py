@@ -1,5 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import urllib2
+import urllib
+import base64
+import json
+import random
+import time
 from Tkinter import *
 
 import cv2
@@ -262,18 +268,52 @@ class PepperController:
         self.drawLines(x=440, y=250, len=560, vertical=False)
         '''
         camera'''
-        self.group_camera = LabelFrame(root, text="camera")
-        lmain = Label(self.root)
-        lmain.grid()
-        self.group_camera.grid(row=1, column=20)
-        self.group_camera.place(x=450, y =280)
 
         x = threading.Thread(target=self.streamVideo)
+        #y = threading.Thread(target=self.streamTablet)
 
         self.button_obraz = Button(self.root, text="Obraz", command=lambda: x.start(), width=7, height=2)
+        self.button_obraz_to_tablet = Button(self.root, text="Obraz na tablet", command=lambda: self.pictureToTablet(), width=10, height=2)
         self.button_obraz.place(x=450, y=260)
+        self.button_obraz_to_tablet.place(x=550, y=260)
 
-        self.set_colour_for_frame([], [self.button_obraz])
+        self.set_colour_for_frame([], [self.button_obraz, self.button_obraz_to_tablet])
+
+    def getRandName(self):
+        randNum = random.randint(0, 1000)
+        return "demoPictures/photo" + str(randNum) + ".png"
+
+    def uploadPhotoToWeb(self, photo):
+        f = open(photo, "rb")  # open our image file as read only in binary mode
+        image_data = f.read()  # read in our image file
+        b64_image = base64.standard_b64encode(image_data)
+        client_id = "af482612ae6d1c1"  # this the id which we've got after registrating the app on imgur
+        headers = {'Authorization': 'Client-ID ' + client_id}
+        data = {'image': b64_image, 'title': 'test'}
+        request = urllib2.Request(url="https://api.imgur.com/3/upload.json", data=urllib.urlencode(data),
+                                  headers=headers)
+        response = urllib2.urlopen(request).read()
+        parse = json.loads(response)
+        return parse['data']['link']  # returns a url of the photo
+
+    def showPicture(self):
+        link = self.uploadPhotoToWeb(self.photoName)
+        self.robot.show_image(link)
+        time.sleep(5)
+        self.robot.reset_tablet()
+
+    def takePicture(self):
+        self.robot.subscribe_camera("camera_top", 2, 30)
+        img = self.robot.get_camera_frame(show=False)
+        self.robot.unsubscribe_camera()
+        self.robot.play_sound("/home/nao/camera1.ogg")
+        im = Image.fromarray(img)
+        self.photoName = self.getRandName()
+        im.save(self.photoName)
+
+    def pictureToTablet(self):
+        self.takePicture()
+        self.showPicture()
 
     def streamVideo(self):
         self.robot.subscribe_camera("camera_top", 2, 30)
@@ -284,10 +324,19 @@ class PepperController:
             name = "camera.jpg"
             im.save(name)
             load = Image.open(name)
-            render = ImageTk.PhotoImage(load)
-            img = Label(self.root, image=render)
-            img.image = render
-            img.place(x=450, y=350)
+            try:
+                render = ImageTk.PhotoImage(load)
+                img = Label(self.root, image=render)
+                img.image = render
+                img.place(x=450, y=350)
+            except:
+                print ("The application has finished")
+                break
+
+    def streamTablet(self):
+        self.robot.subscribe_camera("camera_top", 2, 30)
+        while True:
+            self.robot.show_tablet_camera(text="")
 
 
     def drawLines(self, x, y, len, vertical):

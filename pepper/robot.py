@@ -21,7 +21,7 @@ import cv2
 import gtts
 import playsound
 import subprocess
-
+import socket
 
 class Pepper:
     """
@@ -475,8 +475,8 @@ class Pepper:
 
         if on_robot:
             # TODO: It requires a HTTPS server running. This should be somehow automated.
-            cv2.imwrite("./tmp/map.png", robot_map)
-            self.tablet_show_web(remote_ip + ":8000/map.png")
+            cv2.imwrite("../tmp/map.png", robot_map)
+            self.show_web(remote_ip + ":8000/map.png")
             print("[INFO]: Map is available at: " + str(remote_ip) + ":8000/map.png")
         else:
             cv2.imshow("RobotMap", robot_map)
@@ -647,9 +647,9 @@ class Pepper:
         image = cv2.resize(image, (800, 600))
         cv2.putText(image, "Visual question answering", (30, 500), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
         cv2.putText(image, "Question: " + text, (30, 550), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-        cv2.imwrite("./tmp/camera.png", image)
+        cv2.imwrite("../tmp/camera.png", image)
 
-        self.tablet_show_web("http://" + remote_ip + ":8000/tmp/camera.png")
+        self.show_web("http://" + remote_ip + ":8000/tmp/camera.png")
 
     def navigate_to(self, x, y):
         """
