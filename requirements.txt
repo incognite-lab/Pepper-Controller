@@ -1,3 +1,8 @@
-qi
+paramiko
 numpy
 pyyaml
+scp
+gtts
+playsound
+nose
+pillow

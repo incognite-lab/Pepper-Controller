@@ -12,16 +12,18 @@ It also includes a virtual robot for testing purposes.
 """
 import qi
 import time
+import random
 import numpy
 import paramiko
 import speech_recognition
 from nose import tools
 from scp import SCPClient
 import cv2
-import gtts
 import playsound
 import subprocess
 import socket
+from PIL import Image
+from callbacks import HumanGreeter, ReactToTouch
 
 class Pepper:
     """
@@ -49,12 +51,13 @@ class Pepper:
 
         self.ip_address = ip_address
         self.port = port
-
+        connection_url = "tcp://" + ip_address + ":" + str(port)
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.load_system_host_keys()
         ssh.connect(hostname=self.ip_address, username="nao", password="nao")
         self.scp = SCPClient(ssh.get_transport())
+        self.touch_app = qi.Application(["ReactToTouch", "--qi-url=" + connection_url])
 
         self.posture_service = self.session.service("ALRobotPosture")
         self.motion_service = self.session.service("ALMotion")
@@ -80,6 +83,7 @@ class Pepper:
         self.dialog_service = self.session.service("ALDialog")
         self.audio_recorder = self.session.service("ALAudioRecorder")
 
+
         self.slam_map = None
         self.localization = None
         self.camera_link = None
@@ -96,6 +100,12 @@ class Pepper:
     def show_image(self, image):
         self.tablet_service.showImage(image)
 
+    def play_video(self, url):
+        self.tablet_service.playVideo(url)
+
+    def stop_video(self):
+        self.tablet_service.stopVideo()
+
     def set_czech_language(self):
         self.dialog_service.setLanguage("Czech")
         print("Czech language was set up")
@@ -104,10 +114,11 @@ class Pepper:
         self.dialog_service.setLanguage("English")
         print("English language was set up")
 
-    def say(self, text):
+    def say(self, text, bodylanguage="contextual"):
         """Animated say text"""
+        configuration = {"bodyLanguageMode":bodylanguage}
         self.tts_service.say(
-            "\\RSPD={0}\\ \\VCT={1} \\{2}".format(self.voice_speed, self.voice_shape, text)
+            "\\RSPD={0}\\ \\VCT={1} \\{2}".format(self.voice_speed, self.voice_shape, text), configuration
         )
 
     def getVoiceSpeed(self):
@@ -181,6 +192,13 @@ class Pepper:
         print("Showing a website on the tablet")
         self.tablet_service.showWebview(website)
 
+    def detect_touch(self):
+        react_to_touch = ReactToTouch(self.touch_app)
+        print("Waiting for touch...")
+        while not react_to_touch.activated_sensor:
+            pass
+        return react_to_touch.activated_sensor
+
     def tablet_show_settings(self):
         """Show robot settings on the tablet"""
         self.tablet_service.showWebview("http://198.18.0.1/")
@@ -188,6 +206,7 @@ class Pepper:
     def reset_tablet(self):
         print("Resetting a tablet view")
         self.tablet_service.hideWebview()
+        self.tablet_service.hideImage()
 
     def stop_behaviour(self):
         """Stop all behaviours currently running"""
@@ -396,6 +415,17 @@ class Pepper:
         self.tracker_service.stopTracker()
         self.unsubscribe_effector()
         self.say("Let's do something else!")
+
+    def take_picture(self):
+        self.subscribe_camera("camera_top", 2, 30)
+        img = self.get_camera_frame(show=False)
+        self.unsubscribe_camera()
+        self.play_sound("/home/nao/camera1.ogg")
+        im = Image.fromarray(img)
+        photoName = str(random.randint(0, 1000)) + ".png"
+        print("Image saved as {}".format(photoName))
+        im.save(photoName)
+        return photoName
 
     def exploration_mode(self, radius):
         """
@@ -841,7 +871,7 @@ class Pepper:
             else:
                 self.say("I guess your mood is " + emotions[emotion_index])
 
-    def listen_to(self, vocabulary):
+    def listen_to(self, vocabulary, language="Cz"):
         """
         Listen and match the vocabulary which is passed as parameter.
 
@@ -850,31 +880,36 @@ class Pepper:
         >>> words = pepper.listen_to(["what color is the sky", "yes", "no"]
 
         :param vocabulary: List of phrases or words to recognize
-        :type vocabulary: string
+        :type vocabulary: list
         :return: Recognized phrase or words
         :rtype: string
         """
-        self.speech_service.setLanguage("English")
         self.speech_service.pause(True)
+        if language == "En":
+            self.speech_service.setLanguage("English")
+        self.speech_service.removeAllContext()
+        self.speech_service.deleteAllContexts()
         try:
-            self.speech_service.setVocabulary(vocabulary, True)
-        except RuntimeError as error:
-            print(error)
-            self.speech_service.removeAllContext()
-            self.speech_service.setVocabulary(vocabulary, True)
-            self.speech_service.subscribe("Test_ASR")
-        try:
-            print("[INFO]: Robot is listening to you...")
-            self.speech_service.pause(False)
-            time.sleep(4)
-            words = self.memory_service.getData("WordRecognized")
-            print("[INFO]: Robot understood: '" + words[0] + "'")
-            return words[0]
+            self.speech_service.setVocabulary(vocabulary,False)
         except:
-            pass
+            try:
+                self.speech_service.subscribe("Test_ASR")
+                self.speech_service.setVocabulary(vocabulary, False)
+            except:
+                self.speech_service.unsubscribe("Test_ASR")
+                self.speech_service.setVocabulary(vocabulary, False)
+        self.speech_service.subscribe("Test_ASR")
+        print("[INFO]: Robot is listening to you...")
+        self.speech_service.pause(False)
+        time.sleep(4)
+        words = self.memory_service.getData("WordRecognized")
+        print("[INFO]: Robot understood: '" + words[0] + "'")
+        self.speech_service.unsubscribe("Test_ASR")
+        return words
 
     def listen(self):
         """
+        DOES NOT WORK WITHOUT LICENSE (that is our case :( )
         Wildcard speech recognition via internal Pepper engine
 
         .. warning:: To get this proper working it is needed to disable or uninstall \
@@ -1099,6 +1134,19 @@ class Pepper:
         time.sleep(t)
         self.motion_service.stopMove()
 
+    def move_joint_by_angle(self, joints, angles, fractionMaxSpeed):
+        """
+        :param joints: list of joint types to be moved according to http://doc.aldebaran.com/2-0/_images/juliet_joints.png
+        :param angles: list of angles for each joint
+        :param fractionMaxSpeed: fraction of the maximum speed for joint motion, i.e. an integer (0-1)
+        """
+        #self.motion_service.setStiffnesses("Head", 1.0)
+        # Example showing how to set angles, using a fraction of max speed
+        self.motion_service.setAngles(joints, angles, fractionMaxSpeed)
+
+        #time.sleep(3.0)
+        #motion_service.setStiffnesses("Head", 0.0)
+
     class VirtualPepper:
         """Virtual robot for testing"""
 
@@ -1114,6 +1162,7 @@ class Pepper:
             :param text: Text to speech
             :type text: string
             """
+            import gtts
             tts = gtts.gTTS(text, lang="en")
             tts.save("./tmp_speech.mp3")
             playsound.playsound("./tmp_speech.mp3")
