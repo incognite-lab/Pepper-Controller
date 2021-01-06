@@ -135,9 +135,9 @@ class PepperController:
         self.button_app_10 = Button(self.group_application, text=self.configuration.conf["application_10"]["name"],
                                     command=lambda: self.robot.start_behavior(
                                         self.configuration.conf["application_10"]["package"]))
-        self.button_app_11 = Button(self.group_application, text="Foto",
+        self.button_app_11 = Button(self.group_application, text="Take picture",
                                     command=lambda: foto.PepperDemo(None, self.robot).run())
-        self.button_app_12 = Button(self.group_application, text="Tancuj",
+        self.button_app_12 = Button(self.group_application, text="Dance",
                                     command=lambda: self.robot.dance())
 
         self.button_app_1.grid(row=0, column=1, sticky=NSEW)
@@ -207,7 +207,7 @@ class PepperController:
         self.voice_shaping_scale = Scale(self.root, from_=0, to=200, orient=HORIZONTAL, label="Voice pitch", length=115)
         self.voice_speed_scale = Scale(self.root, from_=0, to=200, orient=HORIZONTAL, label="Voice speed", length=115)
         self.voice_volume_scale = Scale(self.root, from_=0, to=100, orien=HORIZONTAL, label="Volume", length=115)
-        self.button_confirm = Button(self.root, text="OK", command=lambda: self.robot.changeVoice(
+        self.button_confirm = Button(self.root, text="Ok", command=lambda: self.robot.changeVoice(
             self.voice_volume_scale.get(), self.voice_speed_scale.get(), self.voice_shaping_scale.get()), height=2,width=3)
 
         self.voice_speed_scale.place(x=5, y=380)
@@ -273,7 +273,7 @@ class PepperController:
         #y = threading.Thread(target=self.streamTablet)
 
         self.button_obraz = Button(self.root, text="Camera", command=lambda: x.start(), width=7, height=2)
-        self.button_obraz_to_tablet = Button(self.root, text="Camera on tablet", command=lambda: self.pictureToTablet(), width=10, height=2)
+        self.button_obraz_to_tablet = Button(self.root, text="On tablet", command=lambda: self.pictureToTablet(), width=10, height=2)
         self.button_obraz.place(x=450, y=260)
         self.button_obraz_to_tablet.place(x=550, y=260)
 

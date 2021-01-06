@@ -35,15 +35,15 @@ class PepperDemo:
         self.robot = Pepper(ip_address, port)
         self.robot.set_czech_language()
         self.photoName = None
-        self.greetings = ["dobrý den", "ahoj", "zdravím", "zdravíčko", "dobrý den ve spolek"]
-        self.asks = ["Mohu vás vyfotit a zveřejnit to na internetu?","Chcete se vyfotit?", "Chcete abych vas vyfotil?"]
+        self.greetings = ["Good afternoon", "Hello", "Hi", "Hello everobody", "Welcome"]
+        self.asks = ["May I photograph you?","May I take your picture?", "Do you want to make your picture?"]
 
     '''recognise answer with google speech reco'''
     def wantToTakePic(self):
-        answers = {"no": ["ne", "ani ne", "vůbec", "moc ne", "nechci", "nevím", "dnes ne", "později", "přiště"],
-                   "yes": ["jo", "rozhodně", "ano", "jasně", "jo jo", "to teda", "no jasně", "no",
-                          "strašně", "chci", "celkem jo", "vcelku jo", "celkem ano", "ale jo", "asi", "třeba",
-                          "nožná"]}
+        answers = {"no": ["no", "no way", "not", "no no", " i dont", "i dont know", "not today", "later", "tommorow"],
+                   "yes": ["yes", "definitely", "yep", "ok", "okey dokey", "sure", "all yes", "you must",
+                          "absolutely", "i want", "i think so", "i agree", "if you want", "if you insist", "probably", "maybe",
+                          "yes sir"]}
         recorded = self.robot.recordSound()
         answer = self.getAnswer(answers, recorded)
         if answer == "no":
@@ -85,14 +85,14 @@ class PepperDemo:
     def recogniseAnswerAndDecide(self):
         isTakePic = self.wantToTakePic()
         if isTakePic:
-            self.robot.say("Super, připravte se. 3, 2, 1 .")
+            self.robot.say("Perfect. On your marks. 3, 2, 1 .")
             self.takePicture()
             self.showPicture()
         elif isTakePic is None:
-            self.robot.say("Nepochopil jsem nebo mluvili jste příliš potichu, zkuste to řict jinak")
+            self.robot.say("Sorry, I did not understand you. Please repeat.")
             self.recogniseAnswerAndDecide()
         else:
-            self.robot.say("Tak možná někdy přiště")
+            self.robot.say("Maybe next time")
 
     '''there is a modifiable grammar error sometimes occurred. 
     In order to deal with it you should change language to english and back'''

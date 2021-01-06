@@ -25,48 +25,48 @@ port = 9559
 robot = Pepper(ip_address, port)
 
 robot.set_volume(50)
-robot.say("Dobrý den, jsem robot pepr.")
+robot.say("Hello, I am Pepper robot.")
 robot.start_animation(random.choice(["Hey_1", "Hey_3", "Hey_4", "Hey_6"]))
 
-robot.say("Takto si vás mohu vyfotit svojí kamerou.")
+robot.say("I can make your photograph.")
 local_img_path = robot.take_picture()
 
 # To display image on tablet, you need to provide URL of the image - i.e., upload the image online
-robot.say("Obrázek najdete ve složce projektu. Kdybych ho chtěl ukázat na tabletu, musel bych ho nahrát na internet.")
+robot.say("The picture will be saved in the project folder.")
 #photo_link = uploadPhotoToWeb(local_img_path)
 #robot.show_image(photo_link)
 #time.sleep(3)
 #robot.reset_tablet()
 
-robot.say("Takto můžeme na tabletu zobrazit vebovou stránku.")
-robot.show_web("https://www.seznam.cz/")
+robot.say("I can also show the internet page on my tablet.")
+robot.show_web("https://www.google.com/")
 time.sleep(5)
 robot.reset_tablet()
 
-robot.say("Chcete, abych vám ukázal, jak funguje rozpoznávání řeči?")
-positive_answers = ["ano", "jo", "tak jo", "chci", "chceme", "jasně"]
-vocab = positive_answers + ["ne", "nechci", "nechceme", "nevím", "hm"]
+robot.say("Do you want to see how I can recognize language?")
+positive_answers = ["yes", "yep", "ok", "i want", "sure", "definitely"]
+vocab = positive_answers + ["no", "not", "i dont", "i do not know", "not sure"]
 answer = robot.listen_to(vocabulary=vocab)
 
 if answer[0] in positive_answers:
-     robot.say("Dobře.. pro rozpoznání libovolných promluv použijeme knihovnu od gůglu. Vyjmenujte prosím roční období.")
+     robot.say("Ok, now you have to count up to five")
      recognised = robot.recordSound()
-     robot.say("Rozpoznal jsem {}".format(recognised.encode('utf-8')))
-else: robot.say("Dobře.")
+     robot.say("I recognized {}".format(recognised.encode('utf-8')))
+else: robot.say("Cool.")
 
 while True:
-    robot.say("Dotkněte se nyní hřbetu mojí pravé ruky.")
+    robot.say("Touch my right palm.")
     touched_sensor = robot.detect_touch()
     if touched_sensor[0] == "RArm":
-        robot.say("Super. Tak takhle se dá detekovat dotyk.")
+        robot.say("Perfect, I can detect touch.")
         break
     else:
-        robot.say("Teď jste se dotkli jiného senzoru.")
+        robot.say("Now you touched different part of my body.")
 
-robot.say("Poslední důležitá věc je přepínání mezi autonomním režimem. Teď ho mám zapnutý a díky tomu jsem interaktivní. Pokud "
-          "bych se ale měl třeba hýbat, je třeba autonomní režim vypnout, aby mě nemátl.")
+robot.say("The last important thing is to switch between autonomous mode. Now I have it turned on and thanks to that I'm interactive. If "
+          "I should move, the autonomous regime needs to be turned off so that it doesn't confuse me.")
 robot.autonomous_life_off()
-robot.say("A je to.", bodylanguage="disabled")
+robot.say("Thats it.", bodylanguage="disabled")
 robot.move_joint_by_angle(["LShoulderRoll", "LShoulderPitch", "RShoulderRoll", "RShoulderPitch"], [-2.9,-1, -2.9, -1], 0.4)
 time.sleep(2)
 robot.stand()
