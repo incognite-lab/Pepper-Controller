@@ -42,7 +42,7 @@ class PepperController:
         self.root.configure(background='#F0E68C')
 
         '''System customization'''
-        self.group_connection = LabelFrame(root, text="Připojení")
+        self.group_connection = LabelFrame(root, text="Connection")
         self.group_connection.grid(row=0, column=0, columnspan=4, rowspan=2, padx=5, pady=5)
         self.group_connection.place(x=5, y=10)
         self.entry_address = Entry(self.group_connection)
@@ -53,9 +53,9 @@ class PepperController:
         else:
             self.entry_address.insert(END, self.configuration.conf["configuration"]["default_ip"])
             self.entry_port.insert(END, self.configuration.conf["configuration"]["default_port"])
-        self.label_address = Label(self.group_connection, text="IP adresa")
+        self.label_address = Label(self.group_connection, text="IP adress")
         self.label_port = Label(self.group_connection, text="Port")
-        self.button_connect = Button(self.group_connection, text="Připojit", command=self.connect)
+        self.button_connect = Button(self.group_connection, text="Connect", command=self.connect)
 
         self.label_address.grid(row=0, column=0, sticky="nse")
         self.entry_address.grid(row=0, column=1)
@@ -65,17 +65,17 @@ class PepperController:
 
         self.set_colour_for_frame([self.group_connection, self.label_address, self.label_port], [self.button_connect])
 
-        self.group_system = LabelFrame(root, text="Systém", width=340, height=125)
+        self.group_system = LabelFrame(root, text="System", width=340, height=125)
         self.group_system.grid_propagate(False)
         self.group_system.grid(columnspan=16, rowspan=2, padx=5, pady=5)
         self.group_system.place(x=5, y=100)
 
-        self.button_switch_al = Button(self.group_system, text="Autonomní režim",
+        self.button_switch_al = Button(self.group_system, text="Autonomous life",
                                        command=lambda: self.robot.autonomous_life(),
                                        width=15)
-        self.button_battery = Button(self.group_system, text="Stav baterie",
+        self.button_battery = Button(self.group_system, text="Battery level",
                                      command=lambda: self.robot.battery_status(), width=15)
-        self.button_stop_all = Button(self.group_system, text="Ukonči aplikace",
+        self.button_stop_all = Button(self.group_system, text="Close app",
                                       command=lambda: self.robot.stop_behaviour(), width=16)
         self.button_web_reset = Button(self.group_system, text="Reset tablet",
                                        command=lambda: self.robot.reset_tablet())
@@ -101,7 +101,7 @@ class PepperController:
                                    ]
                                   )
 
-        self.group_application = LabelFrame(root, text="Aplikace")
+        self.group_application = LabelFrame(root, text="Aplications")
         self.group_application.grid(row=1, column=20, columnspan=16, rowspan=2, padx=5, pady=5)
         self.group_application.place(x=450, y=10)
 
@@ -169,29 +169,29 @@ class PepperController:
                                    ]
                                   )
 
-        self.group_language = LabelFrame(root, text="Mluvení")
+        self.group_language = LabelFrame(root, text="Language")
         self.group_language.grid(row=1, column=20, columnspan=16, rowspan=2, padx=5, pady=5)
         self.group_language.place(x=5, y=270)
 
-        self.language_button_cz = Button(self.group_language, text="Nastav češtinu",
+        self.language_button_cz = Button(self.group_language, text="Czech language",
                                          command=lambda: self.change_language("cz"))
-        self.language_button_en = Button(self.group_language, text="Nastav angličtinu",
+        self.language_button_en = Button(self.group_language, text="English language",
                                          command=lambda: self.change_language("en"))
-        self.button_say_no = Button(self.group_language, text="Ne", command=lambda: self.robot.say(
+        self.button_say_no = Button(self.group_language, text="No", command=lambda: self.robot.say(
             str(np.random.choice(
                 self.configuration.conf["language"][self.language]["no_list"]).encode("utf-8"))))
-        self.button_say_yes = Button(self.group_language, text="Ano",
+        self.button_say_yes = Button(self.group_language, text="Yes",
                                      command=lambda: self.robot.say(
                                          str(np.random.choice(
                                              self.configuration.conf["language"][self.language]["yes_list"]).encode(
                                              "utf-8"))))
-        self.button_say_dont_know = Button(self.group_language, text="Nevím", command=lambda: self.robot.say(
+        self.button_say_dont_know = Button(self.group_language, text="I dont know", command=lambda: self.robot.say(
             str(np.random.choice(
                 self.configuration.conf["language"][self.language]["dont_know_list"]).encode("utf-8"))))
-        self.button_say_hello = Button(self.group_language, text="Pozdrav", command=lambda: self.robot.say(
+        self.button_say_hello = Button(self.group_language, text="Greetings", command=lambda: self.robot.say(
             str(np.random.choice(
                 self.configuration.conf["language"][self.language]["hello"]).encode("utf-8"))))
-        self.button_say_welcome = Button(self.group_language, text="Vítej", command=lambda: self.robot.say(
+        self.button_say_welcome = Button(self.group_language, text="Welcome", command=lambda: self.robot.say(
             str(np.random.choice(
                 self.configuration.conf["language"][self.language]["welcome"]).encode("utf-8"))))
         self.entry_say_text = Entry(self.group_language)
@@ -204,9 +204,9 @@ class PepperController:
         self.button_say_yes.grid(row=1, column=1, sticky=EW)
         self.button_say_dont_know.grid(row=1, column=2, sticky=EW)
 
-        self.voice_shaping_scale = Scale(self.root, from_=0, to=200, orient=HORIZONTAL, label="Výška hlasu", length=115)
-        self.voice_speed_scale = Scale(self.root, from_=0, to=200, orient=HORIZONTAL, label="Rychlost hlasu", length=115)
-        self.voice_volume_scale = Scale(self.root, from_=0, to=100, orien=HORIZONTAL, label="Hlasitost", length=115)
+        self.voice_shaping_scale = Scale(self.root, from_=0, to=200, orient=HORIZONTAL, label="Voice pitch", length=115)
+        self.voice_speed_scale = Scale(self.root, from_=0, to=200, orient=HORIZONTAL, label="Voice speed", length=115)
+        self.voice_volume_scale = Scale(self.root, from_=0, to=100, orien=HORIZONTAL, label="Volume", length=115)
         self.button_confirm = Button(self.root, text="OK", command=lambda: self.robot.changeVoice(
             self.voice_volume_scale.get(), self.voice_speed_scale.get(), self.voice_shaping_scale.get()), height=2,width=3)
 
@@ -221,7 +221,7 @@ class PepperController:
         self.entry_say_text.insert(END, self.configuration.conf["configuration"]["default_sentence"])
         self.entry_gr.place(x=5, y=470)
         self.entry_say_text.grid(row=0,column=0,ipady=20)
-        self.button_say_custom_text = Button(self.root, text="Říct text", command=lambda: self.robot.say(
+        self.button_say_custom_text = Button(self.root, text="Say text", command=lambda: self.robot.say(
             self.entry_say_text.get().encode("utf-8")), width=10, height=2)
         self.button_say_custom_text.place(x=120, y=560)
 
@@ -241,14 +241,14 @@ class PepperController:
                                    self.button_say_custom_text
                                    ]
                                   )
-        '''motorika'''
-        self.group_motorics = LabelFrame(root, text="Motorika")
+        '''Motorics'''
+        self.group_motorics = LabelFrame(root, text="Motorics")
         self.group_motorics.grid(row=1, column=20, columnspan=16, rowspan=2, padx=5, pady=5)
         self.group_motorics.place(x=450, y=180)
-        self.button_wave = Button(self.group_motorics, text="Zamávej", command=lambda: self.robot.start_animation(
+        self.button_wave = Button(self.group_motorics, text="Wave hand", command=lambda: self.robot.start_animation(
             np.random.choice(["Hey_1", "Hey_3", "Hey_4", "Hey_6"])))
-        self.button_stay = Button(self.group_motorics, text="Stůj", command=lambda: self.robot.stand())
-        self.button_rest = Button(self.group_motorics, text="Blikání",
+        self.button_stay = Button(self.group_motorics, text="Stay", command=lambda: self.robot.stand())
+        self.button_rest = Button(self.group_motorics, text="Blink",
                                   command=lambda: self.robot.autonomous_blinking())
 
         self.button_wave.grid(row=0, column=0, sticky=EW)
@@ -272,8 +272,8 @@ class PepperController:
         x = threading.Thread(target=self.streamVideo)
         #y = threading.Thread(target=self.streamTablet)
 
-        self.button_obraz = Button(self.root, text="Obraz", command=lambda: x.start(), width=7, height=2)
-        self.button_obraz_to_tablet = Button(self.root, text="Obraz na tablet", command=lambda: self.pictureToTablet(), width=10, height=2)
+        self.button_obraz = Button(self.root, text="Camera", command=lambda: x.start(), width=7, height=2)
+        self.button_obraz_to_tablet = Button(self.root, text="Camera on tablet", command=lambda: self.pictureToTablet(), width=10, height=2)
         self.button_obraz.place(x=450, y=260)
         self.button_obraz_to_tablet.place(x=550, y=260)
 

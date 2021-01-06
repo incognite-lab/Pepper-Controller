@@ -1,32 +1,32 @@
 application_1:
-  name: Kvíz
+  name: Word quiz
   package: allinonequiz-7404fa/behavior_1
 application_2:
-  name: Video kvíz
+  name: Movie quiz
   package: universal_test-283d06/behavior_1
 application_3:
-  name: Kognitivní test
+  name: Cognitive test
   package: kognitiv-7095f1/behavior_1
 application_4:
-  name: Pamětový test
+  name: Memory test
   package: remember_objects-e9fb3e/behavior_1
 application_5:
-  name: Vtipy
+  name: Jokes
   package: joke_teller_cz-854c30/behavior_1
 application_6:
-  name: Televizní program
+  name: TV program
   package: tvprogramj-b50d24/behavior_1
 application_7:
-  name: Alquist
+  name: Chatbot
   package: alquist-9640b1/behavior_1
 application_8:
-  name: Web scrapping
+  name: Web searching
   package: web_scr-d66716/behavior_1
 application_9:
-  name: Slepé mapy
+  name: Pantomime
   package: universal_test-283d04/behavior_1
 application_10:
-  name: Hadej zvíře
+  name: Excersize
   package: hadejzvire-5e66aa/behavior_1
 
 configuration:
@@ -35,7 +35,7 @@ configuration:
   default_sentence: Hello, I am so glad to be here
   logo: http://people.ciirc.cvut.cz/sejnogab/logo.jpg
   pozvanka: http://people.ciirc.cvut.cz/sejnogab/sovicka.JPG
-  version: 1.5.1
+  version: 2.0.0
   virtual: False
 language:
   lang: "cz"
@@ -57,29 +57,14 @@ language:
       - 'omlouvám se, ale nevím'
       - 'netuším'
     welcome:
-      - 'Dobrý den, dovoluji si Vás pozvat na stánek Panattoni Europe, kde Vám nabídneme výbornou kávu. Panattoni Europe je dle mého skromného názoru nejlepší developer pro Průmysl čtyři nula.'
-    invitation_morning:
-      - "program konference je opravdu nabitý, ale rozhodně si nenechte ujít přednášku pavla sovičky s názvem udržitelný přístup k výstavbě průmyslových budov"
-    slosovani:
-      - "pokud chcete vyhrát některou ze zajímavých cen, odevzdejte prosím svou vizitku. Slosování bude ještě dnes odpoledne."
-    stavitel:
-      - "Panatony je nejaktivnější stavitel průmyslových zón v Evropě"
-    breeam:
-      - "Díky důslednému dodržování požadavků certifikace b r e e a m, Panatony využil rekordní objem druhotných surovin při revitalizaci braunfíldu v připravovaném parku Ostrov North."
-    specialista:
-      - "Panatony je specialista  na revitalizaci braunfíldů a ekologickou výstavbu"
-    oceneni:
-      - "Panatony získal ocenění v soutěži ministerstva průmyslu a obchodu za projekt Panatony Ostrov North."
+      - 'Dobrý den'
     hello:
       - 'dobrý den'
       - 'zdravím'
       - 'zdravíčko'
       - 'Dobrý den. já nejsem Bond, žejms Bond. jsem Tony Panatony.'
     name:
-      - 'Já nejsem Bond, žejms Bond. jsem Tony Panatony.'
-      - 'Já nejsem Bond, žejms Bond. jsem Tony Panatony.'
-      - 'Já nejsem Bond, žejms Bond. jsem Tony Panatony.'
-      - 'Já jsem tony. Tony Panatony.'
+      - 'Já nejsem Bond, žejms Bond.'
   en:
     test_sentence: "Hello, this is the test of my voice."
     yes_list:
@@ -111,14 +96,6 @@ language:
       - 'Please come to the talk'
     slosovani:
       - 'Please come to some other action.'
-    stavitel:
-      - ""
-    breeam:
-      - ""
-    specialista:
-      - ""
-    oceneni:
-      - ""
     hello:
       - 'hello'
       - 'hi everybody'
