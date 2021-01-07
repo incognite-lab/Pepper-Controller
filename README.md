@@ -1,10 +1,11 @@
-# GUI for communication with humanoid robot Pepper
+# Pepper Controller
+
+This is set of tools to control Pepper humanoid robot from Python. 
 
 
 
-Pepper-gui is a graphical user interface that allows controlling humanoid robot Pepper.
 
-
+## GUI Interface
 
 ![Image](gui.png)
 
