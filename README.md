@@ -5,14 +5,25 @@ This is a software to control Pepper humanoid robot from Python. You can easily 
 ## System requirements
 
 Ubuntu up to 20.04 
+
 Python 2.7
+
 Pepper humanoid robot
+
 
 ## Installation
 
 Install Pepper SDK 2.5.10 library for Python 2.7 from: https://www.softbankrobotics.com/emea/en/support/pepper-naoqi-2-9/downloads-softwares
 
- Add the path to your in your .bashrc: export PYTHONPATH=${PYTHONPATH}:/home/yourusername/pynaoqi/lib/python2.7/site-packages 
+
+Add path to your .bashrc: 
+
+`export PYTHONPATH=${PYTHONPATH}:~/pynaoqi/lib/python2.7/site-packages` 
+
+Restart console and test the library:
+
+
+
 
 
 ## GUI Interface
