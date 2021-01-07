@@ -18,11 +18,26 @@ Install Pepper SDK 2.5.10 library for Python 2.7 from: https://www.softbankrobot
 
 Add path to your .bashrc: 
 
+
 `export PYTHONPATH=${PYTHONPATH}:~/pynaoqi/lib/python2.7/site-packages` 
 
-Restart console and test the library:
+
+Restart terminal and test the library:
 
 
+`python2'
+
+
+'import naoqi'
+
+
+Clone this repository to your computer:
+
+'git clone 
+
+
+
+`pip2 install -r ./requirements.txt` 
 
 
 
@@ -42,7 +57,7 @@ Also, if you have Linux, add the path to qi in your .bashrc: export PYTHONPATH=$
 
 
 
-Then install all the other requirements using: pip2 install -r ./requirements.txt 
+Then install all the other requirements using: 
 
 
 
