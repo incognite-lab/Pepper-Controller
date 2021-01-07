@@ -25,39 +25,49 @@ Add path to your .bashrc:
 Restart terminal and test the library:
 
 
-`python2'
+`python2`
 
 
-'import naoqi'
+`import naoqi`
 
 
 Clone this repository to your computer:
 
-'git clone 
+`git clone https://github.com/incognite-lab/Pepper-Controller.git`
 
+`cd Pepper-Controller`
 
+Install dependencies
 
 `pip2 install -r ./requirements.txt` 
 
-
-
 ## GUI Interface
+
+The easist way to control Pepper robot is via the GUI interface:
+
+
+`python2 main.py`
+
+
+The window will appear:
+
 
 ![Image](gui.png)
 
 
-
-## Installation
-
-Pepper SDK 2.5.10 library for Python 2.7 (imported as qi or naoqi). \
-
-It can be installed from:https://www.softbankrobotics.com/emea/en/support/pepper-naoqi-2-9/downloads-softwares \
-
-Also, if you have Linux, add the path to qi in your .bashrc: export PYTHONPATH=${PYTHONPATH}:/home/yourusername/pynaoqi/lib/python2.7/site-packages 
+Firstly you need to enter corrent IP address (press the robot chest button to obtain it) to the upper left box and press "Connect"
 
 
+After succesfull connection you can control the robot by pressing the buttons.
 
-Then install all the other requirements using: 
+If you want to change the behavior of the GUI just edit (conf.yaml[conf.yaml]) file.
+
+
+## Command line examples
+
+If you want to control robot from command line just run Python and type:
+
+
 
 
 
