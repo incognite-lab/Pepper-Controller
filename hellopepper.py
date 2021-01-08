@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from pepper.robot import Pepper
-from demoForClass import uploadPhotoToWeb
+from demo import uploadPhotoToWeb
 import random, os, time
 
 ''' 
