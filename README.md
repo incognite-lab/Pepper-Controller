@@ -64,7 +64,7 @@ After a successful connection, you can control the robot by pressing the buttons
 If you want Pepper to say any phrase, enter it in the text edit field and then press the "Say text" button.
 
 
-The GUI provides support for running Choregraphe projects that are already installed on the robot. We currently do not provide any installable Choregraphe projects, but you can configure the GUI buttons for your own applications. To do that, please edit [conf.yaml](conf.yaml). For each application, you need to provide a name for the button and a path to your Choregraphe app in the form of <applicationID>/<behaviorName>. If you are not sure how to get these, please refer to [http://doc.aldebaran.com/2-1/software/choregraphe/panels/robot_applications.html](Choregraphe documentation). 
+The GUI provides support for running Choregraphe projects that are already installed on the robot. We currently do not provide any installable Choregraphe projects, but you can configure the GUI buttons for your own applications. To do that, please edit [conf.yaml](conf.yaml). For each application, you need to provide a name for the button and a path to your Choregraphe app in the form of <applicationID>/<behaviorName>. If you are not sure how to get these, please refer to [Choregraphe documentation](http://doc.aldebaran.com/2-1/software/choregraphe/panels/robot_applications.html). 
 
 
 Other properties of the GUI can be edited through the [conf.yaml](conf.yaml) file.
@@ -101,7 +101,7 @@ You can also easily switch Autonomous life on or off:
 
 ## Using external speech recognition library
 
-Because the default NUANCE speech recognition software provided with the robot does not fully support speech recognition with open vocabulary, we provide [https://pypi.org/project/SpeechRecognition/](the SpeechRecognition library) as a suitable alternative. This library however needs to be installed directly on the robot. To do that, connect to the robot via ssh and install it as follows:
+Because the default NUANCE speech recognition software provided with the robot does not fully support speech recognition with open vocabulary, we provide [the SpeechRecognition library](https://pypi.org/project/SpeechRecognition/) as a suitable alternative. This library however needs to be installed directly on the robot. To do that, connect to the robot via ssh and install it as follows:
 
 `ssh nao@<pepperIPaddress>`
 
