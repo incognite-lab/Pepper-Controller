@@ -97,6 +97,7 @@ You can also easily switch Autonomous life on or off:
 
 
 `robot.autonomous_life_off()`
+
 `robot.autonomous_life_on()`
 
 ## Using external speech recognition library
