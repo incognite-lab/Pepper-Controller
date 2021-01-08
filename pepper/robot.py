@@ -907,7 +907,7 @@ class Pepper:
         self.speech_service.unsubscribe("Test_ASR")
         return words
 
-    def listen(self):
+    def listen(self, lang):
         """
         DOES NOT WORK WITHOUT LICENSE (that is our case :( )
         Wildcard speech recognition via internal Pepper engine
@@ -950,7 +950,7 @@ class Pepper:
         self.speech_service.setAudioExpression(True)
         self.speech_service.setVisualExpression(True)
 
-        return self.speech_to_text("speech.wav")
+        return self.speech_to_text("speech.wav", lang)
 
     def ask_wikipedia(self):
         """
@@ -1001,11 +1001,12 @@ class Pepper:
         print("[INFO]: File " + file_name + " downloaded")
         self.scp.close()
 
-    def speech_to_text(self, audio_file):
+    def speech_to_text(self, audio_file, lang="en-US"):
         """
         Translate speech to text via Google Speech API
 
-        :param audio_file: Name of the audio (default `speech.wav`
+        :param audio_file: Name of the audio (default `speech.wav`)
+        :param lang: Code of the language (e.g. "en-US", "cs-CZ")
         :type audio_file: string
         :return: Text of the speech
         :rtype: string
@@ -1013,7 +1014,7 @@ class Pepper:
         audio_file = speech_recognition.AudioFile("/tmp/" + audio_file)
         with audio_file as source:
             audio = self.recognizer.record(source)
-            recognized = self.recognizer.recognize_google(audio, language="cs-CZ")
+            recognized = self.recognizer.recognize_google(audio, language=lang)
         return recognized
 
     def chatbot(self):
@@ -1046,6 +1047,14 @@ class Pepper:
         self.unsubscribe_camera()
         cv2.destroyAllWindows()
 
+    def recognize_google(self, lang):
+        """
+        Uses external SpeechRecognition library to transcribe speech to text. The sound is first recorded into .wav file and then analysed with Google cloud service.
+        :param lang: str
+        """
+        self.recordSound()
+        return self.speech_to_text("speech.wav", lang)
+
     def recordSound(self):
         self.audio_recorder.stopMicrophonesRecording()
         print ("start recording")
@@ -1054,7 +1063,6 @@ class Pepper:
         self.audio_recorder.stopMicrophonesRecording()
         print ("record over")
         self.download_file("speech.wav")
-        return self.speech_to_text("speech.wav")
 
     def changeVoice(self, volume, speed, shape):
         self.set_volume(volume)

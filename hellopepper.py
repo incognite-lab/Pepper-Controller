@@ -50,7 +50,7 @@ answer = robot.listen_to(vocabulary=vocab)
 
 if answer[0] in positive_answers:
      robot.say("Ok, now you have to count up to five")
-     recognised = robot.recordSound()
+     recognised = robot.recognize_google(lang="en-US")
      robot.say("I recognized {}".format(recognised.encode('utf-8')))
 else: robot.say("Cool.")
 

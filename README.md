@@ -61,14 +61,13 @@ Firstly, you need to enter the correct IP address (press the robot's chest butto
 
 After a successful connection, you can control the robot by pressing the buttons.
 
-
-You can start the application by clicking the button with it's name in the section "Applications". This will run Pepper internal applications. 
-
-
-If you want Pepper to say the phrase chosen by you enter it in the field above "Say text" button and then press it.
+If you want Pepper to say any phrase, enter it in the text edit field and then press the "Say text" button.
 
 
-If you want to change the behavior of the GUI just edit [conf.yaml](conf.yaml) file.
+The GUI provides support for running Choregraphe projects that are already installed on the robot. We currently do not provide any installable Choregraphe projects, but you can configure the GUI buttons for your own applications. To do that, please edit [conf.yaml](conf.yaml). For each application, you need to provide a name for the button and a path to your Choregraphe app in the form of <applicationID>/<behaviorName>. If you are not sure how to get these, please refer to [http://doc.aldebaran.com/2-1/software/choregraphe/panels/robot_applications.html](Choregraphe documentation). 
+
+
+Other properties of the GUI can be edited through the [conf.yaml](conf.yaml) file.
 
 
 ## Command line examples
@@ -100,6 +99,25 @@ You can also easily switch Autonomous life on or off:
 `robot.autonomous_life_off()`
 `robot.autonomous_life_on()`
 
+## Using external speech recognition library
+
+Because the default NUANCE speech recognition software provided with the robot does not fully support speech recognition with open vocabulary, we provide [https://pypi.org/project/SpeechRecognition/](the SpeechRecognition library) as a suitable alternative. This library however needs to be installed directly on the robot. To do that, connect to the robot via ssh and install it as follows:
+
+`ssh nao@<pepperIPaddress>`
+
+a password for the robot is required, by default it is "nao". Once connected, run in the console:
+
+
+`pip install SpeechRecognition --user`
+
+
+That's all. From now on, you should be able to use the SpeechRecognition library from Python like this:
+
+
+`recognised = robot.recognize_google(lang="en-US")`
+
+
+Please keep in mind that the library uses cloud service and thus needs the robot to be connected to internet. 
 
 
 ## Writing custom application

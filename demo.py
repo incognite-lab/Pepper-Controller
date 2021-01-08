@@ -44,7 +44,7 @@ class PepperDemo:
                    "yes": ["yes", "definitely", "yep", "ok", "okey dokey", "sure", "all yes", "you must",
                           "absolutely", "i want", "i think so", "i agree", "if you want", "if you insist", "probably", "maybe",
                           "yes sir"]}
-        recorded = self.robot.recordSound()
+        recorded = self.robot.recognize_google(lang="en-US")
         answer = self.getAnswer(answers, recorded)
         if answer == "no":
             return False
