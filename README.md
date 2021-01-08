@@ -145,26 +145,36 @@ The core of our software is Pepper class, that is wrapper around naoqi. It will 
 | ask_wikipedia | get_depth_frame | exploration_mode | battery_status |
 | speech_to_text |  show_tablet_camera | robot_localization | list_behavior |
 | chatbot | | stop_localization | get_robot_name | 
-| | | navigate_to | unsubscribe_effector |
+| pick_a_volunteer | | navigate_to | unsubscribe_effector |
+| recordSound | | move_forward | share_localhost |
+| changeVoice | | move_to_circle| rename_robot |
+| | | set_security_distance | upload_file |
+| | | move_head_down | download_file |
+| | | move_head_up | set_awareness |
+| | | move_head_default | |
+| | | move_joint_by_angle | |
+
+
+## Authors
+
+
+![alt text](incognitelogo.png "test_work")
+
+
+[Incognite lab - CIIRC CTU](https://incognite.ciirc.cvut.cz) 
+
+
+[Michal Vavrecka](https://kognice.wixsite.com/vavrecka)
+
+[Gabriela Sejnova](https://kognice.wixsite.com/vavrecka)
+
+[Michael Tesar](https://www.linkedin.com/in/megi-mejdrechova)
+
+
+[Anastasia Ostapenko](https://www.linkedin.com/in/megi-mejdrechova)
 
 
 
-pick_a_volunteer
-
-
-share_localhost
-
-
-
-
-
-rename_robot
-
-
-upload_file
-
-
-download_file
 
 
 
@@ -175,22 +185,6 @@ download_file
 
 
 
-recordSound
 
-changeVoice
 
-set_awareness
 
-move_forward
-
-set_security_distance
-
-move_head_down
-
-move_head_up
-
-move_head_default
-
-move_to_circle
-
-move_joint_by_angle
