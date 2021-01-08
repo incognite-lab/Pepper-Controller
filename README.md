@@ -1,6 +1,6 @@
 # Pepper Controller
 
-This is a software to control Pepper humanoid robot from Python. You can easily connect to robot and control it from the command line or GUI interface. This software has to be replacement for Choreographe tool, that offer only graphical programming instead of full Python support. You can also control robot, run apps or teleoperate the robot from the GUI interface. The example scripts will help  you to learn how to write Pepper app in few lines Python of code without necessity to use Softbank software.   
+This is a software to control Pepper humanoid robot from Python. You can easily connect to the robot and control it from the command line or GUI interface. This software serves as a replacement for the Choregraphe tool, which offers only graphical programming instead of full Python support. You can also control the robot, launch apps installed on the robot or teleoperate the robot from the GUI interface. The example scripts will help you to learn how to write your own Pepper app in a few lines of Python code, without the necessity to use Softbank software.   
 
 ## System requirements
 
@@ -56,10 +56,10 @@ The window will appear:
 ![Image](gui.png)
 
 
-Firstly you need to enter corrent IP address (press the robot chest button to obtain it) to the upper left box and press "Connect"
+Firstly, you need to enter the correct IP address (press the robot's chest button to obtain it) to the upper left box and press "Connect"
 
 
-After succesfull connection you can control the robot by pressing the buttons.
+After a successful connection, you can control the robot by pressing the buttons.
 
 
 You can start the application by clicking the button with it's name in the section "Applications". This will run Pepper internal applications. 
@@ -73,7 +73,7 @@ If you want to change the behavior of the GUI just edit [conf.yaml](conf.yaml) f
 
 ## Command line examples
 
-If you want to control robot from command line just run Python and type:
+If you want to control the robot from command line, just run Python 2 and type:
 
 `import naoqi`
 
@@ -82,30 +82,31 @@ If you want to control robot from command line just run Python and type:
 `robot = Pepper(PeppperIP,9559)`
 
 
-Now you can control Pepper from command line. Pepper can say somenthing:
+Now you can control Pepper from the command line. Pepper can say something:
 
 
 `robot.say("Hello, I am Pepper robot.")`
 
 
-If you want to Pepper to show the web on tablet type:
+If you want Pepper to show a website on tablet, type:
 
 
 `robot.show_web("https://www.google.com/")`
 
 
-You can esaily turn off Autonomous life:
+You can also easily switch Autonomous life on or off:
 
 
 `robot.autonomous_life_off()`
+`robot.autonomous_life_on()`
 
 
 
 ## Writing custom application
 
-As you can see from previous examples, it is pretty straigforward to write application in Python without Choreographe.
+As you can see from previous examples, it is pretty straigforward to write an application in Python without Choregraphe.
 
-We prepared two examples, that you can use as a templates for the developmnent of your own application. 
+We prepared two examples that you can use as templates for the developmnent of your own application. 
 
 First one presents basic robot capabilities:
 
@@ -116,7 +117,7 @@ First one presents basic robot capabilities:
 Feel free to edit the script [file](hellopepper.py) according to your needs.
 
 
-The second example shows more complex application:
+The second example shows a more complex application:
 
 
 `python demo.py`
@@ -128,7 +129,7 @@ You can also use this [script](demo.py) as a starting point to write your applic
 ## List of methods
 
 
-The core of our software is Pepper class, that is wrapper around naoqi. It will help you to write Python applications. Here is a list all methods in Pepper class.
+The core of our software is Pepper class, a wrapper around naoqi. It will help you to write Python applications. Here is a list all methods in Pepper class.
 
 | Language | Vision | Motorics | System |
 | - | - | - | - |
