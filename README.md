@@ -130,106 +130,23 @@ You can also use this [script](demo.py) as a starting point to write your applic
 
 The core of our software is Pepper class, that is wrapper around naoqi. It will help you to write Python applications. Here is a list all methods in Pepper class.
 
-| Vision | Motorics | Language | System | Other |
-| - | - | - | - | - |
-| show_image | getVoiceSpeed | getVoiceShap | getVoiceVolume | test_say |
-| stand | rest | point_at | turn_around | autonomous_blinking |
+| Language | Vision | Motorics | System |
+| - | - | - | - |
+| getVoiceShape | streamCamera | stand | show_image | 
+| getVoiceVolume | get_face_properties | rest | autonomous_life |
+|  set_volume | turn_off_leds  | turn_around | autonomous_blinking |
+| getVoiceSpeed | blink_eyes | detect_touch | show_web |
+| greet | take_picture | dance | point_at | reset_tablet |
+| test_say  | show_map | stop_behaviour | tablet_show_settings | 
+| play_sound | load_map | start_animation | restart_robot | 
+| stop_sound | subscribe_camera | start_behavior | shutdown_robot |
+| listen_to | unsubscribe_camera | hand | autonomous_life_off |
+| listen | get_camera_frame | track_object | autonomous_life_on|
+| ask_wikipedia | get_depth_frame | exploration_mode | battery_status |
+| speech_to_text |  show_tablet_camera | robot_localization | list_behavior |
+| chatbot | | stop_localization | get_robot_name | 
+| | | navigate_to | unsubscribe_effector |
 
-greet
-
-show_web
-
-detect_touch
-
-tablet_show_settings
-
-reset_tablet
-
-stop_behaviour
-
-dance
-
-autonomous_life
-
-restart_robot
-
-shutdown_robot
-
-autonomous_life_off
-
-
-autonomous_life_on
-
-
-set_volume
-
-
-battery_status
-
-
-blink_eyes
-
-turn_off_leds
-
-
-start_animation
-
-
-start_behavior
-
-
-list_behavior
-
-
-get_robot_name
-
-
-hand
-
-
-track_object
-
-
-
-take_picture
-
-
-exploration_mode
-
-
-
-show_map
-
-
-
-robot_localization
-
-
-stop_localization
-
-
-load_map
-
-
-subscribe_camera
-
-
-unsubscribe_camera
-
-
-get_camera_frame
-
-
-get_depth_frame
-
-
-show_tablet_camera
-
-
-navigate_to
-
-
-unsubscribe_effector
 
 
 pick_a_volunteer
@@ -237,20 +154,8 @@ pick_a_volunteer
 
 share_localhost
 
-play_sound
-
-stop_sound
 
 
-get_face_properties
-
-listen_to
-
-
-listen
-
-
-ask_wikipedia
 
 
 rename_robot
@@ -262,13 +167,12 @@ upload_file
 download_file
 
 
-speech_to_text
 
 
-chatbot
 
 
-streamCamera
+
+
 
 
 recordSound
