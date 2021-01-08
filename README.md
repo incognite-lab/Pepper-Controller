@@ -130,179 +130,61 @@ You can also use this [script](demo.py) as a starting point to write your applic
 
 The core of our software is Pepper class, that is wrapper around naoqi. It will help you to write Python applications. Here is a list all methods in Pepper class.
 
+| Language | Vision | Motorics | System |
+| - | - | - | - |
+| getVoiceShape | streamCamera | stand | show_image | 
+| getVoiceVolume | get_face_properties | rest | autonomous_life |
+|  set_volume | turn_off_leds  | turn_around | autonomous_blinking |
+| getVoiceSpeed | blink_eyes | detect_touch | show_web |
+| greet | take_picture | dance | point_at | reset_tablet |
+| test_say  | show_map | stop_behaviour | tablet_show_settings | 
+| play_sound | load_map | start_animation | restart_robot | 
+| stop_sound | subscribe_camera | start_behavior | shutdown_robot |
+| listen_to | unsubscribe_camera | hand | autonomous_life_off |
+| listen | get_camera_frame | track_object | autonomous_life_on|
+| ask_wikipedia | get_depth_frame | exploration_mode | battery_status |
+| speech_to_text |  show_tablet_camera | robot_localization | list_behavior |
+| chatbot | | stop_localization | get_robot_name | 
+| pick_a_volunteer | | navigate_to | unsubscribe_effector |
+| recordSound | | move_forward | share_localhost |
+| changeVoice | | move_to_circle| rename_robot |
+| | | set_security_distance | upload_file |
+| | | move_head_down | download_file |
+| | | move_head_up | set_awareness |
+| | | move_head_default | |
+| | | move_joint_by_angle | |
 
-show_image
 
-getVoiceSpeed
+## Authors
 
-getVoiceShap
 
-getVoiceVolume
+![alt text](incognitelogo.png "test_work")
 
-test_say
 
-stand
+[Incognite lab - CIIRC CTU](https://incognite.ciirc.cvut.cz) 
 
-rest
 
-point_at
+[Michal Vavrecka](https://kognice.wixsite.com/vavrecka)
 
-turn_around
+[Gabriela Sejnova](https://kognice.wixsite.com/vavrecka)
 
-autonomous_blinking
+[Michael Tesar](https://www.linkedin.com/in/megi-mejdrechova)
 
-greet
 
-show_web
+[Anastasia Ostapenko](https://www.linkedin.com/in/megi-mejdrechova)
 
-detect_touch
 
-tablet_show_settings
 
-reset_tablet
 
-stop_behaviour
 
-dance
 
-autonomous_life
 
-restart_robot
 
-shutdown_robot
 
-autonomous_life_off
 
 
-autonomous_life_on
 
 
-set_volume
 
 
-battery_status
 
-
-blink_eyes
-
-turn_off_leds
-
-
-start_animation
-
-
-start_behavior
-
-
-list_behavior
-
-
-get_robot_name
-
-
-hand
-
-
-track_object
-
-
-
-take_picture
-
-
-exploration_mode
-
-
-
-show_map
-
-
-
-robot_localization
-
-
-stop_localization
-
-
-load_map
-
-
-subscribe_camera
-
-
-unsubscribe_camera
-
-
-get_camera_frame
-
-
-get_depth_frame
-
-
-show_tablet_camera
-
-
-navigate_to
-
-
-unsubscribe_effector
-
-
-pick_a_volunteer
-
-
-share_localhost
-
-play_sound
-
-stop_sound
-
-
-get_face_properties
-
-listen_to
-
-
-listen
-
-
-ask_wikipedia
-
-
-rename_robot
-
-
-upload_file
-
-
-download_file
-
-
-speech_to_text
-
-
-chatbot
-
-
-streamCamera
-
-
-recordSound
-
-changeVoice
-
-set_awareness
-
-move_forward
-
-set_security_distance
-
-move_head_down
-
-move_head_up
-
-move_head_default
-
-move_to_circle
-
-move_joint_by_angle
