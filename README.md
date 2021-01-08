@@ -130,7 +130,8 @@ You can also use this [script](demo.py) as a starting point to write your applic
 
 The core of our software is Pepper class, that is wrapper around naoqi. It will help you to write Python applications. Here is a list all methods in Pepper class.
 
-
+| Vision | Motorics | Language | System | Other |
+| - | - | - | - | - |
 | show_image | getVoiceSpeed | getVoiceShap | getVoiceVolume | test_say |
 | stand | rest | point_at | turn_around | autonomous_blinking |
 
