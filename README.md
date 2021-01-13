@@ -100,26 +100,6 @@ You can also easily switch Autonomous life on or off:
 
 `robot.autonomous_life_on()`
 
-## Using external speech recognition library
-
-Because the default NUANCE speech recognition software provided with the robot does not fully support speech recognition with open vocabulary, we provide [the SpeechRecognition library](https://pypi.org/project/SpeechRecognition/) as a suitable alternative. This library however needs to be installed directly on the robot. To do that, connect to the robot via ssh and install it as follows:
-
-`ssh nao@<pepperIPaddress>`
-
-a password for the robot is required, by default it is "nao". Once connected, run in the console:
-
-
-`pip install SpeechRecognition --user`
-
-
-That's all. From now on, you should be able to use the SpeechRecognition library from Python like this:
-
-
-`recognised = robot.recognize_google(lang="en-US")`
-
-
-Please keep in mind that the library uses cloud service and thus needs the robot to be connected to internet. 
-
 
 ## Writing custom application
 
