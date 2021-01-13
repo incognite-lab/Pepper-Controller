@@ -6,3 +6,4 @@ gtts
 playsound
 nose
 pillow
+SpeechRecognition
