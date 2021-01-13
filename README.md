@@ -13,6 +13,12 @@ Pepper humanoid robot
 
 ## Installation
 
+Install dependencies:
+
+
+`sudo apt install python-tk opencv-python`
+
+
 Install Pepper SDK 2.5.10 library for Python 2.7 from: https://www.softbankrobotics.com/emea/en/support/pepper-naoqi-2-9/downloads-softwares
 
 
