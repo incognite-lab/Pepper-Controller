@@ -1,33 +1,33 @@
 application_1:
-  name: Word quiz
+  name: App1
   package: allinonequiz-7404fa/behavior_1
 application_2:
-  name: Movie quiz
-  package: universal_test-283d06/behavior_1
+  name: App2
+  package:
 application_3:
-  name: Cognitive test
-  package: kognitiv-7095f1/behavior_1
+  name: App3
+  package:
 application_4:
-  name: Memory test
-  package: remember_objects-e9fb3e/behavior_1
+  name: App4
+  package:
 application_5:
-  name: Jokes
-  package: joke_teller_cz-854c30/behavior_1
+  name: App5
+  package:
 application_6:
-  name: TV program
-  package: tvprogramj-b50d24/behavior_1
+  name: App6
+  package:
 application_7:
-  name: Chatbot
-  package: alquist-9640b1/behavior_1
+  name: App7
+  package:
 application_8:
-  name: Web searching
-  package: web_scr-d66716/behavior_1
+  name: App8
+  package:
 application_9:
-  name: Pantomime
-  package: universal_test-283d04/behavior_1
+  name: App9
+  package:
 application_10:
-  name: Excersize
-  package: hadejzvire-5e66aa/behavior_1
+  name: App10
+  package:
 
 configuration:
   default_ip: 10.37.1.177

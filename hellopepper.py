@@ -18,59 +18,66 @@ Then install all the other requirements using:
 pip2 install -r ./requirements.txt 
 '''
 
+def take_picture_show(robot):
+    local_img_path = robot.take_picture()
+    photo_link = uploadPhotoToWeb(local_img_path)
+    robot.show_image(photo_link)
+    time.sleep(3)
+    robot.reset_tablet()
 
-# Press Pepper's chest button once and he will tell you his IP address
-ip_address = "10.37.1.100"
-port = 9559
-robot = Pepper(ip_address, port)
+def basic_demo(robot):
+    robot.set_english_language()
+    robot.set_volume(50)
+    robot.say("Hello, I am Pepper robot. This is a demo of some functions in the pepper class. To see the code, please check hello pepper dot pie.")
+    robot.start_animation(random.choice(["Hey_1", "Hey_3", "Hey_4", "Hey_6"]))
 
-robot.set_volume(50)
-robot.say("Hello, I am Pepper robot.")
-robot.start_animation(random.choice(["Hey_1", "Hey_3", "Hey_4", "Hey_6"]))
+    robot.say("I can take a picture of you")
+    robot.take_picture()
 
-robot.say("I can make your photograph.")
-local_img_path = robot.take_picture()
+    # To display image on tablet, you need to provide URL of the image - i.e., upload the image online
+    robot.say("The picture will be saved in the project folder.")
 
-# To display image on tablet, you need to provide URL of the image - i.e., upload the image online
-robot.say("The picture will be saved in the project folder.")
-#photo_link = uploadPhotoToWeb(local_img_path)
-#robot.show_image(photo_link)
-#time.sleep(3)
-#robot.reset_tablet()
+    robot.say("I can also show any internet page on my tablet.")
+    robot.show_web("https://www.google.com/")
+    time.sleep(5)
+    robot.reset_tablet()
 
-robot.say("I can also show the internet page on my tablet.")
-robot.show_web("https://www.google.com/")
-time.sleep(5)
-robot.reset_tablet()
+    robot.say("Do you want to try the google speech recognition library with me?")
+    positive_answers = ["yes", "yep", "ok", "i want", "sure", "definitely"]
+    vocab = positive_answers + ["no", "not", "i dont", "i do not know", "not sure"]
+    answer = robot.listen_to(vocabulary=vocab)
 
-robot.say("Do you want to see how I can recognize language?")
-positive_answers = ["yes", "yep", "ok", "i want", "sure", "definitely"]
-vocab = positive_answers + ["no", "not", "i dont", "i do not know", "not sure"]
-answer = robot.listen_to(vocabulary=vocab)
+    if answer[0] in positive_answers:
+         robot.say("Ok, please count up to five now")
+         recognised = robot.recognize_google(lang="en-US")
+         robot.say("I recognized {}".format(recognised.encode('utf-8')))
+    else: robot.say("Cool.")
 
-if answer[0] in positive_answers:
-     robot.say("Ok, now you have to count up to five")
-     recognised = robot.recognize_google(lang="en-US")
-     robot.say("I recognized {}".format(recognised.encode('utf-8')))
-else: robot.say("Cool.")
+    while True:
+        robot.say("Now touch the top of my right hand.")
+        touched_sensor = robot.detect_touch()
+        if touched_sensor[0] == "RArm":
+            robot.say("Perfect, I can detect touch like this.")
+            break
+        else:
+            robot.say("Now you touched a different part of my body.")
 
-while True:
-    robot.say("Touch my right palm.")
-    touched_sensor = robot.detect_touch()
-    if touched_sensor[0] == "RArm":
-        robot.say("Perfect, I can detect touch.")
-        break
-    else:
-        robot.say("Now you touched different part of my body.")
+    robot.say("The last important thing is to switch between autonomous mode. Now it is turned on and thanks to that I'm interactive. If "
+              "I should move, the autonomous regime needs to be turned off so that it doesn't confuse me.")
+    robot.autonomous_life_off()
+    robot.say("Thats it.", bodylanguage="disabled")
+    robot.move_joint_by_angle(["LShoulderRoll", "LShoulderPitch", "RShoulderRoll", "RShoulderPitch"], [-2.9,-1, -2.9, -1], 0.4)
+    time.sleep(2)
+    robot.stand()
+    robot.autonomous_life_on()
 
-robot.say("The last important thing is to switch between autonomous mode. Now I have it turned on and thanks to that I'm interactive. If "
-          "I should move, the autonomous regime needs to be turned off so that it doesn't confuse me.")
-robot.autonomous_life_off()
-robot.say("Thats it.", bodylanguage="disabled")
-robot.move_joint_by_angle(["LShoulderRoll", "LShoulderPitch", "RShoulderRoll", "RShoulderPitch"], [-2.9,-1, -2.9, -1], 0.4)
-time.sleep(2)
-robot.stand()
-robot.autonomous_life_on()
+
+if __name__ == "__main__":
+    # Press Pepper's chest button once and he will tell you his IP address
+    ip_address = "10.37.1.100"
+    port = 9559
+    robot = Pepper(ip_address, port)
+    basic_demo(robot)
 
 
 

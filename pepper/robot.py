@@ -419,6 +419,7 @@ class Pepper:
     def take_picture(self):
         self.subscribe_camera("camera_top", 2, 30)
         img = self.get_camera_frame(show=False)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.unsubscribe_camera()
         self.play_sound("/home/nao/camera1.ogg")
         im = Image.fromarray(img)

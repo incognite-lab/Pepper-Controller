@@ -15,7 +15,7 @@ from PIL import ImageTk, Image
 
 from pepper.robot import Pepper
 import numpy as np
-import demoForClass as foto
+from hellopepper import basic_demo, take_picture_show
 import threading
 
 
@@ -31,6 +31,8 @@ class PepperController:
     def __init__(self, root):
         self.configuration = Configuration()
         self.robot = None
+        self.ip_address = None
+        self.port = None
         self.language = self.configuration.conf["language"]["lang"]
 
         self.root = root
@@ -39,7 +41,7 @@ class PepperController:
         self.root.title("Pepper Controller " + self.configuration.conf["configuration"]["version"])
         self.root.bind('<Escape>', lambda e: root.destroy())
         self.root.resizable(True, True)
-        self.root.configure(background='#F0E68C')
+        self.root.configure(background='#EFF5FB')
 
         '''System customization'''
         self.group_connection = LabelFrame(root, text="Connection")
@@ -135,10 +137,10 @@ class PepperController:
         self.button_app_10 = Button(self.group_application, text=self.configuration.conf["application_10"]["name"],
                                     command=lambda: self.robot.start_behavior(
                                         self.configuration.conf["application_10"]["package"]))
-        self.button_app_11 = Button(self.group_application, text="Take picture",
-                                    command=lambda: foto.PepperDemo(None, self.robot).run())
-        self.button_app_12 = Button(self.group_application, text="Dance",
-                                    command=lambda: self.robot.dance())
+        self.button_app_11 = Button(self.group_application, text="Take a Picture",
+                                    command=lambda: take_picture_show(self.robot))
+        self.button_app_12 = Button(self.group_application, text="Basic Demo",
+                                    command=lambda: basic_demo(self.robot))
 
         self.button_app_1.grid(row=0, column=1, sticky=NSEW)
         self.button_app_2.grid(row=0, column=2, sticky=NSEW)
@@ -185,7 +187,7 @@ class PepperController:
                                          str(np.random.choice(
                                              self.configuration.conf["language"][self.language]["yes_list"]).encode(
                                              "utf-8"))))
-        self.button_say_dont_know = Button(self.group_language, text="I dont know", command=lambda: self.robot.say(
+        self.button_say_dont_know = Button(self.group_language, text="I don't know", command=lambda: self.robot.say(
             str(np.random.choice(
                 self.configuration.conf["language"][self.language]["dont_know_list"]).encode("utf-8"))))
         self.button_say_hello = Button(self.group_language, text="Greetings", command=lambda: self.robot.say(
@@ -266,18 +268,11 @@ class PepperController:
         self.drawLines(x=0, y=250, len=440, vertical=False)
         self.drawLines(x=440, y=170, len=560, vertical=False)
         self.drawLines(x=440, y=250, len=560, vertical=False)
-        '''
-        camera'''
 
         x = threading.Thread(target=self.streamVideo)
         #y = threading.Thread(target=self.streamTablet)
-
-        self.button_obraz = Button(self.root, text="Camera", command=lambda: x.start(), width=7, height=2)
-        self.button_obraz_to_tablet = Button(self.root, text="On tablet", command=lambda: self.pictureToTablet(), width=10, height=2)
-        self.button_obraz.place(x=450, y=260)
-        self.button_obraz_to_tablet.place(x=550, y=260)
-
-        self.set_colour_for_frame([], [self.button_obraz, self.button_obraz_to_tablet])
+        self.button_stream = Button(self.root, text="Camera Stream", command=lambda: x.start(), width=12, height=2)
+        self.button_stream.place(x=450, y=260)
 
     def getRandName(self):
         randNum = random.randint(0, 1000)
@@ -305,7 +300,7 @@ class PepperController:
     def takePicture(self):
         self.robot.subscribe_camera("camera_top", 2, 30)
         img = self.robot.get_camera_frame(show=False)
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        #img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.robot.unsubscribe_camera()
         self.robot.play_sound("/home/nao/camera1.ogg")
         im = Image.fromarray(img)
@@ -342,25 +337,25 @@ class PepperController:
 
     def drawLines(self, x, y, len, vertical):
         if vertical:
-            verticalLine = Frame(self.root, bg='red', height=len,
+            verticalLine = Frame(self.root, bg='black', height=len,
                                  width=2)
             verticalLine.place(x=x, y=y)
         else:
-            horizontalLine = Frame(self.root, bg='red', height=2,
+            horizontalLine = Frame(self.root, bg='black', height=2,
                                    width=len)
             horizontalLine.place(x=x, y=y)
 
     def set_colour_for_frame(self, objects_light, objects_dark):
         for o in objects_light:
-            o.configure(background='#FFD700')
+            o.configure(background='#EFF5FB')
 
         for o in objects_dark:
-            o.configure(background='#EC9800')
+            o.configure(background='#FFFFFF')
 
     def connect(self):
-        ip_address = self.entry_address.get()
-        port = self.entry_port.get()
-        self.robot = Pepper(ip_address, port)
+        self.ip_address = self.entry_address.get()
+        self.port = self.entry_port.get()
+        self.robot = Pepper(self.ip_address, self.port)
         self.change_language(self.language)
         self.setScales()
 
