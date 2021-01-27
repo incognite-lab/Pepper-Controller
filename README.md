@@ -107,6 +107,12 @@ You can also easily switch Autonomous life on or off:
 `robot.autonomous_life_on()`
 
 
+## Example of Pepper semantic segmentation based on Yolact under Python 3
+
+
+Under onstruction
+
+
 ## Writing custom application
 
 As you can see from previous examples, it is pretty straigforward to write an application in Python without Choregraphe.
