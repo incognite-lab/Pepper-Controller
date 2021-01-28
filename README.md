@@ -110,7 +110,9 @@ You can also easily switch Autonomous life on or off:
 ## Example of Pepper semantic segmentation based on Yolact under Python 3
 
 
-Under onstruction
+Sample script in preparation 
+
+ [![Video1](https://img.youtube.com/vi/sTvDHga0O-U/maxresdefault.jpg)](https://youtu.be/sTvDHga0O-U)
 
 
 ## Writing custom application
