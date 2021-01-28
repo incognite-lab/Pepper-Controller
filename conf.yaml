@@ -34,7 +34,7 @@ configuration:
   default_port: 9559
   default_sentence: Hello, I am so glad to be here
   logo: http://people.ciirc.cvut.cz/sejnogab/logo.jpg
-  pozvanka: http://people.ciirc.cvut.cz/sejnogab/sovicka.JPG
+  pozvanka: https://github.com/incognite-lab/Pepper-Controller/raw/main/incognitelogo.png
   version: 2.0.0
   virtual: False
 language:
@@ -62,9 +62,8 @@ language:
       - 'dobrý den'
       - 'zdravím'
       - 'zdravíčko'
-      - 'Dobrý den. já nejsem Bond, žejms Bond. jsem Tony Panatony.'
     name:
-      - 'Já nejsem Bond, žejms Bond.'
+      - 'Já jsem robot pepr'
   en:
     test_sentence: "Hello, this is the test of my voice."
     yes_list:
@@ -86,12 +85,12 @@ language:
     dont_know_list:
       - 'i have no idea'
       - 'i do not know'
-      - 'sorry, have no idea'
+      - 'sorry, I have no idea'
       - 'i am not sure'
       - 'not sure about this'
-      - 'i do not know correct answer'
+      - 'i do not know the correct answer'
     welcome:
-      - 'Hello, my name is pepper and I am a humanoid robot from czech institute of informatics, robotics and cybernetics '
+      - 'Hello, my name is pepper and I am a humanoid robot. I am happy to see you on this occasion.'
     invitation_morning:
       - 'Please come to the talk'
     slosovani:
@@ -105,4 +104,4 @@ language:
       - 'it is a plesure to meet you'
       - 'what an honour to see you'  
     name:
-      - 'I am not james bond. i am tony puna tony.'
+      - 'I am pepper robot.'
