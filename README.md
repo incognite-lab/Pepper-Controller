@@ -70,7 +70,7 @@ After a successful connection, you can control the robot by pressing the buttons
 If you want Pepper to say any phrase, enter it in the text edit field and then press the "Say text" button.
 
 
-The GUI provides support for running Choregraphe projects that are already installed on the robot. We currently do not provide any installable Choregraphe projects, but you can configure the GUI buttons for your own applications. To do that, please edit [conf.yaml](conf.yaml). For each application, you need to provide a name for the button and a path to your Choregraphe app in the form of <applicationID>/<behaviorName>. If you are not sure how to get these, please refer to [Choregraphe documentation](http://doc.aldebaran.com/2-1/software/choregraphe/panels/robot_applications.html). 
+The GUI provides support for running Choregraphe projects that are already installed on the robot. We currently do not provide any installable Choregraphe projects, but you can configure the GUI buttons for your own applications. To do that, please edit [conf.yaml](conf.yaml). For each application, you need to provide a name for the button and a path to your Choregraphe app in the form of applicationID/behavior_1. If you are not sure how to get these, please refer to [Choregraphe documentation](http://doc.aldebaran.com/2-1/software/choregraphe/panels/robot_applications.html)  (it is label C on the second image). 
 
 
 Other properties of the GUI can be edited through the [conf.yaml](conf.yaml) file.
