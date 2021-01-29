@@ -9,8 +9,9 @@ import json
 from PIL import Image
 import random
 
-'''we need to upload photo to web as we (me) are not able to open it from local folder'''
+
 def uploadPhotoToWeb(photo):
+    """we need to upload photo to web as we (me) are not able to open it from local folder"""
     f = open(photo, "rb")  # open our image file as read only in binary mode
     image_data = f.read()  # read in our image file
     b64_image = base64.standard_b64encode(image_data)
@@ -23,8 +24,9 @@ def uploadPhotoToWeb(photo):
     parse = json.loads(response)
     return parse['data']['link'] #returns a url of the photo
 
-'''reurns a random name for the picture in order not to replace the old photo'''
+
 def getRandName():
+    """returns a random name for the picture in order not to replace the old photo"""
     randNum = random.randint(0, 1000)
     return "demoPictures/photo" + str(randNum) + ".png"
 
@@ -38,9 +40,10 @@ class PepperDemo:
         self.greetings = ["Good afternoon", "Hello", "Hi", "Hello everobody", "Welcome"]
         self.asks = ["May I photograph you?","May I take your picture?", "Do you want to make your picture?"]
 
-    '''recognise answer with google speech reco'''
+
     def wantToTakePic(self):
-        answers = {"no": ["no", "no way", "not", "no no", " i dont", "i dont know", "not today", "later", "tommorow"],
+        """recognise answer with google speech reco"""
+        answers = {"no": ["no", "no way", "not", "no no", " i don't", "i dont know", "not today", "later", "tommorow"],
                    "yes": ["yes", "definitely", "yep", "ok", "okey dokey", "sure", "all yes", "you must",
                           "absolutely", "i want", "i think so", "i agree", "if you want", "if you insist", "probably", "maybe",
                           "yes sir"]}
@@ -53,14 +56,13 @@ class PepperDemo:
         else:
             return None
 
-    '''looks for a recorded answer in a dictionary'''
+
     def getAnswer(self, dic, recorded):
-        answer = None
+        """looks for a recorded answer in a dictionar"""
         for x in dic.keys():
-            if recorded in dic[x]:
-                answer = x
-                break
-        return answer
+            if dic[x] in recorded.lower():
+                return x
+        return None
 
     def welcomeAndAsk(self):
         self.robot.say(random.choice(self.greetings))
@@ -94,9 +96,9 @@ class PepperDemo:
         else:
             self.robot.say("Maybe next time")
 
-    '''there is a modifiable grammar error sometimes occurred. 
-    In order to deal with it you should change language to english and back'''
     def dealWithRecoErrors(self):
+        """there is a modifiable grammar error sometimes occurred.
+        In order to deal with it you should change language to english and back"""
         self.robot.set_english_language()
         self.robot.set_czech_language()
 
