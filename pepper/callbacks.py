@@ -53,7 +53,7 @@ class ReactToTouch(object):
         if (bodies == []):
             return
 
-        sentence = "Dotknul ses " + bodies[0]
+        sentence = bodies[0]
 
         for b in bodies[1:]:
             sentence = sentence + " a " + b
@@ -90,12 +90,6 @@ class HumanGreeter(object):
         """
         Callback for event FaceDetected.
         """
-        # if value == []:  # empty value when the face disappears
-        #     self.got_face = False
-        #     print("Value []")
-        #     self.human_name = None
-        #elif not self.got_face:  # only speak the first time a face appears
-
         self.got_face = True
         # First Field = TimeStamp.
         timeStamp = value[0]
@@ -103,9 +97,7 @@ class HumanGreeter(object):
         faceInfoArray = value[1]
         for j in range( len(faceInfoArray)-1 ):
             faceInfo = faceInfoArray[j]
-            # First Field = Shape info.
-            faceShapeInfo = faceInfo[0]
-            # Second Field = Extra info (empty for now).
+            # First Field = Shape info, Second Field = Extra info
             faceExtraInfo = faceInfo[1]
             if faceExtraInfo[2] == "" or None:
                 self.human_name = "noone"

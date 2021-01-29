@@ -15,7 +15,7 @@ from PIL import ImageTk, Image
 
 from pepper.robot import Pepper
 import numpy as np
-from hellopepper import basic_demo, take_picture_show
+from hellopepper import basic_demo, take_picture_show, recognize_person, learn_person
 import threading
 
 
@@ -131,12 +131,10 @@ class PepperController:
         self.button_app_8 = Button(self.group_application, text=self.configuration.conf["application_8"]["name"],
                                    command=lambda: self.robot.start_behavior(
                                        self.configuration.conf["application_8"]["package"]))
-        self.button_app_9 = Button(self.group_application, text=self.configuration.conf["application_9"]["name"],
-                                   command=lambda: self.robot.start_behavior(
-                                       self.configuration.conf["application_9"]["package"]))
-        self.button_app_10 = Button(self.group_application, text=self.configuration.conf["application_10"]["name"],
-                                    command=lambda: self.robot.start_behavior(
-                                        self.configuration.conf["application_10"]["package"]))
+        self.button_app_9 = Button(self.group_application, text="Learn face",
+                                   command=lambda: learn_person(self.robot, self.language))
+        self.button_app_10 = Button(self.group_application, text="Recognize human",
+                                    command=lambda: recognize_person(self.robot, self.language))
         self.button_app_11 = Button(self.group_application, text="Take a Picture",
                                     command=lambda: take_picture_show(self.robot))
         self.button_app_12 = Button(self.group_application, text="Basic Demo",

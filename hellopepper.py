@@ -2,6 +2,7 @@
 from pepper.robot import Pepper
 from demo import uploadPhotoToWeb
 import random, os, time
+import qi
 
 ''' 
 This is a minimal demo showing you how to work with Pepper class and reach some of the frequently used functions.
@@ -18,6 +19,53 @@ Then install all the other requirements using:
 pip2 install -r ./requirements.txt 
 '''
 
+
+def recognize_person(robot, language="en"):
+    """
+    Try to recognize the person in front of Pepper and greet him.
+
+    :param robot: instance of the Pepper class
+    :param: language: str, "en" for English, "cz" for Czech
+    """
+    name = robot.recognize_person()
+    responses = {"en":{"faceKnown":["Glad to see you, {}", "I am happy to see you again, {}", "Hello, {}"],
+                       "faceUnknown":["I don't think we've met before.","I am sorry, I don't know you yet."]},
+                 "cz":{"faceKnown":["Rád tě vidím, {}", "Je hezké tě zase vidět, {}", "Ahoj, {}"],
+                       "faceUnknown":["Myslím, že my dva se zatím neznáme.","Promiň, ale asi tě zatím neznám."]}}
+
+    if name is not None:
+        name = name.lower()
+        robot.say(random.choice(responses[language]["faceKnown"]).format(name))
+    else:
+        robot.say(random.choice(responses[language]["faceUnknown"]))
+
+
+def learn_person(robot, language="en"):
+    """
+    Try to learn the name of the person in front of Pepper.
+
+    :param robot: instance of the Pepper class
+    :param: language: str, "en" for English, "cz" for Czech
+    """
+    dialog = {"en":{"1":"What is your name?", "2":["That's a pretty name.", "I will remember that.", "Nice to meet you."], '3':'Your name is {}, am I right?', "lang":"en-US"},
+              "cz":{"1":"Jak se jmenuješ?", "2":["To je hezké jméno.", "Budu si to pamatovat.", "Rád tě poznávám."],'3':'Jmenuješ se {}, slyšel jsem správně?', "lang":"cs-CZ"}}
+    robot.say(random.choice(dialog[language]["1"]))
+    while True:
+        name = robot.recognize_google()
+        if name != "":
+            for word in [ "jmenuju ", "jemnuji ","jsem ", "je ", "mi ", "se ", "name is", "is", "I am", "I'm"]:
+                if word.lower() in name.lower():
+                    name = name.split(word)[-1]
+            break
+        else:
+            continue
+    print("Recognized name {}".format(name.encode('utf-8')))
+    while True:
+        success = robot.learn_face(name)
+        if success:
+            break
+    robot.say(random.choice(dialog[language]["2"]))
+
 def take_picture_show(robot):
     local_img_path = robot.take_picture()
     photo_link = uploadPhotoToWeb(local_img_path)
@@ -26,6 +74,7 @@ def take_picture_show(robot):
     robot.reset_tablet()
 
 def basic_demo(robot):
+    """ Shows how to work with the Pepper class and how to use the basic functions."""
     robot.set_english_language()
     robot.set_volume(50)
     robot.say("Hello, I am Pepper robot. This is a demo of some functions in the pepper class. To see the code, please check hello pepper dot pie.")

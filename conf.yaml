@@ -22,12 +22,6 @@ application_7:
 application_8:
   name: App8
   package:
-application_9:
-  name: App9
-  package:
-application_10:
-  name: App10
-  package:
 
 configuration:
   default_ip: 10.37.1.177

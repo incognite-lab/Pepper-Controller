@@ -58,6 +58,8 @@ class Pepper:
         ssh.connect(hostname=self.ip_address, username="nao", password="nao")
         self.scp = SCPClient(ssh.get_transport())
         self.touch_app = qi.Application(["ReactToTouch", "--qi-url=" + connection_url])
+        self.facereco_app = qi.Application(["HumanGreeter", "--qi-url=" + connection_url])
+        self.human_reco = HumanGreeter(self.facereco_app)
 
         self.posture_service = self.session.service("ALRobotPosture")
         self.motion_service = self.session.service("ALMotion")
@@ -723,6 +725,31 @@ class Pepper:
         self.tracker_service.setEffector("None")
         print("[INFO]: End-effector is unsubscribed")
 
+    def learn_face(self, name):
+        """
+        Tries to learn the face with the provided name.
+        :param name:str, name to learn with face
+        :return: str, name of human
+        """
+        self.set_awareness(True)
+        self.human_reco.subscribe_2reco()
+        print("Waiting to see a human...")
+        success = self.human_reco.learnFace(str(name))
+        return success
+
+    def recognize_person(self):
+        """
+        Tries to recognize the name of the person in front of Pepper
+        :return: str, name of human
+        """
+        self.set_awareness(True)
+        self.human_reco.subscribe_2reco()
+        print("Waiting to see a human...")
+        while not self.human_reco.human_name:
+            pass
+        name = self.human_reco.human_name if self.human_reco.human_name != "noone" else None
+        return name
+
     def pick_a_volunteer(self):
         """
         Complex movement for choosing a random people.
@@ -1177,13 +1204,13 @@ class Pepper:
             playsound.playsound("./tmp_speech.mp3")
 
         @staticmethod
-        def listen():
+        def listen(lang="en-US"):
             """Speech to text by Google Speech Recognition"""
             recognizer = speech_recognition.Recognizer()
             with speech_recognition.Microphone() as source:
                 print("[INFO]: Say something...")
                 audio = recognizer.listen(source)
-                speech = recognizer.recognize_google(audio, language="en-US")
+                speech = recognizer.recognize_google(audio, language=lang)
 
                 return speech
 
