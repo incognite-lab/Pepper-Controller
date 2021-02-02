@@ -165,8 +165,7 @@ The core of our software is Pepper class, a wrapper around naoqi. It will help y
 | | |move_joint_by_angle | upload_file |
 | | | move_head_down | download_file |
 | | | move_head_up | set_awareness |
-| | | move_head_default | |
-
+| | | move_head_default | |()
 
 
 ## Authors

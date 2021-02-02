@@ -103,7 +103,7 @@ class PepperController:
                                    ]
                                   )
 
-        self.group_application = LabelFrame(root, text="Aplications")
+        self.group_application = LabelFrame(root, text="Applications")
         self.group_application.grid(row=1, column=20, columnspan=16, rowspan=2, padx=5, pady=5)
         self.group_application.place(x=450, y=10)
 

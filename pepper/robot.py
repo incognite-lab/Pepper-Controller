@@ -57,10 +57,8 @@ class Pepper:
         ssh.load_system_host_keys()
         ssh.connect(hostname=self.ip_address, username="nao", password="nao")
         self.scp = SCPClient(ssh.get_transport())
-        self.touch_app = qi.Application(["ReactToTouch", "--qi-url=" + connection_url])
-        self.facereco_app = qi.Application(["HumanGreeter", "--qi-url=" + connection_url])
-        self.human_reco = HumanGreeter(self.facereco_app)
-
+        self.app = qi.Application(["ReactToTouch","HumanGreeter", "--qi-url=" + connection_url])
+        self.human_reco = HumanGreeter(self.app)
         self.posture_service = self.session.service("ALRobotPosture")
         self.motion_service = self.session.service("ALMotion")
         self.tracker_service = self.session.service("ALTracker")
@@ -195,7 +193,7 @@ class Pepper:
         self.tablet_service.showWebview(website)
 
     def detect_touch(self):
-        react_to_touch = ReactToTouch(self.touch_app)
+        react_to_touch = ReactToTouch(self.app)
         print("Waiting for touch...")
         while not react_to_touch.activated_sensor:
             pass
