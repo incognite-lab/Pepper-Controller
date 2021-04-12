@@ -2,32 +2,20 @@ import pybullet as p
 import gym
 import sys
 import os
-from ciircgym import envs
 import torch
 import cv2
-import numpy as np
 import pkg_resources
 import subprocess
 import os
 import threading
 import json
 from copy import copy
-from PIL import Image
-import matplotlib.pyplot as plt
-import scipy.misc
 
 sys.path.append(pkg_resources.resource_filename("ciircgym", "yolact_vision"))
 #sys.path.append(pkg_resources.resource_filename("ciircgym", "pepper_controller"))
 
 from inference_tool import InfTool
-# from ciircyolact_vision import eval
-from yolact import Yolact
-from data import cfg, set_cfg, set_dataset
-import eval as ev
-from utils.augmentations import FastBaseTransform
-from utils.functions import SavePath
-from ciircgym.yolact_vision import yolact
-from ciircgym.envs.wrappers import RandomizedEnvWrapper
+
 
 isFinished = False
 if not os.path.exists("./yolact_weights_realworld.pth"):

@@ -14,6 +14,8 @@ This will show Pepper's camera in OpenCV, detect objects and Pepper will say out
 
 `conda activate ciircgym`
 
+`python setup.py develop`
+
 
 ## How to run
 
