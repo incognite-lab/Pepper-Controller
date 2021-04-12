@@ -213,7 +213,7 @@ def camera_stream(robot):
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
         im = Image.fromarray(image)
-        im.save("camera.jpg")
+        im.save("./camera.jpg")
     robot.unsubscribe_camera()
     cv2.destroyAllWindows()
     global hasFinished
@@ -228,7 +228,7 @@ def constantlyCheckObjects(robot):
 
 
 if __name__ == "__main__":
-    robot = Pepper("10.37.1.178")
+    robot = Pepper("10.37.1.237")
     args = parse_args()
     #robot.autonomous_life_off()
     robot.set_english_language()

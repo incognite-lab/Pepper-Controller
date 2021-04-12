@@ -7,7 +7,6 @@ All what is needed for evaluation and inference is in the yolact_vision folder i
 #### Generate dataset 
 
 In COCO format:
-
 `python generate_dataset.py configs/config_coco.json` 
  fills output_folder set in config_coco.json with images in correct format. See example config 'config_coco.json' for details about options, including randomization settings.
 

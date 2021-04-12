@@ -30,7 +30,9 @@ from ciircgym.yolact_vision import yolact
 from ciircgym.envs.wrappers import RandomizedEnvWrapper
 
 isFinished = False
-
+if not os.path.exists("./yolact_weights_realworld.pth"):
+    print("Did not find YOLACT weights, downloading them...")
+    subprocess.call("./download_weights.sh")
 
 def assignDirections(class_names, centroids):
     if not centroids:
@@ -106,16 +108,8 @@ if __name__ == "__main__":
     fileName = os.path.join(fileDir, "../yolactDemo.py")
     fileName = os.path.abspath(os.path.realpath(fileName))
     name = "camera.jpg"
-    #weights = pkg_resources.resource_filename("ciircgym",
-                                              #"yolact_vision/data/yolact/weights/weights_yolact_25/crow_base_25_133333.pth")
-    # path to saved config obj or name of an existing one in the Config script (e.g. 'yolact_base_config') or None for autodetection
-    weights = pkg_resources.resource_filename("ciircgym",
-                                               "yolact_vision/data/yolact/weights/yolact_base_54_800000.pth")
-    model_path = SavePath.from_str(weights)
-    config = model_path.model_name + '_config'
-    #config = pkg_resources.resource_filename("ciircgym",
-                                    #"yolact_vision/data/yolact/weights/weights_yolact_25/config_train.obj")
-    cnn = InfTool(weights=weights, config=config, score_threshold=0.35)
+    weights = "./yolact_weights_realworld.pth"
+    cnn = InfTool(weights=weights, config="yolact_base_config", score_threshold=0.35)
 
     pepperThread = threading.Thread(target=streamPepperCamera)
     pepperThread.start()
