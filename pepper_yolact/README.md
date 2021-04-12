@@ -4,7 +4,7 @@
 This will show Pepper's camera in OpenCV, detect objects and Pepper will say out loud what he sees.
 
 
-![Image](./detection_demo.png)
+![Image](detection_demo.png)
 
 
 ## Requirements
