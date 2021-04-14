@@ -24,6 +24,11 @@ import subprocess
 import socket
 from PIL import Image
 from callbacks import HumanGreeter, ReactToTouch
+import os
+
+if not os.path.exists("/tmp_pepper"):
+    os.makedirs("/tmp_pepper")
+    print("Created temporary folder /tmp_pepper/ for retrieved data")
 
 class Pepper:
     """
@@ -506,7 +511,7 @@ class Pepper:
 
         if on_robot:
             # TODO: It requires a HTTPS server running. This should be somehow automated.
-            cv2.imwrite("../tmp/map.png", robot_map)
+            cv2.imwrite("../tmp_pepper/map.png", robot_map)
             self.show_web(remote_ip + ":8000/map.png")
             print("[INFO]: Map is available at: " + str(remote_ip) + ":8000/map.png")
         else:
@@ -655,7 +660,7 @@ class Pepper:
         Show image from camera with SpeechToText annotation on the robot tablet
 
         .. note:: For showing image on robot you will need to share a location via HTTPS and \
-        save the image to ./tmp.
+        save the image to ./tmp_pepper.
 
         .. warning:: It has to be some camera subscribed and ./tmp folder in root directory \
         exists for showing it on the robot.
@@ -663,11 +668,11 @@ class Pepper:
         :Example:
 
         >>> pepper = Pepper("10.37.1.227")
-        >>> pepper.share_localhost("/Users/michael/Desktop/Pepper/tmp/")
+        >>> pepper.share_localhost("/Users/michael/Desktop/Pepper/tmp_pepper/")
         >>> pepper.subscribe_camera("camera_top", 2, 30)
         >>> while True:
         >>>     pepper.show_tablet_camera("camera top")
-        >>>     pepper.tablet_show_web("http://10.37.2.241:8000/tmp/camera.png")
+        >>>     pepper.tablet_show_web("http://10.37.2.241:8000/tmp_pepper/camera.png")
 
         :param text: Question of the visual question answering
         :type text: string
@@ -678,9 +683,9 @@ class Pepper:
         image = cv2.resize(image, (800, 600))
         cv2.putText(image, "Visual question answering", (30, 500), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
         cv2.putText(image, "Question: " + text, (30, 550), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-        cv2.imwrite("../tmp/camera.png", image)
+        cv2.imwrite("../tmp_pepper/camera.png", image)
 
-        self.show_web("http://" + remote_ip + ":8000/tmp/camera.png")
+        self.show_web("http://" + remote_ip + ":8000/tmp_pepper/camera.png")
 
     def navigate_to(self, x, y):
         """
@@ -1023,7 +1028,7 @@ class Pepper:
         :param file_name: File name with extension (or path)
         :type file_name: string
         """
-        self.scp.get(file_name, local_path="/tmp/")
+        self.scp.get(file_name, local_path="/tmp_pepper/")
         print("[INFO]: File " + file_name + " downloaded")
         self.scp.close()
 
@@ -1037,7 +1042,7 @@ class Pepper:
         :return: Text of the speech
         :rtype: string
         """
-        audio_file = speech_recognition.AudioFile("/tmp/" + audio_file)
+        audio_file = speech_recognition.AudioFile("/tmp_pepper/" + audio_file)
         with audio_file as source:
             audio = self.recognizer.record(source)
             recognized = self.recognizer.recognize_google(audio, language=lang)
