@@ -90,8 +90,6 @@ Open .ui file
 
 File > Open > Pick "pepper_controller.ui" 
 
-Edit
-
 ## Command line examples
 
 If you want to control the robot from command line, just run Python 2 and type:
