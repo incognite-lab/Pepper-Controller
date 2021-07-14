@@ -148,7 +148,7 @@ class Pepper:
 
     def rest(self):
         """Get robot into default resting position know as `Crouch`"""
-        self.posture_service.goToPostures("Crouch", 1.0)
+        self.posture_service.goToPosture("Crouch", 1.0)
         print("[INFO]: Robot is in resting position")
 
     def point_at(self, x, y, z, effector_name, frame):
@@ -163,7 +163,7 @@ class Pepper:
     def turn_around(self, speed):
         """
         Turn around its axis
-        :param speed: Positive values to right, negative to left
+        :param speed: Positive values to right, negative to left # other way
         :type speed: float
         """
         self.motion_service.move(0, 0, speed)
@@ -223,7 +223,14 @@ class Pepper:
         """Start dancing with robot"""
         print("Robot is about to dance a little")
         self.behavior_service.startBehavior("date_dance-896e88/.")
-
+    
+    def mood_happy(self):
+        """ is happy """
+        print("Robot is in happy mood")
+        animation_finished = self.animation_service.run("animations/Stand/Emotions/Positive/Happy_4", _async=True)
+        animation_finished.value()
+        
+    
     def autonomous_life(self):
         """
         Switch autonomous life on/off
@@ -277,8 +284,12 @@ class Pepper:
     def battery_status(self):
         """Say a battery status"""
         battery = self.battery_service.getBatteryCharge()
-        self.say("Mám nabitých " + str(battery) + " procent baterie")
-
+        language = self.dialog_service.getLanguage()
+        if language == "Czech":
+            self.say("Mám nabitých " + str(battery) + " procent baterie")
+        elif language == "English":
+            self.say("My battery level is " + str(battery) + " %")
+        
     def blink_eyes(self, rgb):
         """
         Blink eyes with defined color
@@ -296,7 +307,9 @@ class Pepper:
     def turn_off_leds(self):
         """Turn off the LEDs in robot's eyes"""
         self.blink_eyes([0, 0, 0])
-
+    
+    
+    
     def start_animation(self, animation):
         """
         Starts a animation which is stored on robot
@@ -325,7 +338,7 @@ class Pepper:
         except Exception as error:
             print(error)
             return False
-
+    
     def start_behavior(self, behavior):
         """
         Starts a behavior stored on robot
@@ -599,7 +612,7 @@ class Pepper:
             camera_index = 2
             resolution = 1
             color_space = 11
-
+        
         self.camera_link = self.camera_device.subscribeCamera("Camera_Stream" + str(numpy.random.random()),
                                                               camera_index, resolution, color_space, fps)
         if self.camera_link:
@@ -1100,7 +1113,12 @@ class Pepper:
         self.set_volume(volume)
         self.voice_speed = speed
         self.voice_shape = shape
-        self.say("Zkouška hlasu")
+        language = self.dialog_service.getLanguage()
+        if language == "Czech":
+            self.say("Zkouška hlasu")
+        elif language == "English":
+            self.say("Sound check")
+        
 
     def set_awareness(self, on=True):
         """
@@ -1186,6 +1204,14 @@ class Pepper:
 
         #time.sleep(3.0)
         #motion_service.setStiffnesses("Head", 0.0)
+
+    def do_hand_shake(self):
+        self.move_joint_by_angle(["RElbowRoll", "RShoulderPitch", "RElbowYaw", "RWristYaw"], [1, 1, 1, 1], 0.4)
+        self.hand("right", False)
+        time.sleep(3)
+        self.hand("right", True)
+        self.move_joint_by_angle(["RElbowRoll", "RShoulderPitch", "RElbowYaw", "RWristYaw"], [0, 1.5, 1, 1], 0.4)
+
 
     class VirtualPepper:
         """Virtual robot for testing"""

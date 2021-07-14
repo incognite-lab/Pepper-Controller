@@ -1,0 +1,1139 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.1">
+  <object class="tk.Toplevel" id="toplevel1">
+    <property name="geometry">800x600</property>
+    <property name="height">0</property>
+    <property name="minsize">800|600</property>
+    <property name="resizable">both</property>
+    <property name="takefocus">true</property>
+    <property name="title" translatable="yes">Pepper Gui 2.0.1</property>
+    <property name="width">0</property>
+    <child>
+      <object class="ttk.Frame" id="frame5">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="pack">
+          <property name="expand">true</property>
+          <property name="fill">both</property>
+          <property name="propagate">True</property>
+          <property name="side">top</property>
+        </layout>
+        <child>
+          <object class="ttk.Frame" id="frame6">
+            <layout manager="pack">
+              <property name="expand">true</property>
+              <property name="fill">both</property>
+              <property name="propagate">True</property>
+              <property name="side">left</property>
+            </layout>
+            <child>
+              <object class="ttk.Labelframe" id="connection">
+                <property name="height">200</property>
+                <property name="text" translatable="yes">Connection</property>
+                <property name="width">200</property>
+                <layout manager="pack">
+                  <property name="fill">x</property>
+                  <property name="padx">10</property>
+                  <property name="pady">10</property>
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+                <child>
+                  <object class="ttk.Frame" id="frame7">
+                    <property name="height">50</property>
+                    <property name="width">50</property>
+                    <layout manager="pack">
+                      <property name="anchor">center</property>
+                      <property name="propagate">True</property>
+                      <property name="side">top</property>
+                    </layout>
+                    <child>
+                      <object class="ttk.Label" id="IPAddress">
+                        <property name="anchor">n</property>
+                        <property name="state">normal</property>
+                        <property name="text" translatable="yes">IP Address</property>
+                        <layout manager="grid">
+                          <property name="column">0</property>
+                          <property name="propagate">True</property>
+                          <property name="row">0</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Port">
+                        <property name="compound">top</property>
+                        <property name="text" translatable="yes">Port</property>
+                        <layout manager="grid">
+                          <property name="column">0</property>
+                          <property name="propagate">True</property>
+                          <property name="row">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Entry" id="port_in">
+                        <property name="cursor">xterm</property>
+                        <property name="text" translatable="yes">9559</property>
+                        <property name="textvariable">string:port</property>
+                        <property name="validate">focus</property>
+                        <layout manager="grid">
+                          <property name="column">1</property>
+                          <property name="propagate">True</property>
+                          <property name="row">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Button" id="connect_btn">
+                        <property cbtype="simple" name="command" type="command">on_connect_clicked</property>
+                        <property name="text" translatable="yes">Connect</property>
+                        <layout manager="grid">
+                          <property name="column">2</property>
+                          <property name="propagate">True</property>
+                          <property name="row">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Entry" id="ipAddress_in">
+                        <property name="cursor">xterm</property>
+                        <property name="text" translatable="yes">10.37.1.243</property>
+                        <property name="textvariable">string:ipaddress</property>
+                        <layout manager="grid">
+                          <property name="column">1</property>
+                          <property name="propagate">True</property>
+                          <property name="row">0</property>
+                        </layout>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Labelframe" id="system">
+                <property name="height">200</property>
+                <property name="text" translatable="yes">System</property>
+                <property name="width">200</property>
+                <layout manager="pack">
+                  <property name="expand">false</property>
+                  <property name="fill">both</property>
+                  <property name="padx">10</property>
+                  <property name="pady">10</property>
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+                <child>
+                  <object class="ttk.Frame" id="frame2">
+                    <property name="height">400</property>
+                    <property name="width">200</property>
+                    <layout manager="pack">
+                      <property name="expand">true</property>
+                      <property name="fill">both</property>
+                      <property name="propagate">True</property>
+                      <property name="side">left</property>
+                    </layout>
+                    <child>
+                      <object class="ttk.Button" id="reset_tablet">
+                        <property cbtype="simple" name="command" type="command">on_reset_tablet_clicked</property>
+                        <property name="text" translatable="yes">Reset tablet</property>
+                        <layout manager="grid">
+                          <property name="column">1</property>
+                          <property name="padx">5</property>
+                          <property name="pady">5</property>
+                          <property name="propagate">True</property>
+                          <property name="row">0</property>
+                          <property name="sticky">nsew</property>
+                          <property id="1" name="weight" type="col">1</property>
+                          <property id="0" name="weight" type="row">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Button" id="close_app">
+                        <property cbtype="simple" name="command" type="command">on_close_app_clicked</property>
+                        <property name="text" translatable="yes">Close App</property>
+                        <layout manager="grid">
+                          <property name="column">0</property>
+                          <property name="padx">5</property>
+                          <property name="pady">5</property>
+                          <property name="propagate">True</property>
+                          <property name="row">2</property>
+                          <property name="sticky">nsew</property>
+                          <property id="0" name="weight" type="col">1</property>
+                          <property id="2" name="weight" type="row">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Button" id="aware_off">
+                        <property cbtype="simple" name="command" type="command">on_aware_off_clicked</property>
+                        <property name="text" translatable="yes">Awareness Off</property>
+                        <layout manager="grid">
+                          <property name="column">0</property>
+                          <property name="padx">5</property>
+                          <property name="pady">5</property>
+                          <property name="propagate">True</property>
+                          <property name="row">1</property>
+                          <property name="sticky">nsew</property>
+                          <property id="0" name="weight" type="col">1</property>
+                          <property id="1" name="weight" type="row">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Button" id="aware_on">
+                        <property cbtype="simple" name="command" type="command">on_aware_on_clicked</property>
+                        <property name="text" translatable="yes">Awareness On</property>
+                        <layout manager="grid">
+                          <property name="column">1</property>
+                          <property name="padx">5</property>
+                          <property name="pady">5</property>
+                          <property name="propagate">True</property>
+                          <property name="row">1</property>
+                          <property name="sticky">nsew</property>
+                          <property id="1" name="weight" type="col">1</property>
+                          <property id="1" name="weight" type="row">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Button" id="battery_level">
+                        <property cbtype="simple" name="command" type="command">on_battery_level_clicked</property>
+                        <property name="text" translatable="yes">Battery Level</property>
+                        <layout manager="grid">
+                          <property name="column">1</property>
+                          <property name="padx">5</property>
+                          <property name="pady">5</property>
+                          <property name="propagate">True</property>
+                          <property name="row">2</property>
+                          <property name="sticky">nsew</property>
+                          <property id="1" name="weight" type="col">1</property>
+                          <property id="2" name="weight" type="row">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Frame" id="frame1">
+                        <property name="height">200</property>
+                        <property name="width">200</property>
+                        <layout manager="grid">
+                          <property name="column">0</property>
+                          <property name="padx">5</property>
+                          <property name="pady">5</property>
+                          <property name="propagate">True</property>
+                          <property name="row">0</property>
+                          <property name="sticky">nsew</property>
+                          <property id="0" name="weight" type="col">1</property>
+                          <property id="0" name="weight" type="row">1</property>
+                        </layout>
+                        <child>
+                          <object class="ttk.Label" id="auto_life">
+                            <property name="anchor">center</property>
+                            <property name="justify">center</property>
+                            <property name="text" translatable="yes">Auto Life: </property>
+                            <layout manager="pack">
+                              <property name="expand">true</property>
+                              <property name="fill">both</property>
+                              <property name="propagate">True</property>
+                              <property name="side">left</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Button" id="change_auto_life">
+                            <property cbtype="simple" name="command" type="command">on_auto_life_clicked</property>
+                            <property name="text" translatable="yes">Change</property>
+                            <layout manager="pack">
+                              <property name="expand">true</property>
+                              <property name="fill">both</property>
+                              <property name="propagate">True</property>
+                              <property name="side">left</property>
+                            </layout>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Labelframe" id="language">
+                <property name="height">200</property>
+                <property name="text" translatable="yes">Language</property>
+                <property name="width">200</property>
+                <layout manager="pack">
+                  <property name="expand">false</property>
+                  <property name="fill">both</property>
+                  <property name="padx">10</property>
+                  <property name="pady">10</property>
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+                <child>
+                  <object class="ttk.Button" id="cz_langauge">
+                    <property cbtype="simple" name="command" type="command">on_czech_clicked</property>
+                    <property name="text" translatable="yes">Czech Language</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="padx">5</property>
+                      <property name="pady">5</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property name="sticky">nsew</property>
+                      <property id="0" name="weight" type="col">1</property>
+                      <property id="0" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="eng_lang">
+                    <property cbtype="simple" name="command" type="command">on_english_clicked</property>
+                    <property name="text" translatable="yes">English Language</property>
+                    <layout manager="grid">
+                      <property name="column">1</property>
+                      <property name="padx">5</property>
+                      <property name="pady">5</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property name="sticky">nsew</property>
+                      <property id="1" name="weight" type="col">1</property>
+                      <property id="0" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="greet">
+                    <property cbtype="simple" name="command" type="command">on_greet_clicked</property>
+                    <property name="text" translatable="yes">Greetings</property>
+                    <layout manager="grid">
+                      <property name="column">2</property>
+                      <property name="padx">5</property>
+                      <property name="pady">5</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property name="sticky">nsew</property>
+                      <property id="2" name="weight" type="col">1</property>
+                      <property id="0" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="no">
+                    <property cbtype="simple" name="command" type="command">on_no_clicked</property>
+                    <property name="text" translatable="yes">No</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="padx">5</property>
+                      <property name="pady">5</property>
+                      <property name="propagate">True</property>
+                      <property name="row">1</property>
+                      <property name="sticky">nsew</property>
+                      <property id="0" name="weight" type="col">1</property>
+                      <property id="1" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="yes">
+                    <property cbtype="simple" name="command" type="command">on_yes_clicked</property>
+                    <property name="text" translatable="yes">Yes</property>
+                    <layout manager="grid">
+                      <property name="column">1</property>
+                      <property name="padx">5</property>
+                      <property name="pady">5</property>
+                      <property name="propagate">True</property>
+                      <property name="row">1</property>
+                      <property name="sticky">nsew</property>
+                      <property id="1" name="weight" type="col">1</property>
+                      <property id="1" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="idk">
+                    <property cbtype="simple" name="command" type="command">on_idk_clicked</property>
+                    <property name="text" translatable="yes">I don't know</property>
+                    <layout manager="grid">
+                      <property name="column">2</property>
+                      <property name="padx">5</property>
+                      <property name="pady">5</property>
+                      <property name="propagate">True</property>
+                      <property name="row">1</property>
+                      <property name="sticky">nsew</property>
+                      <property id="2" name="weight" type="col">1</property>
+                      <property id="1" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Frame" id="voice_settings">
+                <property name="height">100</property>
+                <property name="width">100</property>
+                <layout manager="pack">
+                  <property name="expand">false</property>
+                  <property name="fill">both</property>
+                  <property name="padx">10</property>
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+                <child>
+                  <object class="ttk.Button" id="update">
+                    <property cbtype="simple" name="command" type="command">on_update_sound_clicked</property>
+                    <property name="text" translatable="yes">Update</property>
+                    <layout manager="grid">
+                      <property name="column">3</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property name="rowspan">2</property>
+                      <property name="sticky">nsew</property>
+                      <property id="3" name="weight" type="col">1</property>
+                      <property id="0" name="weight" type="row">0</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Frame" id="frame4">
+                    <property name="height">200</property>
+                    <property name="width">200</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="padx">5</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property name="sticky">nsew</property>
+                      <property id="0" name="weight" type="col">1</property>
+                      <property id="0" name="weight" type="row">0</property>
+                    </layout>
+                    <child>
+                      <object class="ttk.Scale" id="scale1">
+                        <property name="cursor">arrow</property>
+                        <property name="from_">0</property>
+                        <property name="orient">horizontal</property>
+                        <property name="to">200</property>
+                        <property name="value">100</property>
+                        <property name="variable">int:voice_speed</property>
+                        <layout manager="pack">
+                          <property name="expand">true</property>
+                          <property name="fill">x</property>
+                          <property name="side">top</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="voice_speed">
+                        <property name="text" translatable="yes">Voice Speed</property>
+                        <layout manager="pack">
+                          <property name="fill">x</property>
+                          <property name="side">top</property>
+                        </layout>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Frame" id="frame8">
+                    <property name="height">200</property>
+                    <property name="width">200</property>
+                    <layout manager="grid">
+                      <property name="column">1</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property name="sticky">nsew</property>
+                      <property id="1" name="weight" type="col">1</property>
+                      <property id="0" name="weight" type="row">0</property>
+                    </layout>
+                    <child>
+                      <object class="ttk.Scale" id="scale2">
+                        <property name="from_">0</property>
+                        <property name="orient">horizontal</property>
+                        <property name="to">200</property>
+                        <property name="value">100</property>
+                        <property name="variable">int:voice_pitch</property>
+                        <layout manager="pack">
+                          <property name="fill">x</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="label1">
+                        <property name="text" translatable="yes">Voice Pitch</property>
+                        <layout manager="pack">
+                          <property name="expand">true</property>
+                          <property name="fill">x</property>
+                          <property name="side">top</property>
+                        </layout>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Frame" id="frame9">
+                    <property name="height">200</property>
+                    <property name="width">200</property>
+                    <layout manager="grid">
+                      <property name="column">2</property>
+                      <property name="padx">5</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property name="sticky">nsew</property>
+                      <property id="2" name="weight" type="col">1</property>
+                      <property id="0" name="weight" type="row">0</property>
+                    </layout>
+                    <child>
+                      <object class="ttk.Scale" id="scale4">
+                        <property name="from_">0</property>
+                        <property name="orient">horizontal</property>
+                        <property name="to">100</property>
+                        <property name="value">50</property>
+                        <property name="variable">int:volume</property>
+                        <layout manager="pack">
+                          <property name="fill">x</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="volume">
+                        <property name="text" translatable="yes">Volume</property>
+                        <property name="wraplength">100</property>
+                        <layout manager="pack">
+                          <property name="fill">x</property>
+                          <property name="side">left</property>
+                        </layout>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Frame" id="say_frame">
+                <property name="height">200</property>
+                <property name="width">200</property>
+                <layout manager="pack">
+                  <property name="expand">true</property>
+                  <property name="fill">both</property>
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+                <child>
+                  <object class="ttk.Entry" id="what_to_say">
+                    <property name="text" translatable="yes">Hello, I am so glad to be here!</property>
+                    <property name="textvariable">string:text_to_say</property>
+                    <property name="width">40</property>
+                    <layout manager="pack">
+                      <property name="expand">true</property>
+                      <property name="fill">both</property>
+                      <property name="padx">5</property>
+                      <property name="propagate">True</property>
+                      <property name="side">top</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="say_btn">
+                    <property cbtype="simple" name="command" type="command">on_say_clicked</property>
+                    <property name="text" translatable="yes">Say Text</property>
+                    <layout manager="pack">
+                      <property name="expand">false</property>
+                      <property name="pady">5</property>
+                      <property name="propagate">True</property>
+                      <property name="side">top</property>
+                    </layout>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Frame" id="frame11">
+            <property name="height">200</property>
+            <property name="width">200</property>
+            <layout manager="pack">
+              <property name="expand">true</property>
+              <property name="fill">both</property>
+              <property name="propagate">True</property>
+              <property name="side">left</property>
+            </layout>
+            <child>
+              <object class="ttk.Labelframe" id="apps">
+                <property name="height">200</property>
+                <property name="text" translatable="yes">Applications</property>
+                <property name="width">200</property>
+                <layout manager="pack">
+                  <property name="expand">true</property>
+                  <property name="fill">x</property>
+                  <property name="padx">10</property>
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+                <child>
+                  <object class="ttk.Button" id="application_1">
+                    <property cbtype="with_wid" name="command" type="command">on_app_clicked</property>
+                    <property name="text" translatable="yes">App1</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property name="sticky">nsew</property>
+                      <property id="0" name="weight" type="col">1</property>
+                      <property id="0" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="application_2">
+                    <property cbtype="with_wid" name="command" type="command">on_app_clicked</property>
+                    <property name="text" translatable="yes">App2</property>
+                    <layout manager="grid">
+                      <property name="column">1</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property name="sticky">nsew</property>
+                      <property id="1" name="minsize" type="col">0</property>
+                      <property id="1" name="pad" type="col">0</property>
+                      <property id="1" name="uniform" type="col" />
+                      <property id="1" name="weight" type="col">1</property>
+                      <property id="0" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="application_3">
+                    <property cbtype="with_wid" name="command" type="command">on_app_clicked</property>
+                    <property name="text" translatable="yes">App3</property>
+                    <layout manager="grid">
+                      <property name="column">2</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property name="sticky">nsew</property>
+                      <property id="2" name="weight" type="col">1</property>
+                      <property id="0" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="application_4">
+                    <property cbtype="with_wid" name="command" type="command">on_app_clicked</property>
+                    <property name="text" translatable="yes">App4</property>
+                    <layout manager="grid">
+                      <property name="column">3</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property name="sticky">nsew</property>
+                      <property id="3" name="weight" type="col">1</property>
+                      <property id="0" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="application_5">
+                    <property cbtype="with_wid" name="command" type="command">on_app_clicked</property>
+                    <property name="text" translatable="yes">App5</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="propagate">True</property>
+                      <property name="row">1</property>
+                      <property name="sticky">nsew</property>
+                      <property id="0" name="weight" type="col">1</property>
+                      <property id="1" name="minsize" type="row">0</property>
+                      <property id="1" name="pad" type="row">0</property>
+                      <property id="1" name="uniform" type="row" />
+                      <property id="1" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="application_6">
+                    <property cbtype="with_wid" name="command" type="command">on_app_clicked</property>
+                    <property name="text" translatable="yes">App6</property>
+                    <layout manager="grid">
+                      <property name="column">1</property>
+                      <property name="propagate">True</property>
+                      <property name="row">1</property>
+                      <property name="sticky">nsew</property>
+                      <property id="1" name="minsize" type="col">0</property>
+                      <property id="1" name="pad" type="col">0</property>
+                      <property id="1" name="uniform" type="col" />
+                      <property id="1" name="weight" type="col">1</property>
+                      <property id="1" name="minsize" type="row">0</property>
+                      <property id="1" name="pad" type="row">0</property>
+                      <property id="1" name="uniform" type="row" />
+                      <property id="1" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="application_7">
+                    <property cbtype="with_wid" name="command" type="command">on_app_clicked</property>
+                    <property name="text" translatable="yes">App7</property>
+                    <layout manager="grid">
+                      <property name="column">2</property>
+                      <property name="propagate">True</property>
+                      <property name="row">1</property>
+                      <property name="sticky">nsew</property>
+                      <property id="2" name="weight" type="col">1</property>
+                      <property id="1" name="minsize" type="row">0</property>
+                      <property id="1" name="pad" type="row">0</property>
+                      <property id="1" name="uniform" type="row" />
+                      <property id="1" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="application_8">
+                    <property cbtype="with_wid" name="command" type="command">on_app_clicked</property>
+                    <property name="text" translatable="yes">App8</property>
+                    <layout manager="grid">
+                      <property name="column">3</property>
+                      <property name="propagate">True</property>
+                      <property name="row">1</property>
+                      <property name="sticky">nsew</property>
+                      <property id="3" name="weight" type="col">1</property>
+                      <property id="1" name="minsize" type="row">0</property>
+                      <property id="1" name="pad" type="row">0</property>
+                      <property id="1" name="uniform" type="row" />
+                      <property id="1" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="learn_face">
+                    <property cbtype="simple" name="command" type="command">on_learn_face_clicked</property>
+                    <property name="text" translatable="yes">Learn Face</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="propagate">True</property>
+                      <property name="row">2</property>
+                      <property name="sticky">nsew</property>
+                      <property id="0" name="weight" type="col">1</property>
+                      <property id="2" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="recognize">
+                    <property cbtype="simple" name="command" type="command">on_recognize_clicked</property>
+                    <property name="text" translatable="yes">Recognize Human</property>
+                    <layout manager="grid">
+                      <property name="column">1</property>
+                      <property name="propagate">True</property>
+                      <property name="row">2</property>
+                      <property name="sticky">nsew</property>
+                      <property id="1" name="minsize" type="col">0</property>
+                      <property id="1" name="pad" type="col">0</property>
+                      <property id="1" name="uniform" type="col" />
+                      <property id="1" name="weight" type="col">1</property>
+                      <property id="2" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="take_picture">
+                    <property cbtype="simple" name="command" type="command">on_take_picture_clicked</property>
+                    <property name="text" translatable="yes">Take a Picture</property>
+                    <layout manager="grid">
+                      <property name="column">2</property>
+                      <property name="propagate">True</property>
+                      <property name="row">2</property>
+                      <property name="sticky">nsew</property>
+                      <property id="2" name="weight" type="col">1</property>
+                      <property id="2" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Button" id="basic_demo">
+                    <property cbtype="simple" name="command" type="command">on_basic_demo_clicked</property>
+                    <property name="text" translatable="yes">Basic Demo</property>
+                    <layout manager="grid">
+                      <property name="column">3</property>
+                      <property name="propagate">True</property>
+                      <property name="row">2</property>
+                      <property name="sticky">nsew</property>
+                      <property id="3" name="weight" type="col">1</property>
+                      <property id="2" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Notebook" id="motorics">
+                <property name="height">80</property>
+                <property name="width">200</property>
+                <bind add="True" handler="on_motorics_clicked" sequence="&lt;Button-1&gt;" />
+                <bind add="True" handler="on_a_pressed" sequence="&lt;a&gt;" />
+                <bind add="True" handler="on_d_pressed" sequence="&lt;d&gt;" />
+                <bind add="True" handler="on_s_pressed" sequence="&lt;s&gt;" />
+                <bind add="True" handler="on_space_pressed" sequence="&lt;space&gt;" />
+                <bind add="True" handler="on_w_pressed" sequence="&lt;w&gt;" />
+                <layout manager="pack">
+                  <property name="expand">true</property>
+                  <property name="fill">both</property>
+                  <property name="padx">10</property>
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+                <child>
+                  <object class="ttk.Notebook.Tab" id="gestures">
+                    <property name="compound">top</property>
+                    <property name="text" translatable="yes">Gestures</property>
+                    <child>
+                      <object class="ttk.Frame" id="frame19">
+                        <property name="height">200</property>
+                        <property name="width">200</property>
+                        <layout manager="pack">
+                          <property name="propagate">True</property>
+                          <property name="side">left</property>
+                        </layout>
+                        <child>
+                          <object class="ttk.Button" id="stay">
+                            <property cbtype="simple" name="command" type="command">on_stay_clicked</property>
+                            <property name="text" translatable="yes">Stay</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="propagate">True</property>
+                              <property name="row">1</property>
+                              <property id="0" name="weight" type="col">0</property>
+                              <property id="1" name="weight" type="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Button" id="blink">
+                            <property cbtype="simple" name="command" type="command">on_blink_clicked</property>
+                            <property name="text" translatable="yes">Blink</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="propagate">True</property>
+                              <property name="row">2</property>
+                              <property id="0" name="weight" type="col">0</property>
+                              <property id="2" name="weight" type="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Button" id="gesture_2">
+                            <property cbtype="with_wid" name="command" type="command">on_gesture_clicked</property>
+                            <property name="text" translatable="yes">Positive</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="propagate">True</property>
+                              <property name="row">0</property>
+                              <property id="1" name="weight" type="col">0</property>
+                              <property id="0" name="weight" type="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Button" id="gesture_3">
+                            <property cbtype="with_wid" name="command" type="command">on_gesture_clicked</property>
+                            <property name="text" translatable="yes">Neutral</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="propagate">True</property>
+                              <property name="row">1</property>
+                              <property id="1" name="weight" type="col">0</property>
+                              <property id="1" name="weight" type="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Button" id="gesture_4">
+                            <property cbtype="with_wid" name="command" type="command">on_gesture_clicked</property>
+                            <property name="text" translatable="yes">Negative</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="propagate">True</property>
+                              <property name="row">2</property>
+                              <property id="1" name="weight" type="col">0</property>
+                              <property id="2" name="weight" type="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Button" id="gesture_1">
+                            <property cbtype="with_wid" name="command" type="command">on_gesture_clicked</property>
+                            <property name="text" translatable="yes">Wave Hand</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="propagate">True</property>
+                              <property name="row">0</property>
+                              <property id="0" name="weight" type="col">0</property>
+                              <property id="0" name="weight" type="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Button" id="hand_shake">
+                            <property cbtype="simple" name="command" type="command">on_handshake_clicked</property>
+                            <property name="text" translatable="yes">Shake Hand</property>
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="propagate">True</property>
+                              <property name="row">3</property>
+                              <property id="0" name="weight" type="col">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Notebook.Tab" id="movement">
+                    <property name="compound">top</property>
+                    <property name="text" translatable="yes">Movement</property>
+                    <child>
+                      <object class="ttk.Frame" id="frame18">
+                        <property name="height">100</property>
+                        <property name="width">100</property>
+                        <bind add="True" handler="on_motorics_clicked" sequence="&lt;Button-1&gt;" />
+                        <layout manager="pack">
+                          <property name="propagate">True</property>
+                          <property name="side">right</property>
+                        </layout>
+                        <child>
+                          <object class="ttk.Button" id="forward_btn">
+                            <property cbtype="simple" name="command" type="command">on_forward_clicked</property>
+                            <property name="text" translatable="yes">/\ (W)</property>
+                            <bind add="True" handler="on_motorics_clicked" sequence="&lt;Button-1&gt;" />
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="propagate">True</property>
+                              <property name="row">0</property>
+                              <property name="sticky">nsew</property>
+                              <property id="1" name="weight" type="col">1</property>
+                              <property id="0" name="weight" type="row">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Button" id="left_btn">
+                            <property cbtype="simple" name="command" type="command">on_left_clicked</property>
+                            <property name="text" translatable="yes">&lt; (A)</property>
+                            <bind add="True" handler="on_motorics_clicked" sequence="&lt;Button-1&gt;" />
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="propagate">True</property>
+                              <property name="row">1</property>
+                              <property name="sticky">nsew</property>
+                              <property id="0" name="weight" type="col">1</property>
+                              <property id="1" name="weight" type="row">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Button" id="right_btn">
+                            <property cbtype="simple" name="command" type="command">on_right_clicked</property>
+                            <property name="text" translatable="yes">&gt; (D)</property>
+                            <bind add="True" handler="on_motorics_clicked" sequence="&lt;Button-1&gt;" />
+                            <layout manager="grid">
+                              <property name="column">2</property>
+                              <property name="propagate">True</property>
+                              <property name="row">1</property>
+                              <property name="sticky">nsew</property>
+                              <property id="2" name="weight" type="col">1</property>
+                              <property id="1" name="weight" type="row">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Button" id="backward_btn">
+                            <property cbtype="simple" name="command" type="command">on_backward_clicked</property>
+                            <property name="text" translatable="yes">\/ (S)</property>
+                            <bind add="True" handler="on_motorics_clicked" sequence="&lt;Button-1&gt;" />
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="propagate">True</property>
+                              <property name="row">2</property>
+                              <property name="sticky">nsew</property>
+                              <property id="1" name="weight" type="col">1</property>
+                              <property id="2" name="weight" type="row">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Button" id="stop_btn">
+                            <property cbtype="simple" name="command" type="command">on_stop_clicked</property>
+                            <property name="text" translatable="yes">Stop (Space)</property>
+                            <bind add="True" handler="on_motorics_clicked" sequence="&lt;Button-1&gt;" />
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="propagate">True</property>
+                              <property name="row">1</property>
+                              <property name="sticky">nsew</property>
+                              <property id="1" name="weight" type="col">1</property>
+                              <property id="1" name="weight" type="row">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Scale" id="scale3">
+                            <property name="from_">0.6</property>
+                            <property name="orient">horizontal</property>
+                            <property name="to">1.4</property>
+                            <property name="value">1</property>
+                            <property name="variable">double:move_speed</property>
+                            <bind add="True" handler="on_motorics_clicked" sequence="&lt;Button-1&gt;" />
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="columnspan">2</property>
+                              <property name="propagate">True</property>
+                              <property name="row">3</property>
+                              <property name="sticky">nsew</property>
+                              <property id="1" name="weight" type="col">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="move_speed">
+                            <property name="text" translatable="yes">Speed</property>
+                            <bind add="True" handler="on_motorics_clicked" sequence="&lt;Button-1&gt;" />
+                            <layout manager="grid">
+                              <property name="column">0</property>
+                              <property name="propagate">True</property>
+                              <property name="row">3</property>
+                              <property id="0" name="weight" type="col">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Labelframe" id="camera_stream_frame">
+                <property name="height">200</property>
+                <property name="text" translatable="yes">Camera Stream</property>
+                <property name="width">200</property>
+                <layout manager="pack">
+                  <property name="expand">true</property>
+                  <property name="fill">x</property>
+                  <property name="padx">10</property>
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+                <child>
+                  <object class="ttk.Frame" id="frame17">
+                    <property name="height">200</property>
+                    <property name="width">200</property>
+                    <layout manager="pack">
+                      <property name="fill">both</property>
+                      <property name="propagate">True</property>
+                      <property name="side">top</property>
+                    </layout>
+                    <child>
+                      <object class="ttk.Button" id="camera_stream_button">
+                        <property cbtype="simple" name="command" type="command">on_start_stream_clicked</property>
+                        <property name="text" translatable="yes">Start Stream</property>
+                        <layout manager="pack">
+                          <property name="side">left</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Button" id="stop_stream">
+                        <property cbtype="simple" name="command" type="command">on_stop_stream_clicked</property>
+                        <property name="text" translatable="yes">Stop Stream</property>
+                        <layout manager="pack">
+                          <property name="side">left</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Combobox" id="pick_camera">
+                        <property name="state">readonly</property>
+                        <property name="validate">focusout</property>
+                        <property name="values">"Camera Top" "Camera Bottom" "Camera Depth"</property>
+                        <bind add="True" handler="on_picked_camera" sequence="&lt;&lt;ComboboxSelected&gt;&gt;" />
+                        <layout manager="pack">
+                          <property name="expand">true</property>
+                          <property name="fill">y</property>
+                          <property name="propagate">True</property>
+                          <property name="side">top</property>
+                        </layout>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Frame" id="frame16">
+                    <property name="height">200</property>
+                    <property name="width">200</property>
+                    <layout manager="pack">
+                      <property name="fill">both</property>
+                      <property name="propagate">True</property>
+                      <property name="side">top</property>
+                    </layout>
+                    <child>
+                      <object class="tk.Canvas" id="canvas1">
+                        <property name="height">240</property>
+                        <property name="width">320</property>
+                        <layout manager="pack">
+                          <property name="anchor">w</property>
+                          <property name="expand">false</property>
+                          <property name="side">top</property>
+                        </layout>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="frame10">
+        <property name="height">100</property>
+        <property name="width">200</property>
+        <layout manager="pack">
+          <property name="expand">true</property>
+          <property name="fill">both</property>
+          <property name="propagate">True</property>
+          <property name="side">top</property>
+        </layout>
+        <child>
+          <object class="ttk.Frame" id="frame15">
+            <property name="height">100</property>
+            <property name="width">200</property>
+            <layout manager="pack">
+              <property name="expand">true</property>
+              <property name="fill">both</property>
+              <property name="propagate">True</property>
+              <property name="side">top</property>
+            </layout>
+            <child>
+              <object class="ttk.Label" id="output">
+                <property name="anchor">nw</property>
+                <property name="background">#404040</property>
+                <property name="font">{DejaVu Sans} 12 {}</property>
+                <property name="foreground">#fff</property>
+                <property name="padding">5</property>
+                <property name="relief">sunken</property>
+                <property name="text" translatable="yes">output</property>
+                <layout manager="pack">
+                  <property name="expand">true</property>
+                  <property name="fill">both</property>
+                  <property name="padx">5</property>
+                  <property name="pady">5</property>
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

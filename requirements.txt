@@ -7,3 +7,4 @@ playsound
 nose
 pillow
 SpeechRecognition
+pygubu

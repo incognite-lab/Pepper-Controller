@@ -75,6 +75,15 @@ The GUI provides support for running Choregraphe projects that are already insta
 
 Other properties of the GUI can be edited through the [conf.yaml](conf.yaml) file.
 
+## GUI edit
+GUI was made in Pygubu Designer (https://github.com/alejandroautalan/pygubu-designer)
+Install Pygubu Designer:
+`pip2 install pygubu-designer`
+Run Pygubu Designer:
+`pygubu-designer`
+Open .ui file
+File > Open > Pick "pepper_controller.ui" 
+
 
 ## Command line examples
 
