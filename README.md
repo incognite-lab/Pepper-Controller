@@ -90,6 +90,7 @@ Open .ui file
 
 File > Open > Pick "pepper_controller.ui" 
 
+Edit
 
 ## Command line examples
 
