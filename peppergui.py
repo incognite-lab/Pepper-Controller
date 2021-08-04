@@ -1,3 +1,4 @@
+#!/usr/bin/env python2.7
 import os
 import Tkinter as tk
 import ttk
@@ -18,7 +19,7 @@ PROJECT_UI = os.path.join(PROJECT_PATH, "pepper_controller.ui")
 
 class Configuration:
 
-    def __init__(self, config_file="./conf.yaml"):
+    def __init__(self, config_file=os.path.join(PROJECT_PATH,"conf.yaml")):
         self.config_file = config_file
         self.conf = yaml.safe_load(open(self.config_file))
 
