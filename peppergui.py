@@ -116,98 +116,6 @@ class PepperControllerApp:
         reps_label = self.builder.get_object('reps_label')
         reps_label.config(text="Reps: " + str(int(float(reps))))
 
-        # conf = self.configuration.conf
-        # i = 1
-        # list_ = []
-        # while True:
-        #     try:
-        #         list_.append(conf["arm_submove_"+str(i)]['name'])
-        #         i += 1
-        #     except KeyError:
-        #         break
-        # arm_combobox['values'] = list_
-        # list_ = []
-        # i = 1
-        # while True:
-        #     try:
-        #         list_.append(conf["head_submove_"+str(i)]['name'])
-        #         i += 1
-        #     except KeyError:
-        #         break
-        # head_combobox['values'] = list_
-        # list_ = []
-        # i = 1
-        # while True:
-        #     try:
-        #         list_.append(conf["torso_submove_"+str(i)]['name'])
-        #         i += 1
-        #     except KeyError:
-        #         break
-        # torso_combobox['values'] = list_
-        #arm_id = conf["arm_submove_"+arm_number+1]['name']
-
-        # load workouts
-    #     self.work_list = {"neck_workout": self.load_neck_work(),
-    #                  "shoulder_workout": self.load_shoulder_work(),
-    #                  "arm_workout": self.load_arm_work(),
-    #                  "torso_workout": self.load_torso_work()}
-    #     neck_work_list = self.load_neck_work()
-    #     torso_work_list = self.load_torso_work()
-    #     shoulder_work_list = self.load_shoulder_work()
-    #     arm_work_list = self.load_arm_work()
-
-    # def load_neck_work(self):
-    #     conf = self.configuration.conf
-    #     neck_work_list = []
-    #     i = 1
-    #     while True:
-    #         try:
-    #             neck_work_list.append(conf["neck_work_"+str(i)]['position_list'])
-    #             i += 1
-    #         except KeyError:
-    #             break
-    #     np.random.shuffle(neck_work_list)
-    #     return neck_work_list
-
-    # def load_torso_work(self):
-    #     conf = self.configuration.conf
-    #     torso_work_list = []
-    #     i = 1
-    #     while True:
-    #         try:
-    #             torso_work_list.append(conf["torso_work_"+str(i)]['position_list'])
-    #             i += 1
-    #         except KeyError:
-    #             break
-    #     np.random.shuffle(torso_work_list)
-    #     return torso_work_list
-
-    # def load_shoulder_work(self):
-    #     conf = self.configuration.conf
-    #     shoulder_work_list = []
-    #     i = 1
-    #     while True:
-    #         try:
-    #             shoulder_work_list.append(conf["shoulder_work_"+str(i)]['position_list'])
-    #             i += 1
-    #         except KeyError:
-    #             break
-    #     np.random.shuffle(shoulder_work_list)
-    #     return shoulder_work_list
-
-    # def load_arm_work(self):
-    #     conf = self.configuration.conf
-    #     arm_work_list = []
-    #     i = 1
-    #     while True:
-    #         try:
-    #             arm_work_list.append(conf["arm_work_"+str(i)]['position_list'])
-    #             i += 1
-    #         except KeyError:
-    #             break
-    #     np.random.shuffle(arm_work_list)
-    #     return arm_work_list
-
     def run(self):
         self.mainwindow.mainloop()
 
@@ -269,7 +177,7 @@ class PepperControllerApp:
             self.output_text("[INFO]: Robot is initialized at " +
                              self.ip_address + ":" + str(port))
             # motion parser
-            self.mp = MotionParser("workout_conf.json", self.robot)
+            self.mp = MotionParser(os.path.join(PROJECT_PATH,"workout_conf.json"), self.robot)
             self.arms_combobox['values'] = self.mp.get_conf(
             )["arms_positions"]["data_list"].keys()
             self.head_combobox['values'] = self.mp.get_conf(
