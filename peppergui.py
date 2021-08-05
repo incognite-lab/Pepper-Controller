@@ -1,5 +1,4 @@
-#!/usr/bin/env python2.7
-import random
+# -*- coding: utf-8 -*-
 from motion_parser import MotionParser
 import os
 import Tkinter as tk
@@ -15,7 +14,7 @@ from hellopepper import basic_demo, take_picture_show, recognize_person, learn_p
 import time
 import sys
 import subprocess
-
+import random
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 PROJECT_UI = os.path.join(PROJECT_PATH, "pepper_controller.ui")
