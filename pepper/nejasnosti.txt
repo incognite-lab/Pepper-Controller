@@ -1,4 +1,0 @@
-def rest(self): -> goToPostures, spravne goToPosture
-def turn_around(self, speed): -> kladne doleva, zaporne doprava
-def battery_status(self): -> neni anglicky
-def changeVoice(self, volume, speed, shape): -> neni anglicky

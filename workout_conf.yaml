@@ -1,0 +1,243 @@
+arms_positions:
+  joint_list: ["LElbowRoll", "RElbowRoll", "LElbowYaw", "RElbowYaw", "LShoulderPitch", "RShoulderPitch", "LShoulderRoll", "RShoulderRoll", "LWristYaw", "RWristYaw"]
+  data_list: {neutral: [-0.67, 0.67, -0.8, 0.81, 1.28, 1.28, 0.19, -0.19, 0, 0],
+              ruce_v_bok: [-1.562, 1.562, -0.085, 0.085, 1.25, 1.25, 0.73, -0.73, 0, 0],
+              upazit: [0, 0, 0, 0, 0, 0, 1.562, -1.562, 0, 0],
+              predpazit: [0, 0, -1.56, 1.56, 0.0, 0.0, 0, -0, 0, 0],
+              vzpazit: [-0.00, 0, -1.63, 1.63, -1.36, -1.36, 0.17, -0.17, 0, 0],
+              pripazit: [-0.00, 0, -1.63, 1.63, 1.72, 1.72, 0.03, -0.03, 0, 0],
+              zapazit: [0.0, 0.0, -1.59, 1.58, 2.09, 2.09, 0.12, -0.11, 0, 0],
+              biceps_flex: [-1.56, 1.56, -0.02, 0.0, -1.58, -1.59, 1.4, -1.4, -1.46, 1.46],
+              biceps_relax: [-0.01, 0.01, -0.02, 0.0, -1.58, -1.59, 1.4, -1.4, -1.46, 1.46],
+              triceps_extend: [-1.56, 1.56, -1.39, 1.39, 0.04, 0.04, 0.16, -0.16, -1.82, 1.82],
+              triceps_relax: [-0.01, 0.01, -1.39, 1.39, 0.04, 0.04, 0.16, -0.16, -1.82, 1.82]}
+
+torso_positions:
+  joint_list: ["HipRoll", "HipPitch", "KneePitch"]
+  data_list: {zaklon: [-0.0, 0.3, 0],
+            predklon: [-0, -0.3, 0],
+            uklon_doleva: [0.36, 0, 0],
+            uklon_doprava: [-0.36, 0, 0],
+            neutral: [0, 0, 0]}
+
+head_positions:
+  joint_list: ["HeadYaw", "HeadPitch"]
+  data_list: {zaklon: [0, -0.71],
+            predklon: [0, 0.64],
+            toceni_doleva: [1.21, 0],
+            toceni_doprava: [-1.21, 0],
+            neutral: [0, 0]}
+
+# for gui
+
+   
+
+positions:
+  head:
+    joint_list: ["HeadYaw", "HeadPitch"]
+    data_list: {zaklon: [0, -0.71],
+                predklon: [0, 0.64],
+                toceni_doleva: [1.21, 0],
+                toceni_doprava: [-1.21, 0],
+                neutral: [0, 0]}
+  torso:
+    joint_list: ["HipRoll", "HipPitch", "KneePitch"]
+    data_list: {zaklon: [-0.0, 0.3, 0],
+                predklon: [-0, -0.3, 0],
+                uklon_doleva: [0.36, 0, 0],
+                uklon_doprava: [-0.36, 0, 0],
+                neutral: [0, 0, 0]}
+  arms:
+    joint_list: ["LElbowRoll", "RElbowRoll", "LElbowYaw", "RElbowYaw", "LShoulderPitch", "RShoulderPitch", "LShoulderRoll", "RShoulderRoll", "LWristYaw", "RWristYaw"]
+    data_list: {neutral: [-0.67, 0.67, -0.8, 0.81, 1.28, 1.28, 0.19, -0.19, 0, 0],
+                ruce_v_bok: [-1.562, 1.562, -0.085, 0.085, 1.25, 1.25, 0.73, -0.73, 0, 0],
+                upazit: [0, 0, 0, 0, 0, 0, 1.562, -1.562, 0, 0],
+                predpazit: [0, 0, -1.56, 1.56, 0.0, 0.0, 0, -0, 0, 0],
+                vzpazit: [-0.00, 0, -1.63, 1.63, -1.36, -1.36, 0.17, -0.17, 0, 0],
+                pripazit: [-0.00, 0, -1.63, 1.63, 1.72, 1.72, 0.03, -0.03, 0, 0],
+                zapazit: [0.0, 0.0, -1.59, 1.58, 2.09, 2.09, 0.12, -0.11, 0, 0],
+                biceps_flex: [-1.56, 1.56, -0.02, 0.0, -1.58, -1.59, 1.4, -1.4, -1.46, 1.46],
+                biceps_relax: [-0.01, 0.01, -0.02, 0.0, -1.58, -1.59, 1.4, -1.4, -1.46, 1.46],
+                triceps_extend: [-1.56, 1.56, -1.39, 1.39, 0.04, 0.04, 0.16, -0.16, -1.82, 1.82],
+                triceps_relax: [-0.01, 0.01, -1.39, 1.39, 0.04, 0.04, 0.16, -0.16, -1.82, 1.82]}
+
+
+
+# todo speed, todo add body part
+exercises:
+  torso: # move 1
+    -
+      - { head: neutral,
+          torso: uklon_doprava,
+          arms: ruce_v_bok,
+          speed: 0.2}
+      - { head: neutral,
+          torso: uklon_doleva,
+          arms: ruce_v_bok,
+          speed: 0.2}
+  head: # move 2
+    -
+      - { head: toceni_doprava,
+          torso: neutral,
+          arms: ruce_v_bok,
+          speed: 0.2}
+      - { head: toceni_doleva,
+          torso: neutral,
+          arms: ruce_v_bok,
+          speed: 0.2}
+    - # move 3
+      - { head: predklon,
+          torso: neutral,
+          arms: ruce_v_bok,
+          speed: 0.2}
+      - { head: zaklon,
+          torso: neutral,
+          arms: ruce_v_bok,
+          speed: 0.2}
+  shoulders:
+    - # move 4
+      - { head: neutral,
+          torso: neutral,
+          arms: pripazit,
+          speed: 0.2}
+      - { head: neutral,
+          torso: neutral,
+          arms: upazit,
+          speed: 0.2}
+    - # move 5
+      - { head: neutral,
+          torso: neutral,
+          arms: predpazit,
+          speed: 0.2}
+      - { head: neutral,
+          torso: neutral,
+          arms: zapazit,
+          speed: 0.2}
+    - # move 6
+      - { head: neutral,
+          torso: neutral,
+          arms: upazit,
+          speed: 0.2}
+      - { head: neutral,
+          torso: neutral,
+          arms: vzpazit,
+          speed: 0.2}
+  arms:
+    - # move 7
+      - { head: neutral,
+          torso: neutral,
+          arms: biceps_flex,
+          speed: 0.2}
+      - { head: neutral,
+          torso: neutral,
+          arms: biceps_relax,
+          speed: 0.2}
+    - # move 8
+      - { head: neutral,
+          torso: neutral,
+          arms: triceps_extend,
+          speed: 0.2}
+      - { head: neutral,
+          torso: neutral,
+          arms: triceps_relax,
+          speed: 0.2}
+
+workouts:
+  short_neck:
+    -
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["Procvičíme si hlavu, opakujte po mně"]]
+      - [self, do_exercise, ["head", 0, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["skvěle vám to šlo, teď si odpočiňte"]]
+    -
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["Procvičíme si hlavu, opakujte po mně"]]
+      - [self, do_exercise, ["head", 1, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["skvěle vám to šlo, teď si odpočiňte"]]
+  short_arms:
+    -
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["Procvičíme si paže, opakujte po mně"]]
+      - [self, do_exercise, ["arms", 0, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["skvěle vám to šlo, teď si odpočiňte"]]
+    -
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["Procvičíme si paže, opakujte po mně"]]
+      - [self, do_exercise, ["arms", 1, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["skvěle vám to šlo, teď si odpočiňte"]]
+  short_torso:
+    -
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["Procvičíme si boky, opakujte po mně"]]
+      - [self, do_exercise, ["torso", 0, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["skvěle vám to šlo, teď si odpočiňte"]]
+  short_shoulders:
+    -
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["Procvičíme si ramena, opakujte po mně"]]
+      - [self, do_exercise, ["shoulders", 0, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["skvěle vám to šlo, teď si odpočiňte"]]
+    -
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["Procvičíme si ramena, opakujte po mně"]]
+      - [self, do_exercise, ["shoulders", 1, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["skvěle vám to šlo, teď si odpočiňte"]]
+    -
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["Procvičíme si ramena, opakujte po mně"]]
+      - [self, do_exercise, ["shoulders", 2, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["skvěle vám to šlo, teď si odpočiňte"]]
+  neck:
+    - 
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["Teď si procvičíme hlavu, dejte si ruce v bok"]]
+      - [self, go_to_position, ["neutral", "neutral", "ruce_v_bok"]]
+      - [robot, say, ["a nyní opakujte po mě", "disabled"]]
+      - [self, do_exercise, ["head", 0, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["a teď druhý cvik", "disabled"]]
+      - [self, do_exercise, ["head", 1, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["skvěle vám to šlo, teď si odpočiňte"]]
+  hips:
+    -
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["Teď si procvičíme boky, dejte si ruce v bok"]]
+      - [self, go_to_position, ["neutral", "neutral", "ruce_v_bok"]]
+      - [robot, say, ["a nyní opakujte po mě"]]
+      - [self, do_exercise, ["torso", 0, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["skvěle vám to šlo, teď si odpočiňte"]]
+  arms:
+    - 
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["Teď si procvičíme paže, opakujte po mě"]]
+      - [self, do_exercise, ["arms", 0, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["a teď cvik na tricepsy"]]
+      - [self, do_exercise, ["arms", 1, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["skvěle vám to šlo, teď si odpočiňte"]]
+  shoulders:
+    -
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["Teď si procvičíme ramena, narovnejte se prosím"]]
+      - [self, go_to_position, ["neutral", "neutral", "pripazit"]]
+      - [robot, say, ["a nyní opakujte po mě", "disabled"]]
+      - [self, do_exercise, ["shoulders", 0, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["a teď druhý cvik", "disabled"]]
+      - [self, do_exercise, ["shoulders", 1, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["a nyní poslední cvik", "disabled"]]
+      - [self, do_exercise, ["shoulders", 2, 3]]
+      - [self, go_to_position, ["neutral", "neutral", "neutral"]]
+      - [robot, say, ["skvěle vám to šlo, teď si odpočiňte"]]

@@ -1,6 +1,115 @@
+default_chatbot_path: "mnt/c"
+
+torso_work_1:
+  position_list:
+    - ["neutral", "uklon_doprava", "ruce_v_bok"]
+    - ["neutral", "uklon_doleva", "ruce_v_bok"]
+
+neck_work_1:
+  position_list:
+    - ["toceni_doprava", "neutral", "ruce_v_bok"]
+    - ["toceni_doleva", "neutral", "ruce_v_bok"]
+
+neck_work_2:
+  position_list:
+    - ["predklon", "neutral", "ruce_v_bok"]
+    - ["zaklon", "neutral", "ruce_v_bok"]
+
+shoulder_work_1:
+  position_list:
+    - ["neutral", "neutral", "pripazit"]
+    - ["neutral", "neutral", "upazit"]
+
+shoulder_work_2:
+  position_list:
+    - ["neutral", "neutral", "predpazit"]
+    - ["neutral", "neutral", "zapazit"]
+
+shoulder_work_3:
+  position_list:
+    - ["neutral", "neutral", "upazit"]
+    - ["neutral", "neutral", "vzpazit"]
+
+arm_work_1:
+  position_list:
+    - ["neutral", "neutral", "biceps_flex"]
+    - ["neutral", "neutral", "biceps_relax"]
+
+arm_work_2:
+  position_list:
+    - ["neutral", "neutral", "triceps_extend"]
+    - ["neutral", "neutral", "triceps_relax"]
+
+
+arm_submove_1:
+    name: Neutral
+    id: neutral
+
+arm_submove_2:
+    name: Ruce v bok
+    id: ruce_v_bok
+
+arm_submove_3:
+    name: Upažit
+    id: upazit
+
+arm_submove_4:
+    name: Předpažit
+    id: predpazit
+
+arm_submove_5:
+    name: Vzpažit
+    id: vzpazit
+
+arm_submove_6:
+    name: Připažit
+    id: pripazit
+
+arm_submove_7:
+    name: Zapažit
+    id: zapazit
+
+head_submove_1:
+    name: Neutral
+    id: neutral
+
+head_submove_2:
+    name: Zaklonit
+    id: zaklon
+
+head_submove_3:
+    name: Předklonit
+    id: predklon
+
+head_submove_4:
+    name: Točení doleva
+    id: toceni_doleva
+
+head_submove_5:
+    name: Točení doprava
+    id: toceni_doprava
+
+head_submove_5:
+    name: Točení doprava
+    id: toceni_doprava
+
+torso_submove_1:
+    name: Neutral
+    id: neutral
+
+torso_submove_2:
+    name: Úklon doleva
+    id: uklon_doleva
+
+torso_submove_3:
+    name: Úklon doprava
+    id: uklon_doprava
+
+
+
 gesture_1:
     name: Wave Hand
-    path_list: 
+    path_list:
         - 'Gestures/Hey_1'
         - 'Gestures/Hey_2'
         - 'Gestures/Hey_3'
@@ -12,7 +121,7 @@ gesture_2:
         - 'Emotions/Positive/Laugh_2'
         - 'Emotions/Positive/Laugh_3'
         - 'Emotions/Positive/Hysterical_1'
-    
+
 gesture_3:
     name: Neutral
     path_list:
@@ -30,23 +139,23 @@ gesture_4:
         - 'Emotions/Negative/Sad_1'
 
 application_1:
-  name: App1
+  name: Quiz
   package: allinonequiz-7404fa/behavior_1
 application_2:
-  name: App2
-  package:
+  name: Mapy
+  package: universal_test-283d04/behavior_1
 application_3:
-  name: App3
-  package:
+  name: Osobnosti
+  package: untitled-4fccc1/behavior_1
 application_4:
-  name: App4
-  package:
+  name: Paměť
+  package: remember_objects-e9fb3e/behavior_1
 application_5:
-  name: App5
-  package:
+  name: Video Quiz
+  package: universal_test-283d06/behavior_1
 application_6:
-  name: App6
-  package:
+  name: Zvíře
+  package: hadejzvire-5e66aa/behavior_1
 application_7:
   name: App7
   package:
@@ -75,7 +184,7 @@ language:
       - 'na tom se shodneme'
     no_list:
       - 'ne'
-      - 'to nesouhlasí'  
+      - 'to nesouhlasí'
       - 'nesouhlasím'
     dont_know_list:
       - 'bohužel nevím'
@@ -97,7 +206,7 @@ language:
       - 'of course'
       - 'yeah'
       - 'that is true'
-      - 'i agree'  
+      - 'i agree'
       - 'you are right'
       - 'yes sir'
       - 'yes, of course'
@@ -127,6 +236,6 @@ language:
       - 'nice to meet you'
       - 'hello my friend'
       - 'it is a plesure to meet you'
-      - 'what an honour to see you'  
+      - 'what an honour to see you'
     name:
       - 'I am pepper robot.'

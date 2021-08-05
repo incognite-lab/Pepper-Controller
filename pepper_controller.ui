@@ -869,18 +869,6 @@
                             </layout>
                           </object>
                         </child>
-                        <child>
-                          <object class="ttk.Button" id="hand_shake">
-                            <property cbtype="simple" name="command" type="command">on_handshake_clicked</property>
-                            <property name="text" translatable="yes">Shake Hand</property>
-                            <layout manager="grid">
-                              <property name="column">0</property>
-                              <property name="propagate">True</property>
-                              <property name="row">3</property>
-                              <property id="0" name="weight" type="col">0</property>
-                            </layout>
-                          </object>
-                        </child>
                       </object>
                     </child>
                   </object>
@@ -1001,6 +989,241 @@
                               <property name="row">3</property>
                               <property id="0" name="weight" type="col">1</property>
                             </layout>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Notebook.Tab" id="posture">
+                    <property name="text" translatable="yes">Posture</property>
+                    <child>
+                      <object class="ttk.Frame" id="frame3">
+                        <property name="height">200</property>
+                        <property name="width">200</property>
+                        <layout manager="pack">
+                          <property name="propagate">True</property>
+                          <property name="side">top</property>
+                        </layout>
+                        <child>
+                          <object class="ttk.Frame" id="frame12">
+                            <property name="height">200</property>
+                            <property name="width">200</property>
+                            <layout manager="pack">
+                              <property name="fill">y</property>
+                              <property name="propagate">True</property>
+                              <property name="side">left</property>
+                            </layout>
+                            <child>
+                              <object class="ttk.Combobox" id="arms_submove">
+                                <layout manager="pack">
+                                  <property name="propagate">True</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Combobox" id="torso_submove">
+                                <layout manager="pack">
+                                  <property name="propagate">True</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Combobox" id="head_submove">
+                                <layout manager="pack">
+                                  <property name="propagate">True</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="do_move">
+                                <property cbtype="simple" name="command" type="command">on_do_move_clicked</property>
+                                <property name="text" translatable="yes">Do Move</property>
+                                <layout manager="pack">
+                                  <property name="propagate">True</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Notebook.Tab" id="workout">
+                    <property name="text" translatable="yes">Workout</property>
+                    <child>
+                      <object class="ttk.Frame" id="frame13">
+                        <property name="height">200</property>
+                        <property name="width">200</property>
+                        <layout manager="pack">
+                          <property name="propagate">True</property>
+                          <property name="side">top</property>
+                        </layout>
+                        <child>
+                          <object class="ttk.Frame" id="frame14">
+                            <property name="height">200</property>
+                            <property name="width">200</property>
+                            <layout manager="pack">
+                              <property name="expand">true</property>
+                              <property name="fill">x</property>
+                              <property name="propagate">True</property>
+                              <property name="side">left</property>
+                            </layout>
+                            <child>
+                              <object class="ttk.Button" id="short_neck">
+                                <property cbtype="with_wid" name="command" type="command">on_random_work_clicked</property>
+                                <property name="text" translatable="yes">Random Neck Workout</property>
+                                <layout manager="pack">
+                                  <property name="expand">false</property>
+                                  <property name="fill">x</property>
+                                  <property name="propagate">True</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="short_torso">
+                                <property cbtype="with_wid" name="command" type="command">on_random_work_clicked</property>
+                                <property name="text" translatable="yes">Random Torso Workout</property>
+                                <layout manager="pack">
+                                  <property name="fill">x</property>
+                                  <property name="propagate">True</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="short_arms">
+                                <property cbtype="with_wid" name="command" type="command">on_random_work_clicked</property>
+                                <property name="text" translatable="yes">Random Arm Workout</property>
+                                <layout manager="pack">
+                                  <property name="fill">x</property>
+                                  <property name="propagate">True</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="short_shoulders">
+                                <property cbtype="with_wid" name="command" type="command">on_random_work_clicked</property>
+                                <property name="text" translatable="yes">Random Shoulder Workout</property>
+                                <layout manager="pack">
+                                  <property name="fill">x</property>
+                                  <property name="propagate">True</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Frame" id="frame26">
+                            <property name="height">200</property>
+                            <property name="width">200</property>
+                            <layout manager="pack">
+                              <property name="expand">true</property>
+                              <property name="fill">x</property>
+                              <property name="propagate">True</property>
+                              <property name="side">left</property>
+                            </layout>
+                            <child>
+                              <object class="ttk.Scale" id="reps">
+                                <property cbtype="scale" name="command" type="command">on_reps_changed</property>
+                                <property name="from_">1</property>
+                                <property name="orient">horizontal</property>
+                                <property name="to">5.99</property>
+                                <property name="value">3.5</property>
+                                <layout manager="pack">
+                                  <property name="fill">x</property>
+                                  <property name="propagate">True</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Label" id="reps_label">
+                                <property name="text" translatable="yes">Reps: </property>
+                                <layout manager="pack">
+                                  <property name="propagate">True</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Notebook.Tab" id="chatbot_tab">
+                    <property name="text" translatable="yes">Chatbot</property>
+                    <child>
+                      <object class="ttk.Frame" id="frame20">
+                        <property name="height">200</property>
+                        <property name="width">200</property>
+                        <layout manager="pack">
+                          <property name="propagate">True</property>
+                          <property name="side">top</property>
+                        </layout>
+                        <child>
+                          <object class="ttk.Button" id="chat">
+                            <property cbtype="simple" name="command" type="command">on_chatbot_clicked</property>
+                            <property name="text" translatable="yes">Run Chatbot</property>
+                            <layout manager="pack">
+                              <property name="fill">x</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Button" id="default_">
+                            <property cbtype="simple" name="command" type="command">on_default_path_clicked</property>
+                            <property name="text" translatable="yes">Default Path</property>
+                            <layout manager="pack">
+                              <property name="fill">x</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Frame" id="frame21">
+                            <property name="height">200</property>
+                            <property name="width">200</property>
+                            <layout manager="pack">
+                              <property name="fill">x</property>
+                              <property name="propagate">True</property>
+                              <property name="side">top</property>
+                            </layout>
+                            <child>
+                              <object class="ttk.Label" id="chatbot_path_label">
+                                <property name="anchor">center</property>
+                                <property name="text" translatable="yes">Chatbot path:</property>
+                                <layout manager="pack">
+                                  <property name="anchor">center</property>
+                                  <property name="expand">true</property>
+                                  <property name="fill">x</property>
+                                  <property name="propagate">True</property>
+                                  <property name="side">left</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="pygubu.builder.widgets.pathchooserinput" id="path_to_chatbot">
+                                <property name="path">./</property>
+                                <property name="type">directory</property>
+                                <layout manager="pack">
+                                  <property name="expand">true</property>
+                                  <property name="fill">x</property>
+                                  <property name="side">left</property>
+                                </layout>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
