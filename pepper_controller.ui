@@ -1560,7 +1560,7 @@
                               <property name="side">top</property>
                             </layout>
                             <child>
-                              <object class="ttk.Label" id="label5">
+                              <object class="ttk.Label" id="chatbot_path_label">
                                 <property name="anchor">center</property>
                                 <property name="text" translatable="yes">Chatbot path:</property>
                                 <layout manager="pack">
@@ -1573,7 +1573,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="pygubu.builder.widgets.pathchooserinput" id="pathchooserinput2">
+                              <object class="pygubu.builder.widgets.pathchooserinput" id="path_to_chatbot">
                                 <property name="path">./</property>
                                 <property name="type">directory</property>
                                 <layout manager="pack">
