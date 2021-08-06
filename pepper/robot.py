@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
 This is a wrapper around `qi` framework by Aldebaran
@@ -10,6 +9,8 @@ recognition.
 
 It also includes a virtual robot for testing purposes.
 """
+import sys
+print(sys.path)
 import qi
 import time
 import random
@@ -69,6 +70,7 @@ class Pepper:
         self.motion_service = self.session.service("ALMotion")
         self.tracker_service = self.session.service("ALTracker")
         self.tts_service = self.session.service("ALAnimatedSpeech")
+        self.tts = self.session.service("ALTextToSpeech")
         self.tablet_service = self.session.service("ALTabletService")
         self.autonomous_life_service = self.session.service("ALAutonomousLife")
         self.system_service = self.session.service("ALSystem")
@@ -1104,7 +1106,7 @@ class Pepper:
         self.audio_recorder.stopMicrophonesRecording()
         print ("start recording")
         self.audio_recorder.startMicrophonesRecording("/home/nao/speech.wav", "wav", 48000, (0, 0, 1, 0))
-        time.sleep(5)
+        time.sleep(3)
         self.audio_recorder.stopMicrophonesRecording()
         print ("record over")
         self.download_file("speech.wav")

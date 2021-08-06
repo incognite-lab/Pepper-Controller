@@ -12,9 +12,11 @@ import cv2
 import threading
 from hellopepper import basic_demo, take_picture_show, recognize_person, learn_person
 import time
+import threading
 import sys
 import subprocess
 import random
+import qi
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 PROJECT_UI = os.path.join(PROJECT_PATH, "pepper_controller.ui")
@@ -240,7 +242,7 @@ class PepperControllerApp:
     def on_idk_clicked(self):
         text_list = self.configuration.conf["language"][self.language]["dont_know_list"]
         text = np.random.choice(text_list).encode("utf-8")
-        self.robot.say(text)
+        qi.async(lambda: self.robot.say(text))
         self.output_text("[INFO]: Saying I don\'t know.")
 
     def start_stream(self):
@@ -339,6 +341,7 @@ class PepperControllerApp:
 
     def on_close_app_clicked(self):
         self.robot.stop_behaviour()
+        self.robot.tts.stopAll()
         self.output_text("[INFO]: Stopping all behaviour.")
 
     def on_battery_level_clicked(self):
@@ -372,7 +375,96 @@ class PepperControllerApp:
 
     def on_basic_demo_clicked(self):
         self.output_text("[INFO]: Running basic demo.")
-        basic_demo(self.robot)
+
+    ####### ZIVOT 90 ########
+    def on_intro_clicked(self):
+        self.output_text("[INFO]: Introducing Pepper.")
+        text_list = self.configuration.conf["language"][self.language]["introduce"]
+        text = np.random.choice(text_list).encode("utf-8")
+        qi.async(lambda: self.robot.say(text))
+
+    def on_logo_clicked(self):
+        self.output_text("[INFO]: Showing logo Zivot 90.")
+        self.robot.show_image("http://people.ciirc.cvut.cz/~sejnogab/zivot90.png")
+
+    def on_offer_clicked(self):
+        self.output_text("[INFO]: Offering what to do.")
+        text_list = self.configuration.conf["language"][self.language]["offer"]
+        text = np.random.choice(text_list).encode("utf-8")
+        qi.async(lambda: self.robot.say(text))
+
+    def on_howto_clicked(self):
+        self.output_text("[INFO]: Explaining how to talk to robot.")
+        text_list = self.configuration.conf["language"][self.language]["how_to"]
+        text = np.random.choice(text_list).encode("utf-8")
+        qi.async(lambda: self.robot.say(text))
+
+    def on_standup1_clicked(self):
+        self.output_text("[INFO]: Running standup 1.")
+        text_list = self.configuration.conf["language"][self.language]["standup_1"]
+        text = np.random.choice(text_list).encode("utf-8").replace("*wait*", "\\pau=4000\\")
+        qi.async(lambda: self.robot.say(text))
+
+    def on_standup2_clicked(self):
+        self.output_text("[INFO]: Standup 2 is not defined!")
+
+    def on_standup3_clicked(self):
+        self.output_text("[INFO]: Standup 3 is not defined!")
+
+    def on_sorry_clicked(self):
+        self.output_text("[INFO]: Saying sorry")
+        text_list = self.configuration.conf["language"][self.language]["say_sorry"]
+        text = np.random.choice(text_list).encode("utf-8")
+        qi.async(lambda: self.robot.say(text))
+
+    def on_alquist_clicked(self):
+        self.output_text("[INFO]: Running Alquist")
+        self.robot.start_behavior("date_dance-896e88/behavior_1.xar")
+
+    def on_chatbottwo_clicked(self):
+        self.output_text("[INFO]: Running Chatbot 2")
+        path = "/home/martin/chatbot2"
+        src_path = os.path.join(path, "src")
+        main_path = os.path.join(src_path, "main.py")
+        data_path = os.path.join(path, "data")
+        logs_path = os.path.join(path, "logs")
+        # subprocess.call('gnome-terminal -- {} --mode robot_remote --data-dir {} --logs-dir {} --loglevel-file trace --loglevel-console info'.format(main_path, data_path, logs_path), shell=True, cwd=src_path)
+        # print('gnome-terminal -- {} --mode robot_remote --data-dir {} --logs-dir {} --loglevel-file trace --loglevel-console info'.format(main_path, data_path, logs_path))
+
+        # command = "python " + main_path + " -m robot_remote -l " + logs_path +" -d " + data_path
+        command = "python2 " + main_path + " --robot-credentials " + self.ip_address + " --mode robot_remote --data-dir " + data_path + " --logs-dir " + logs_path + " --loglevel-file trace --loglevel-console info"
+        subprocess.call("gnome-terminal -- " + command, shell=True)
+
+    def on_dance_clicked(self):
+        self.output_text("[INFO]: Dancing")
+        self.robot.start_behavior("date_dance-896e88/")
+
+    def on_getname_clicked(self):
+        self.output_text("[INFO]: Trying to recognize person")
+        recognize_person(self.robot, self.language)
+
+    def on_howdy_clicked(self):
+        self.output_text("[INFO]: Asking how are you")
+        text_list = self.configuration.conf["language"][self.language]["how_are_you"]
+        text = np.random.choice(text_list).encode("utf-8")
+        qi.async(lambda: self.robot.say(text))
+
+    def on_iamfine_clicked(self):
+        self.output_text("[INFO]: Saying I am fine")
+        text_list = self.configuration.conf["language"][self.language]["i_am_fine"]
+        text = np.random.choice(text_list).encode("utf-8")
+        qi.async(lambda: self.robot.say(text))
+
+    def on_andyou_clicked(self):
+        self.output_text("[INFO]: Asking How about you?")
+        text_list = self.configuration.conf["language"][self.language]["and_you"]
+        text = np.random.choice(text_list).encode("utf-8")
+        qi.async(lambda: self.robot.say(text))
+
+    def on_learn_name_clicked(self):
+        self.output_text("[INFO]: Trying to learn person's name")
+        learn_person(self.robot, self.language)
+
 
     def on_update_sound_clicked(self):
         self.output_text("[INFO]: Updating sound settings.")
@@ -440,12 +532,18 @@ class PepperControllerApp:
         self.robot.do_hand_shake()
 
     def on_do_move_clicked(self):
+        state = self.robot.autonomous_life_service.getState()
+        if state != "disabled":
+            self.robot.autonomous_life_off()
         arms = self.builder.get_object('arms_submove').get()
         torso = self.builder.get_object('torso_submove').get()
         head = self.builder.get_object('head_submove').get()
         self.mp.go_to_position(head, torso, arms, 0.2)
 
     def on_random_work_clicked(self, group):
+        state = self.robot.autonomous_life_service.getState()
+        if state != "disabled":
+            self.robot.autonomous_life_off()
         #work = self.work_list[widget_id]
         reps = self.builder.get_object('reps').get()
         reps = int(float(reps))
@@ -492,6 +590,11 @@ class PepperControllerApp:
         conf = self.configuration.conf
         path = conf["default_chatbot_path"]
         self.builder.get_object('path_to_chatbot')["path"] = conf["default_chatbot_path"]
+
+    def on_restart_clicked(self):
+        self.output_text("[INFO]: Restarting robot.")
+        self.robot.restart_robot()
+
 
 if __name__ == '__main__':
     app = PepperControllerApp()

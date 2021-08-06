@@ -3,6 +3,7 @@ from pepper.robot import Pepper
 from demo import uploadPhotoToWeb
 import random, os, time
 import qi
+from vokativ import vokativ
 
 ''' 
 This is a minimal demo showing you how to work with Pepper class and reach some of the frequently used functions.
@@ -31,11 +32,11 @@ def recognize_person(robot_cls, language="en"):
     responses = {"en":{"faceKnown":["Glad to see you, {}", "I am happy to see you again, {}", "Hello, {}"],
                        "faceUnknown":["I don't think we've met before.","I am sorry, I don't know you yet."]},
                  "cz":{"faceKnown":["Rád tě vidím, {}", "Je hezké tě zase vidět, {}", "Ahoj, {}"],
-                       "faceUnknown":["Myslím, že my dva se zatím neznáme.","Promiň, ale asi tě zatím neznám."]}}
+                       "faceUnknown":["Myslím, že my dva se zatím neznáme. Chcete se seznámit?","Promiň, ale asi tě zatím neznám. Můžeme se seznámit?"]}}
 
     if name is not None:
         name = name.lower()
-        robot_cls.say(random.choice(responses[language]["faceKnown"]).format(name))
+        robot_cls.say(random.choice(responses[language]["faceKnown"]).format(vokativ(name.encode('utf-8'))))
     else:
         robot_cls.say(random.choice(responses[language]["faceUnknown"]))
 
@@ -47,25 +48,36 @@ def learn_person(robot_cls, language="en"):
     :param robot_cls: instance of the Pepper class
     :param: language: str, "en" for English, "cz" for Czech
     """
-    dialog = {"en":{"1":"What is your name?", "2":["That's a pretty name.", "I will remember that.", "Nice to meet you."], '3':'Your name is {}, am I right?', "lang":"en-US"},
-              "cz":{"1":"Jak se jmenuješ?", "2":["To je hezké jméno.", "Budu si to pamatovat.", "Rád tě poznávám."],'3':'Jmenuješ se {}, slyšel jsem správně?', "lang":"cs-CZ"}}
-    robot_cls.say(dialog[language]["1"])
+    dialog = {"en":{"1":"What is your name?", "2":["Nice to meet you."], '3':'Your name is {}, am I right?',"4":["Hold on a second please, I am memorizing your face."], "5":["And that's it."], "lang":"en-US"},
+              "cz":{"1":"Jak se jmenuješ?", "2":["Těší mě","Rád tě poznávám."],'3':'Jmenuješ se {}, slyšel jsem správně?', "4":["Chvíli prosím vydrž, pokusím si tě zapamatovat"], "5":["A je to."],"lang":"cs-CZ"}}
     while True:
+        robot_cls.say(dialog[language]["1"])
         name = robot_cls.recognize_google(lang=dialog[language]["lang"])
         if name != "":
             for word in [ "jmenuju ", "jemnuji ","jsem ", "je ", "mi ", "se ", "name is", "is", "I am", "I'm"]:
                 if word.lower() in name.lower():
                     name = name.split(word)[-1]
+            robot_cls.say(dialog[language]["3"].format(name.encode('utf-8')))
+            answer = robot_cls.recognize_google(lang=dialog[language]["lang"])
+            if any(s in answer for s in ["jo", "ano", "správně", "yes", "right", "yep"]):
+               robot_cls.say(random.choice(dialog[language]["2"]))
+               break
+            else:
+                continue
             break
         else:
             continue
     print("Recognized name {}".format(name.encode('utf-8')))
-    robot_cls.say(name.encode('utf-8'))
-    while True:
-        success = robot_cls.learn_face(name)
+    robot_cls.say(random.choice(dialog[language]["4"]))
+    x = 0
+    while x != 5:
+        success = robot_cls.learn_face(name.encode('utf-8'))
         if success:
             break
-    robot_cls.say(random.choice(dialog[language]["2"]))
+        x +=1
+        time.sleep(1)
+    robot_cls.say(random.choice(dialog[language]["5"]))
+
 
 def take_picture_show(robot):
     local_img_path = robot.take_picture()
@@ -124,7 +136,7 @@ def basic_demo(robot):
 
 if __name__ == "__main__":
     # Press Pepper's chest button once and he will tell you his IP address
-    ip_address = "10.37.1.100"
+    ip_address = "10.37.1.2"
     port = 9559
     robot = Pepper(ip_address, port)
     basic_demo(robot)

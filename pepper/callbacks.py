@@ -92,19 +92,21 @@ class HumanGreeter(object):
         """
         self.got_face = True
         # First Field = TimeStamp.
-        timeStamp = value[0]
-        # Second Field = array of face_Info's.
-        faceInfoArray = value[1]
-        for j in range( len(faceInfoArray)-1 ):
-            faceInfo = faceInfoArray[j]
-            # First Field = Shape info, Second Field = Extra info
-            faceExtraInfo = faceInfo[1]
-            if faceExtraInfo[2] == "" or None:
-                self.human_name = "noone"
-            else:
-                self.human_name = faceExtraInfo[2]
-            print("Person recognized as %s"%self.human_name)
-            self.got_face = False
+        # Second Field = array of face_Info's
+        if len(value) > 1:
+            faceInfoArray = value[1]
+            for j in range( len(faceInfoArray)-1 ):
+                faceInfo = faceInfoArray[j]
+                # First Field = Shape info, Second Field = Extra info
+                faceExtraInfo = faceInfo[1]
+                if faceExtraInfo[2] == "" or None:
+                    self.human_name = "noone"
+                else:
+                    self.human_name = faceExtraInfo[2]
+                    print("Person recognized as %s" % self.human_name)
+                    break
+                print("Person recognized as %s"%self.human_name)
+                self.got_face = False
         try:
             self.face_detection.unsubscribe("HumanGreeter")
         except:
