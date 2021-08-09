@@ -461,6 +461,7 @@
                     </child>
                     <child>
                       <object class="ttk.Label" id="label1">
+                        <property name="anchor">ne</property>
                         <property name="text" translatable="yes">Voice Pitch</property>
                         <layout manager="pack">
                           <property name="expand">true</property>
@@ -1216,7 +1217,7 @@
                           </object>
                         </child>
                         <child>
-                          <object class="ttk.Button" id="wave">
+                          <object class="ttk.Button" id="gesture_5">
                             <property cbtype="with_wid" name="command" type="command">on_gesture_clicked</property>
                             <property name="text" translatable="yes">Wave Hand</property>
                             <layout manager="grid">
@@ -1632,6 +1633,7 @@
                                 </child>
                                 <child>
                                   <object class="ttk.Label" id="label3">
+                                    <property name="font">TkIconFont</property>
                                     <property name="text" translatable="yes">Voice Sensitivity</property>
                                     <layout manager="pack">
                                       <property name="expand">true</property>
@@ -1661,7 +1663,7 @@
                                     <property name="orient">horizontal</property>
                                     <property name="to">15</property>
                                     <property name="value">7</property>
-                                    <property name="variable">int:person_left</property>
+                                    <property name="variable">double:person_left</property>
                                     <layout manager="pack">
                                       <property name="fill">x</property>
                                     </layout>

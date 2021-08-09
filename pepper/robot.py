@@ -305,6 +305,13 @@ class Pepper:
 
         """
         self.led_service.fadeRGB('AllLeds', rgb[0], rgb[1], rgb[2], 1.0)
+        self.led_service.fadeRGB('AllLeds', 0,0,0, 1.0)
+        self.led_service.fadeRGB('AllLeds', rgb[0], rgb[1], rgb[2], 1.0)
+        self.led_service.fadeRGB('AllLeds', 0,0,0, 1.0)
+        self.led_service.fadeRGB('AllLeds', rgb[0], rgb[1], rgb[2], 1.0)
+        self.led_service.fadeRGB('AllLeds', 0,0,0, 1.0)
+        self.led_service.fadeRGB('AllLeds', rgb[0], rgb[1], rgb[2], 1.0)
+        self.led_service.fadeRGB('AllLeds', 0,0,0, 1.0)
 
     def turn_off_leds(self):
         """Turn off the LEDs in robot's eyes"""

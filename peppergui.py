@@ -206,8 +206,8 @@ class PepperControllerApp:
         self.output_text("[INFO]: Language changed to english.")
 
     def on_blink_clicked(self):
-        self.robot.autonomous_blinking()
-        self.output_text("[INFO]: Changed blinking.")
+        self.robot.blink_eyes([148,0,211])
+        self.output_text("[INFO]: Blinking eyes.")
 
     def on_stay_clicked(self):
         self.robot.stand()

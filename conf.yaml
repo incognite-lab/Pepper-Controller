@@ -107,7 +107,7 @@ torso_submove_3:
 
 
 
-gesture_1:
+gesture_5:
     name: Wave Hand
     path_list:
         - 'Gestures/Hey_1'
