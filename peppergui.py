@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from motion_parser import MotionParser
 import os
-import Tkinter as tk
-import ttk
 import pygubu
 from PIL import Image, ImageTk
 from pepper.robot import Pepper
@@ -44,6 +42,9 @@ class PepperControllerApp:
         self.voice_speed = None
         self.ipaddress = None
         self.port = None
+        self.chatbot_voice_stop = 500
+        self.chatbot_voice_sens = 0.5
+        self.chatbot_person_left = 7000
         builder.import_variables(self, [u'move_speed', u'text_to_say',
                                         u'volume', u'voice_pitch', u'voice_speed', u'ipaddress', u'port'])
 
@@ -152,6 +153,7 @@ class PepperControllerApp:
 
     def on_d_pressed(self, event=None):
         self.on_right_clicked()
+
 
     def on_space_pressed(self, event=None):
         self.on_stop_clicked()
@@ -376,6 +378,9 @@ class PepperControllerApp:
     def on_basic_demo_clicked(self):
         self.output_text("[INFO]: Running basic demo.")
 
+    def on_unlearn_clicked(self):
+        self.robot.face_detection_service.clearDatabase()
+
     ####### ZIVOT 90 ########
     def on_intro_clicked(self):
         self.output_text("[INFO]: Introducing Pepper.")
@@ -472,6 +477,12 @@ class PepperControllerApp:
         voice_pitch = self.builder.tkvariables['voice_pitch'].get()
         voice_speed = self.builder.tkvariables['voice_speed'].get()
         self.robot.changeVoice(volume, voice_speed, voice_pitch)
+
+    def on_update_chatbot_clicked(self):
+        self.output_text("[INFO]: Updating chatbot settings.")
+        self.chatbot_voice_stop = self.builder.tkvariables['voice_stopped'].get() * 1000
+        self.chatbot_voice_sens = self.builder.tkvariables['voice_sensitivity'].get()
+        self.chatbot_person_left = self.builder.tkvariables['person_left'].get() * 1000
 
     def set_scales(self):
         self.builder.tkvariables['voice_speed'].set(self.robot.getVoiceSpeed())
