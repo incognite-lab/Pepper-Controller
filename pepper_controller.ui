@@ -1092,9 +1092,9 @@
                   </object>
                 </child>
                 <child>
-                  <object class="ttk.Button" id="take_picture">
-                    <property cbtype="simple" name="command" type="command">on_take_picture_clicked</property>
-                    <property name="text" translatable="yes">Take a Picture</property>
+                  <object class="ttk.Button" id="application_11">
+                    <property cbtype="with_wid" name="command" type="command">on_app_clicked</property>
+                    <property name="text" translatable="yes">App11</property>
                     <layout manager="grid">
                       <property name="column">2</property>
                       <property name="propagate">True</property>
@@ -1106,9 +1106,9 @@
                   </object>
                 </child>
                 <child>
-                  <object class="ttk.Button" id="application_11">
+                  <object class="ttk.Button" id="application_12">
                     <property cbtype="with_wid" name="command" type="command">on_app_clicked</property>
-                    <property name="text" translatable="yes">App11</property>
+                    <property name="text" translatable="yes">App12</property>
                     <layout manager="grid">
                       <property name="column">3</property>
                       <property name="propagate">True</property>

@@ -139,35 +139,41 @@ gesture_4:
         - 'Emotions/Negative/Sad_1'
 
 application_1:
-  name: Quiz
+  name: All in One Quiz
   package: allinonequiz-7404fa/behavior_1
 application_2:
-  name: Mapy
-  package: universal_test-283d04/behavior_1
+  name: Vědomostní kvíz
+  package: cz-g-vedomostniquiz-dc9982/behavior_1
 application_3:
-  name: Osobnosti
-  package: untitled-4fccc1/behavior_1
+  name: Test Kondice
+  package: cz-g-testkondice-dc9982/behavior_1
 application_4:
-  name: Paměť
-  package: remember_objects-e9fb3e/behavior_1
+  name: Test Pozornosti
+  package: cz-g-testpozornosti-dc9982/behavior_1
 application_5:
-  name: Video Quiz
-  package: universal_test-283d06/behavior_1
+  name: Test Paměti
+  package: cz-g-testpameti-dc9982/behavior_1
 application_6:
-  name: Zvíře
-  package: hadejzvire-5e66aa/behavior_1
+  name: Test Spokojenosti
+  package: cz-g-testspokojenosti-dc9982/behavior_1
 application_7:
-  name: App7
-  package:
+  name: Kvíz Osobnosti
+  package: untitled-4fccc1/behavior_1
 application_8:
-  name: App8
-  package:
+  name: Kognitivní Trénink
+  package: kognitiv-7095f1/behavior_1
 application_9:
-  name: App9
-  package:
+  name: Paměťový Trénink
+  package: remember_objects-e9fb3e/behavior_1
 application_10:
-  name: App10
-  package:
+  name: Hádej zvíře
+  package: hadejzvire-5e66aa/behavior_1
+application_11:
+  name: Slepé mapy
+  package: universal_test-283d04/behavior_1
+application_12:
+  name: Test Osobnosti
+  package: psychotest_stop/behavior_1
 
 configuration:
   default_ip: 10.37.1.243
