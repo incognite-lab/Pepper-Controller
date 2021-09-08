@@ -1,214 +1,4 @@
 {
-  "arms_positions": {
-    "joint_list": [
-      "LElbowRoll",
-      "RElbowRoll",
-      "LElbowYaw",
-      "RElbowYaw",
-      "LShoulderPitch",
-      "RShoulderPitch",
-      "LShoulderRoll",
-      "RShoulderRoll",
-      "LWristYaw",
-      "RWristYaw"
-    ],
-    "data_list": {
-      "neutral": [
-        -0.67,
-        0.67,
-        -0.8,
-        0.81,
-        1.28,
-        1.28,
-        0.19,
-        -0.19,
-        0,
-        0
-      ],
-      "ruce_v_bok": [
-        -1.562,
-        1.562,
-        -0.085,
-        0.085,
-        1.25,
-        1.25,
-        0.73,
-        -0.73,
-        0,
-        0
-      ],
-      "upazit": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1.562,
-        -1.562,
-        0,
-        0
-      ],
-      "predpazit": [
-        0,
-        0,
-        -1.56,
-        1.56,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "vzpazit": [
-        0,
-        0,
-        -1.63,
-        1.63,
-        -1.36,
-        -1.36,
-        0.17,
-        -0.17,
-        0,
-        0
-      ],
-      "pripazit": [
-        0,
-        0,
-        -1.63,
-        1.63,
-        1.72,
-        1.72,
-        0.03,
-        -0.03,
-        0,
-        0
-      ],
-      "zapazit": [
-        0,
-        0,
-        -1.59,
-        1.58,
-        2.09,
-        2.09,
-        0.12,
-        -0.11,
-        0,
-        0
-      ],
-      "biceps_flex": [
-        -1.56,
-        1.56,
-        -0.02,
-        0,
-        -1.58,
-        -1.59,
-        1.4,
-        -1.4,
-        -1.46,
-        1.46
-      ],
-      "biceps_relax": [
-        -0.01,
-        0.01,
-        -0.02,
-        0,
-        -1.58,
-        -1.59,
-        1.4,
-        -1.4,
-        -1.46,
-        1.46
-      ],
-      "triceps_extend": [
-        -1.56,
-        1.56,
-        -1.39,
-        1.39,
-        0.04,
-        0.04,
-        0.16,
-        -0.16,
-        -1.82,
-        1.82
-      ],
-      "triceps_relax": [
-        -0.01,
-        0.01,
-        -1.39,
-        1.39,
-        0.04,
-        0.04,
-        0.16,
-        -0.16,
-        -1.82,
-        1.82
-      ]
-    }
-  },
-  "torso_positions": {
-    "joint_list": [
-      "HipRoll",
-      "HipPitch",
-      "KneePitch"
-    ],
-    "data_list": {
-      "zaklon": [
-        0,
-        0.3,
-        0
-      ],
-      "predklon": [
-        0,
-        -0.3,
-        0
-      ],
-      "uklon_doleva": [
-        0.36,
-        0,
-        0
-      ],
-      "uklon_doprava": [
-        -0.36,
-        0,
-        0
-      ],
-      "neutral": [
-        0,
-        0,
-        0
-      ]
-    }
-  },
-  "head_positions": {
-    "joint_list": [
-      "HeadYaw",
-      "HeadPitch"
-    ],
-    "data_list": {
-      "zaklon": [
-        0,
-        -0.71
-      ],
-      "predklon": [
-        0,
-        0.64
-      ],
-      "toceni_doleva": [
-        1.21,
-        0
-      ],
-      "toceni_doprava": [
-        -1.21,
-        0
-      ],
-      "neutral": [
-        0,
-        0
-      ]
-    }
-  },
   "positions": {
     "head": {
       "joint_list": [
@@ -310,18 +100,7 @@
           0,
           0
         ],
-        "upazit": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          1.562,
-          -1.562,
-          0,
-          0
-        ],
+        "upazit_internal": [-0.01, 0.0, 0.01, 0.0, -1.54, -1.54, 1.44, -1.44, 1.46, -1.57],
         "predpazit": [
           0,
           0,
@@ -335,17 +114,18 @@
           0
         ],
         "vzpazit": [
-          0,
-          0,
-          -1.63,
-          1.63,
-          -1.36,
-          -1.36,
-          0.17,
-          -0.17,
-          0,
-          0
+          -0.01,
+          0.01,
+          0.01,
+          0.0,
+          -1.54,
+          -1.54,
+          0.21,
+          -0.22,
+          0.0,
+          0.0
         ],
+        "upazit_external": [0, 0.0, -2.09, 2.09, 1.46, 1.45, 1.56, -1.56, 0.0, 0.0],
         "pripazit": [
           0,
           0,
@@ -479,7 +259,7 @@
         {
           "head": "neutral",
           "torso": "neutral",
-          "arms": "upazit",
+          "arms": "upazit_external",
           "speed": 0.2
         }
       ],
@@ -501,7 +281,21 @@
         {
           "head": "neutral",
           "torso": "neutral",
-          "arms": "upazit",
+          "arms": "upazit_internal",
+          "speed": 0.2
+        },
+        {
+          "head": "neutral",
+          "torso": "neutral",
+          "arms": "vzpazit",
+          "speed": 0.2
+        }
+      ],
+      [
+        {
+          "head": "neutral",
+          "torso": "neutral",
+          "arms": "biceps_flex",
           "speed": 0.2
         },
         {
@@ -544,6 +338,102 @@
     ]
   },
   "workouts": {
+    "15_minutes": [
+      [
+        ["self","go_to_position",["neutral","neutral","neutral"]],
+        ["robot", "say",["Teď si společně zacvičíme, cvičení bude trvat 15 minut, začneme krkem, opakujte po mně"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["head", 0, 12]],
+        ["self", "stop_music", []],
+        ["self","go_to_position",["neutral","neutral","ruce_v_bok"]],
+        ["robot", "say", ["Výborně už jen 10 opakování", "disabled"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["head", 0, 10]],
+        ["self", "stop_music", []],
+        ["self","go_to_position",["neutral","neutral","ruce_v_bok"]],
+        ["robot", "say",["Další cvik", "disabled"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["head", 1, 12]],
+        ["self", "stop_music", []],
+        ["self","go_to_position",["neutral","neutral","neutral"]],
+        ["robot", "say", ["Výborně už jen 10 opakování", "disabled"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["head", 1, 10]],
+        ["self", "stop_music", []],
+        ["self", "go_to_position",["neutral", "neutral", "neutral"]],
+        ["robot", "say",["Dále procvičíme boky"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["torso", 0, 12]],
+        ["self", "stop_music", []],
+        ["self","go_to_position",["neutral","neutral","ruce_v_bok"]],
+        ["robot", "say", ["Výborně už jen 10 opakování", "disabled"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["torso", 0, 10]],
+        ["self", "stop_music", []],
+        ["self", "go_to_position",["neutral", "neutral", "neutral"]],
+        ["robot", "say",["Nyní procvičíme ramena"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["shoulders", 0, 12]],
+        ["self", "stop_music", []],
+        ["self","go_to_position",["neutral","neutral","neutral"]],
+        ["robot", "say", ["Výborně už jen 10 opakování", "disabled"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["shoulders", 0, 10]],
+        ["self", "stop_music", []],
+        ["self","go_to_position",["neutral","neutral","neutral"]],
+        ["robot", "say",["Další cvik"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["shoulders", 1, 12]],
+        ["self", "stop_music", []],
+        ["self","go_to_position",["neutral","neutral","neutral"]],
+        ["robot", "say", ["Výborně už jen 10 opakování", "disabled"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["shoulders", 1, 10]],
+        ["self", "stop_music", []],
+        ["self","go_to_position",["neutral","neutral","neutral"]],
+        ["robot", "say",["Další cvik"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["shoulders", 2, 12]],
+        ["self", "stop_music", []],
+        ["self","go_to_position",["neutral","neutral","neutral"]],
+        ["robot", "say", ["Výborně už jen 10 opakování", "disabled"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["shoulders", 2, 10]],
+        ["self", "stop_music", []],
+        ["self","go_to_position",["neutral","neutral","neutral"]],
+        ["robot", "say",["Další cvik"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["shoulders", 0, 12]],
+        ["self", "stop_music", []],
+        ["self","go_to_position",["neutral","neutral","neutral"]],
+        ["robot", "say", ["Výborně už jen 10 opakování", "disabled"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["shoulders", 0, 10]],
+        ["self", "stop_music", []],
+        ["self", "go_to_position",["neutral", "neutral", "neutral"]],
+        ["robot", "say",["Teď budeme cvičit bicepsy a tricepsy"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["arms", 0, 12]],
+        ["self", "stop_music", []],
+        ["self","go_to_position",["neutral","neutral","neutral"]],
+        ["robot", "say", ["Výborně už jen 10 opakování", "disabled"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["arms", 0, 10]],
+        ["self", "stop_music", []],
+        ["self","go_to_position",["neutral","neutral","neutral"]],
+        ["robot", "say",["Další cvik"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["arms", 1, 12]],
+        ["self", "stop_music", []],
+        ["self","go_to_position",["neutral","neutral","neutral"]],
+        ["robot", "say", ["Výborně už jen 10 opakování", "disabled"]],
+        ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
+        ["self", "do_exercise", ["arms", 1, 10]],
+        ["self", "stop_music", []],
+        ["self", "go_to_position",["neutral", "neutral", "neutral"]],
+        ["robot","say",["skvěle vám to šlo, teď si odpočiňte"]]
+      ]
+    ],
     "short_neck": [
       [
         [

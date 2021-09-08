@@ -93,7 +93,8 @@ class PepperControllerApp:
         # video properties
         self.canvas = builder.get_object('canvas1')
         self.video_thread = threading.Thread(target=self.start_stream)
-        self.thread_alive = False
+        self._stop_event = threading.Event()
+        #self.thread_alive = False
         self.stream_on = -1  # -1 == initial, 0 == off, 1 == on
 
         # movement
@@ -121,7 +122,17 @@ class PepperControllerApp:
 
     def on_closing(self):
         """ Close operation. """
-        self.thread_alive = False
+        # self.stream_on = 0
+        #self.thread_alive = False
+        
+        self._stop_event.set()
+        #self.video_thread.join()
+        
+        #time.sleep(10)
+        # print("tu")
+        # while self.video_thread.is_alive():
+        #     self.video_thread.join()
+        # print("over")
         self.top_level.destroy()
 
     def output_text(self, text):
@@ -179,11 +190,11 @@ class PepperControllerApp:
             # motion parser
             self.mp = MotionParser(os.path.join(PROJECT_PATH,"workout_conf.json"), self.robot)
             self.arms_combobox['values'] = self.mp.get_conf(
-            )["arms_positions"]["data_list"].keys()
+            )["positions"]["arms"]["data_list"].keys()
             self.head_combobox['values'] = self.mp.get_conf(
-            )["head_positions"]["data_list"].keys()
+            )["positions"]["head"]["data_list"].keys()
             self.torso_combobox['values'] = self.mp.get_conf(
-            )["torso_positions"]["data_list"].keys()
+            )["positions"]["torso"]["data_list"].keys()
             self.work_dict = {"short_neck": random.sample(range(len(self.mp.get_conf()["workouts"]["short_neck"])), len(self.mp.get_conf()["workouts"]["short_neck"])),
                               "short_arms": random.sample(range(len(self.mp.get_conf()["workouts"]["short_arms"])), len(self.mp.get_conf()["workouts"]["short_arms"])),
                               "short_torso": random.sample(range(len(self.mp.get_conf()["workouts"]["short_torso"])), len(self.mp.get_conf()["workouts"]["short_torso"])),
@@ -244,26 +255,32 @@ class PepperControllerApp:
         self.output_text("[INFO]: Saying I don\'t know.")
 
     def start_stream(self):
-        self.robot.subscribe_camera(self.get_picked_camera(), 2, 30)
-        self.thread_alive = True
-        while self.thread_alive:
-            if not self.stream_on:
+        self.robot.subscribe_camera(self.get_picked_camera(), 0, 30)
+        #self.thread_alive = True
+        while not self._stop_event.is_set():
+            #print(self.thread_alive)
+            if not self.stream_on == 1:
+                self._stop_event.wait(1)
                 continue
             image = self.robot.get_camera_frame(show=False)
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            image = cv2.resize(image, (320, 240))
             im = Image.fromarray(image)
-            name = "camera.jpg"
-            im.save(name)
+            #name = "camera.jpg"
+            #im.save(name)
             try:
                 # Load image in canvas
-                fpath = os.path.join(PROJECT_PATH, 'camera.jpg')
-                aux = Image.open(fpath)
-                aux = aux.resize((320, 240), Image.ANTIALIAS)
-                self.img = ImageTk.PhotoImage(aux)
+                #fpath = os.path.join(PROJECT_PATH, 'camera.jpg')
+                #aux = Image.open(fpath)
+                #aux = aux.resize((320, 240), Image.ANTIALIAS)
+                #self.img = ImageTk.PhotoImage(aux)
+                self.img = ImageTk.PhotoImage(im)
                 self.canvas.create_image(0, 0, image=self.img, anchor='nw')
             except:
                 print("The application has finished")
                 break
+            
+        #print("thread alive " + str(self.thread_alive))
 
     def on_start_stream_clicked(self):
         self.output_text("[INFO]: Starting camera stream.")
@@ -412,7 +429,7 @@ class PepperControllerApp:
             camera = "camera_bottom"
         else:
             camera = "camera_top"
-        self.robot.subscribe_camera(camera, 2, 30)
+        self.robot.subscribe_camera(camera, 1, 30)
 
     def get_picked_camera(self):
         """ Get picked camera from combobox. """
@@ -434,7 +451,7 @@ class PepperControllerApp:
             camera = "camera_bottom"
         else:
             camera = "camera_top"
-        self.robot.subscribe_camera(camera, 2, 30)
+        self.robot.subscribe_camera(camera, 1, 30)
 
     def on_handshake_clicked(self):
         self.robot.do_hand_shake()
