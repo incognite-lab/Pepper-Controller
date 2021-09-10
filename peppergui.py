@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from motion_parser import MotionParser
 import os
-import Tkinter as tk
-import ttk
 import pygubu
 from PIL import Image, ImageTk
 from pepper.robot import Pepper
@@ -44,6 +42,9 @@ class PepperControllerApp:
         self.voice_speed = None
         self.ipaddress = None
         self.port = None
+        self.chatbot_voice_stop = 500
+        self.chatbot_voice_sens = 0.5
+        self.chatbot_person_left = 7000
         builder.import_variables(self, [u'move_speed', u'text_to_say',
                                         u'volume', u'voice_pitch', u'voice_speed', u'ipaddress', u'port'])
 
@@ -153,6 +154,7 @@ class PepperControllerApp:
     def on_d_pressed(self, event=None):
         self.on_right_clicked()
 
+
     def on_space_pressed(self, event=None):
         self.on_stop_clicked()
 
@@ -204,8 +206,8 @@ class PepperControllerApp:
         self.output_text("[INFO]: Language changed to english.")
 
     def on_blink_clicked(self):
-        self.robot.autonomous_blinking()
-        self.output_text("[INFO]: Changed blinking.")
+        self.robot.blink_eyes([148,0,211])
+        self.output_text("[INFO]: Blinking eyes.")
 
     def on_stay_clicked(self):
         self.robot.stand()
@@ -254,14 +256,14 @@ class PepperControllerApp:
             image = self.robot.get_camera_frame(show=False)
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             im = Image.fromarray(image)
-            name = "camera.jpg"
-            im.save(name)
+            #name = "camera.jpg"
+            #im.save(name)
             try:
                 # Load image in canvas
-                fpath = os.path.join(PROJECT_PATH, 'camera.jpg')
-                aux = Image.open(fpath)
-                aux = aux.resize((320, 240), Image.ANTIALIAS)
-                self.img = ImageTk.PhotoImage(aux)
+                #fpath = os.path.join(PROJECT_PATH, 'camera.jpg')
+                #aux = Image.open(im)
+                aux = im.resize((320, 240), Image.ANTIALIAS)
+                self.img =  ImageTk.PhotoImage(image=aux)
                 self.canvas.create_image(0, 0, image=self.img, anchor='nw')
             except:
                 print("The application has finished")
@@ -351,6 +353,8 @@ class PepperControllerApp:
     def on_app_clicked(self, widget_id):
         self.output_text("[INFO]: Running app: " +
                          self.configuration.conf[widget_id]["name"] + ".")
+        if widget_id == "application_4":
+            self.robot.say("Pojďte zjistit, jak jste na tom se svou pozorností.")
         self.robot.start_behavior(
             self.configuration.conf[widget_id]["package"])
 
@@ -375,6 +379,9 @@ class PepperControllerApp:
 
     def on_basic_demo_clicked(self):
         self.output_text("[INFO]: Running basic demo.")
+
+    def on_unlearn_clicked(self):
+        self.robot.face_detection_service.clearDatabase()
 
     ####### ZIVOT 90 ########
     def on_intro_clicked(self):
@@ -419,7 +426,10 @@ class PepperControllerApp:
 
     def on_alquist_clicked(self):
         self.output_text("[INFO]: Running Alquist")
-        self.robot.start_behavior("date_dance-896e88/behavior_1.xar")
+        if "10.37." in self.ip_address:
+            self.robot.start_behavior("alquist-9640b1/behavior_1")
+        else:
+            self.robot.start_behavior("alquist-9640b1/behavior_2")
 
     def on_chatbottwo_clicked(self):
         self.output_text("[INFO]: Running Chatbot 2")
@@ -428,11 +438,7 @@ class PepperControllerApp:
         main_path = os.path.join(src_path, "main.py")
         data_path = os.path.join(path, "data")
         logs_path = os.path.join(path, "logs")
-        # subprocess.call('gnome-terminal -- {} --mode robot_remote --data-dir {} --logs-dir {} --loglevel-file trace --loglevel-console info'.format(main_path, data_path, logs_path), shell=True, cwd=src_path)
-        # print('gnome-terminal -- {} --mode robot_remote --data-dir {} --logs-dir {} --loglevel-file trace --loglevel-console info'.format(main_path, data_path, logs_path))
-
-        # command = "python " + main_path + " -m robot_remote -l " + logs_path +" -d " + data_path
-        command = "python2 " + main_path + " --robot-credentials " + self.ip_address + " --mode robot_remote --data-dir " + data_path + " --logs-dir " + logs_path + " --loglevel-file trace --loglevel-console info"
+        command = "sudo PYTHONPATH=${PYTHONPATH}:/home/martin/pynaoqi-python2.7-2.5.7.1-linux64/lib/python2.7/site-packages python2 " + main_path + " --robot-credentials " + self.ip_address + " --mode robot_remote --data-dir " + data_path + " --logs-dir " + logs_path + " --loglevel-file trace --loglevel-console info"
         subprocess.call("gnome-terminal -- " + command, shell=True)
 
     def on_dance_clicked(self):
@@ -472,6 +478,12 @@ class PepperControllerApp:
         voice_pitch = self.builder.tkvariables['voice_pitch'].get()
         voice_speed = self.builder.tkvariables['voice_speed'].get()
         self.robot.changeVoice(volume, voice_speed, voice_pitch)
+
+    def on_update_chatbot_clicked(self):
+        self.output_text("[INFO]: Updating chatbot settings.")
+        self.chatbot_voice_stop = self.builder.tkvariables['voice_stopped'].get() * 1000
+        self.chatbot_voice_sens = self.builder.tkvariables['voice_sensitivity'].get()
+        self.chatbot_person_left = self.builder.tkvariables['person_left'].get() * 1000
 
     def set_scales(self):
         self.builder.tkvariables['voice_speed'].set(self.robot.getVoiceSpeed())

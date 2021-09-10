@@ -461,6 +461,7 @@
                     </child>
                     <child>
                       <object class="ttk.Label" id="label1">
+                        <property name="anchor">ne</property>
                         <property name="text" translatable="yes">Voice Pitch</property>
                         <layout manager="pack">
                           <property name="expand">true</property>
@@ -1092,9 +1093,9 @@
                   </object>
                 </child>
                 <child>
-                  <object class="ttk.Button" id="take_picture">
-                    <property cbtype="simple" name="command" type="command">on_take_picture_clicked</property>
-                    <property name="text" translatable="yes">Take a Picture</property>
+                  <object class="ttk.Button" id="application_11">
+                    <property cbtype="with_wid" name="command" type="command">on_app_clicked</property>
+                    <property name="text" translatable="yes">App11</property>
                     <layout manager="grid">
                       <property name="column">2</property>
                       <property name="propagate">True</property>
@@ -1106,9 +1107,9 @@
                   </object>
                 </child>
                 <child>
-                  <object class="ttk.Button" id="application_11">
+                  <object class="ttk.Button" id="application_12">
                     <property cbtype="with_wid" name="command" type="command">on_app_clicked</property>
-                    <property name="text" translatable="yes">App11</property>
+                    <property name="text" translatable="yes">App12</property>
                     <layout manager="grid">
                       <property name="column">3</property>
                       <property name="propagate">True</property>
@@ -1216,7 +1217,7 @@
                           </object>
                         </child>
                         <child>
-                          <object class="ttk.Button" id="wave">
+                          <object class="ttk.Button" id="gesture_5">
                             <property cbtype="with_wid" name="command" type="command">on_gesture_clicked</property>
                             <property name="text" translatable="yes">Wave Hand</property>
                             <layout manager="grid">
@@ -1533,54 +1534,151 @@
                           <property name="side">top</property>
                         </layout>
                         <child>
-                          <object class="ttk.Button" id="chat">
-                            <property cbtype="simple" name="command" type="command">on_chatbot_clicked</property>
-                            <property name="text" translatable="yes">Run Chatbot</property>
+                          <object class="ttk.Button" id="button20">
+                            <property cbtype="simple" name="command" type="command">on_unlearn_clicked</property>
+                            <property name="text" translatable="yes">Unlearn All Faces</property>
                             <layout manager="pack">
                               <property name="fill">x</property>
                             </layout>
                           </object>
                         </child>
                         <child>
-                          <object class="ttk.Button" id="default_">
-                            <property cbtype="simple" name="command" type="command">on_default_path_clicked</property>
-                            <property name="text" translatable="yes">Default Path</property>
+                          <object class="ttk.Frame" id="frame3">
+                            <property name="height">100</property>
+                            <property name="width">100</property>
                             <layout manager="pack">
-                              <property name="fill">x</property>
-                            </layout>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="ttk.Frame" id="frame21">
-                            <property name="height">200</property>
-                            <property name="width">200</property>
-                            <layout manager="pack">
-                              <property name="fill">x</property>
+                              <property name="expand">false</property>
+                              <property name="fill">both</property>
+                              <property name="padx">10</property>
                               <property name="propagate">True</property>
                               <property name="side">top</property>
                             </layout>
                             <child>
-                              <object class="ttk.Label" id="chatbot_path_label">
-                                <property name="anchor">center</property>
-                                <property name="text" translatable="yes">Chatbot path:</property>
-                                <layout manager="pack">
-                                  <property name="anchor">center</property>
-                                  <property name="expand">true</property>
-                                  <property name="fill">x</property>
+                              <object class="ttk.Button" id="button14">
+                                <property cbtype="simple" name="command" type="command">on_update_chatbot_clicked</property>
+                                <property name="text" translatable="yes">Update</property>
+                                <layout manager="grid">
+                                  <property name="column">3</property>
                                   <property name="propagate">True</property>
-                                  <property name="side">left</property>
+                                  <property name="row">0</property>
+                                  <property name="rowspan">2</property>
+                                  <property name="sticky">nsew</property>
+                                  <property id="3" name="weight" type="col">1</property>
+                                  <property id="0" name="weight" type="row">0</property>
                                 </layout>
                               </object>
                             </child>
                             <child>
-                              <object class="pygubu.builder.widgets.pathchooserinput" id="path_to_chatbot">
-                                <property name="path">./</property>
-                                <property name="type">directory</property>
-                                <layout manager="pack">
-                                  <property name="expand">true</property>
-                                  <property name="fill">x</property>
-                                  <property name="side">left</property>
+                              <object class="ttk.Frame" id="frame12">
+                                <property name="height">200</property>
+                                <property name="width">200</property>
+                                <layout manager="grid">
+                                  <property name="column">0</property>
+                                  <property name="padx">5</property>
+                                  <property name="propagate">True</property>
+                                  <property name="row">0</property>
+                                  <property name="sticky">nsew</property>
+                                  <property id="0" name="weight" type="col">1</property>
+                                  <property id="0" name="weight" type="row">0</property>
                                 </layout>
+                                <child>
+                                  <object class="ttk.Scale" id="scale5">
+                                    <property name="cursor">arrow</property>
+                                    <property name="from_">0</property>
+                                    <property name="orient">horizontal</property>
+                                    <property name="to">3</property>
+                                    <property name="value">0.5</property>
+                                    <property name="variable">int:voice_stopped</property>
+                                    <layout manager="pack">
+                                      <property name="expand">true</property>
+                                      <property name="fill">x</property>
+                                      <property name="side">top</property>
+                                    </layout>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="ttk.Label" id="label2">
+                                    <property name="text" translatable="yes">Voice Stopped (s)</property>
+                                    <layout manager="pack">
+                                      <property name="fill">x</property>
+                                      <property name="side">top</property>
+                                    </layout>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Frame" id="frame13">
+                                <property name="height">200</property>
+                                <property name="width">200</property>
+                                <layout manager="grid">
+                                  <property name="column">1</property>
+                                  <property name="propagate">True</property>
+                                  <property name="row">0</property>
+                                  <property name="sticky">nsew</property>
+                                  <property id="1" name="weight" type="col">1</property>
+                                  <property id="0" name="weight" type="row">0</property>
+                                </layout>
+                                <child>
+                                  <object class="ttk.Scale" id="scale6">
+                                    <property name="from_">0.1</property>
+                                    <property name="orient">horizontal</property>
+                                    <property name="to">1</property>
+                                    <property name="value">0.5</property>
+                                    <property name="variable">int:voice_sensitivity</property>
+                                    <layout manager="pack">
+                                      <property name="fill">x</property>
+                                    </layout>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="ttk.Label" id="label3">
+                                    <property name="font">TkIconFont</property>
+                                    <property name="text" translatable="yes">Voice Sensitivity</property>
+                                    <layout manager="pack">
+                                      <property name="expand">true</property>
+                                      <property name="fill">x</property>
+                                      <property name="side">top</property>
+                                    </layout>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Frame" id="frame14">
+                                <property name="height">200</property>
+                                <property name="width">200</property>
+                                <layout manager="grid">
+                                  <property name="column">2</property>
+                                  <property name="padx">5</property>
+                                  <property name="propagate">True</property>
+                                  <property name="row">0</property>
+                                  <property name="sticky">nsew</property>
+                                  <property id="2" name="weight" type="col">1</property>
+                                  <property id="0" name="weight" type="row">0</property>
+                                </layout>
+                                <child>
+                                  <object class="ttk.Scale" id="scale7">
+                                    <property name="from_">1</property>
+                                    <property name="orient">horizontal</property>
+                                    <property name="to">15</property>
+                                    <property name="value">7</property>
+                                    <property name="variable">double:person_left</property>
+                                    <layout manager="pack">
+                                      <property name="fill">x</property>
+                                    </layout>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="ttk.Label" id="label4">
+                                    <property name="text" translatable="yes">Person Left (s)</property>
+                                    <property name="wraplength">100</property>
+                                    <layout manager="pack">
+                                      <property name="fill">x</property>
+                                      <property name="side">left</property>
+                                    </layout>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                           </object>
