@@ -451,7 +451,7 @@
           [
             "Procvičíme si hlavu, opakujte po mně"
           ]
-        ],
+        ], ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
         [
           "self",
           "do_exercise",
@@ -460,7 +460,7 @@
             0,
             3
           ]
-        ],
+        ], ["self", "stop_music", []],
         [
           "self",
           "go_to_position",
@@ -494,7 +494,7 @@
           [
             "Procvičíme si hlavu, opakujte po mně"
           ]
-        ],
+        ], ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
         [
           "self",
           "do_exercise",
@@ -503,7 +503,7 @@
             1,
             3
           ]
-        ],
+        ], ["self", "stop_music", []],
         [
           "self",
           "go_to_position",
@@ -539,7 +539,7 @@
           [
             "Procvičíme si paže, opakujte po mně"
           ]
-        ],
+        ], ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
         [
           "self",
           "do_exercise",
@@ -548,7 +548,7 @@
             0,
             3
           ]
-        ],
+        ], ["self", "stop_music", []],
         [
           "self",
           "go_to_position",
@@ -582,7 +582,7 @@
           [
             "Procvičíme si paže, opakujte po mně"
           ]
-        ],
+        ], ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
         [
           "self",
           "do_exercise",
@@ -591,7 +591,7 @@
             1,
             3
           ]
-        ],
+        ], ["self", "stop_music", []],
         [
           "self",
           "go_to_position",
@@ -627,7 +627,7 @@
           [
             "Procvičíme si boky, opakujte po mně"
           ]
-        ],
+        ], ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
         [
           "self",
           "do_exercise",
@@ -636,7 +636,7 @@
             0,
             3
           ]
-        ],
+        ], ["self", "stop_music", []],
         [
           "self",
           "go_to_position",
@@ -672,7 +672,7 @@
           [
             "Procvičíme si ramena, opakujte po mně"
           ]
-        ],
+        ], ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
         [
           "self",
           "do_exercise",
@@ -681,7 +681,7 @@
             0,
             3
           ]
-        ],
+        ], ["self", "stop_music", []],
         [
           "self",
           "go_to_position",
@@ -715,7 +715,7 @@
           [
             "Procvičíme si ramena, opakujte po mně"
           ]
-        ],
+        ], ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
         [
           "self",
           "do_exercise",
@@ -724,7 +724,7 @@
             1,
             3
           ]
-        ],
+        ], ["self", "stop_music", []],
         [
           "self",
           "go_to_position",
@@ -758,7 +758,7 @@
           [
             "Procvičíme si ramena, opakujte po mně"
           ]
-        ],
+        ], ["self", "play_music", ["/home/nao/workout_music/workout_music.mp3"]],
         [
           "self",
           "do_exercise",
@@ -767,7 +767,7 @@
             2,
             3
           ]
-        ],
+        ], ["self", "stop_music", []],
         [
           "self",
           "go_to_position",
@@ -803,7 +803,7 @@
           [
             "Teď si procvičíme hlavu, dejte si ruce v bok"
           ]
-        ],
+        ], 
         [
           "self",
           "go_to_position",
