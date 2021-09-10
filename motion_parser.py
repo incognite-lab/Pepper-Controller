@@ -70,10 +70,10 @@ class MotionParser:
             func(*args)
 
     def play_music(self, song):
-        qi.async(lambda: mp.robot.play_sound(song))
+        qi.async(lambda: self.robot.play_sound(song))
 
     def stop_music(self):
-        mp.robot.stop_sound()
+        self.robot.stop_sound()
 
 if __name__ == "__main__":
     robot = Pepper("10.37.1.206", 9559)

@@ -176,7 +176,7 @@ application_12:
   package: psychotest_stop/behavior_1
 
 configuration:
-  default_ip: 10.37.1.243
+  default_ip: 10.37.1.206
   default_port: 9559
   default_sentence: Hello, I am so glad to be here!!!
   logo: http://people.ciirc.cvut.cz/sejnogab/logo.jpg
