@@ -23,7 +23,7 @@ import playsound
 import subprocess
 import socket
 from PIL import Image
-from callbacks import HumanGreeter, ReactToTouch
+from pepper.callbacks import HumanGreeter, ReactToTouch
 import os
 
 tmp_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tmp_files")
@@ -202,7 +202,11 @@ class Pepper:
         react_to_touch = ReactToTouch(self.app)
         print("Waiting for touch...")
         while not react_to_touch.activated_sensor:
-            pass
+            if react_to_touch.touch != None:
+                pass
+            else:
+                print("Touch callback does not yet work with Python3, please run the code with Python2.7")
+                return None
         return react_to_touch.activated_sensor
 
     def tablet_show_settings(self):

@@ -106,7 +106,10 @@ def basic_demo(robot):
     while True:
         robot.say("Now touch the top of my right hand.")
         touched_sensor = robot.detect_touch()
-        if touched_sensor[0] == "RArm":
+        if touched_sensor == None:
+            robot.say("Oops, you seem to be running this code with python 3. If you want me to show you touch detection, use python 2 instead.")
+            break
+        elif touched_sensor[0] == "RArm":
             robot.say("Perfect, I can detect touch like this.")
             break
         else:

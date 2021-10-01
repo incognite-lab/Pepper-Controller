@@ -21,8 +21,12 @@ class ReactToTouch(object):
         self.memory_service = session.service("ALMemory")
         self.tts = session.service("ALTextToSpeech")
         # Connect to an Naoqi1 Event.
-        self.touch = self.memory_service.subscriber("TouchChanged")
-        self.id = self.touch.signal.connect(functools.partial(self.onTouched, "TouchChanged"))
+        try:
+            self.touch = self.memory_service.subscriber("TouchChanged")
+            self.id = self.touch.signal.connect(functools.partial(self.onTouched, "TouchChanged"))
+        except:
+            self.touch = None
+            print("Callbacks do not yet work with Python3, please run the code with Python2.7")
         self.activated_sensor = None
 
     def onTouched(self, strVarName, value):
@@ -75,7 +79,11 @@ class HumanGreeter(object):
         # Get the service ALMemory.
         self.memory = session.service("ALMemory")
         # Connect the event callback.
-        self.subscriber = self.memory.subscriber("FaceDetected")
+        try:
+            self.subscriber = self.memory.subscriber("FaceDetected")
+        except:
+            self.subscriber = None
+            print("Callbacks do not yet work with Python3, please run the code with Python2.7")
         # Get the services ALTextToSpeech and ALFaceDetection.
         self.tts = session.service("ALTextToSpeech")
         self.face_detection = session.service("ALFaceDetection")
@@ -124,12 +132,10 @@ class HumanGreeter(object):
         """
         Loop on, wait for events until manual interruption.
         """
-        print "Starting HumanGreeter"
         try:
             while True:
                 time.sleep(1)
         except KeyboardInterrupt:
-            print "Interrupted by user, stopping HumanGreeter"
             self.face_detection.unsubscribe("HumanGreeter")
             #stop
             sys.exit(0)

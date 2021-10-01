@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 from motion_parser import MotionParser
 import os
-import Tkinter as tk
-import ttk
+try:
+  import Tkinter as tk
+  import ttk
+except:
+    import tkinter as tk
+    import tkinter.ttk as ttk
 import pygubu
 from PIL import Image, ImageTk
 from pepper.robot import Pepper
@@ -11,8 +15,6 @@ import yaml
 import cv2
 import threading
 from hellopepper import basic_demo, take_picture_show, recognize_person, learn_person
-import time
-import sys
 import subprocess
 import random
 

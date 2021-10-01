@@ -2,8 +2,10 @@
 import time
 
 from pepper.robot import Pepper
-import urllib2
-import urllib
+try:
+    import urllib
+except:
+    import urllib.request as urllib
 import base64
 import json
 from PIL import Image
@@ -18,9 +20,9 @@ def uploadPhotoToWeb(photo):
     client_id = "af482612ae6d1c1"  # this the id which we've got after registrating the app on imgur
     headers = {'Authorization': 'Client-ID ' + client_id}
     data = {'image': b64_image, 'title': 'test'}
-    request = urllib2.Request(url="https://api.imgur.com/3/upload.json", data=urllib.urlencode(data),
+    request = urllib.Request(url="https://api.imgur.com/3/upload.json", data=urllib.urlencode(data),
                               headers=headers)
-    response = urllib2.urlopen(request).read()
+    response = urllib.urlopen(request).read()
     parse = json.loads(response)
     return parse['data']['link'] #returns a url of the photo
 
