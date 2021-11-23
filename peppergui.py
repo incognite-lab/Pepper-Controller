@@ -189,11 +189,11 @@ class PepperControllerApp:
             # motion parser
             self.mp = MotionParser(os.path.join(PROJECT_PATH,"workout_conf.json"), self.robot)
             self.arms_combobox['values'] = self.mp.get_conf(
-            )["arms_positions"]["data_list"].keys()
+            )["positions"]["arms"]["data_list"].keys()
             self.head_combobox['values'] = self.mp.get_conf(
-            )["head_positions"]["data_list"].keys()
+            )["positions"]["head"]["data_list"].keys()
             self.torso_combobox['values'] = self.mp.get_conf(
-            )["torso_positions"]["data_list"].keys()
+            )["positions"]["torso"]["data_list"].keys()
             self.work_dict = {"short_neck": random.sample(range(len(self.mp.get_conf()["workouts"]["short_neck"])), len(self.mp.get_conf()["workouts"]["short_neck"])),
                               "short_arms": random.sample(range(len(self.mp.get_conf()["workouts"]["short_arms"])), len(self.mp.get_conf()["workouts"]["short_arms"])),
                               "short_torso": random.sample(range(len(self.mp.get_conf()["workouts"]["short_torso"])), len(self.mp.get_conf()["workouts"]["short_torso"])),

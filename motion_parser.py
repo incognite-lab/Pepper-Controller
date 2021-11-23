@@ -6,6 +6,7 @@ import time
 import numpy as np
 import yaml
 import sys
+import qi
 
 # insert at 1, 0 is the script path (or '' in REPL)
 sys.path.insert(1, '../Pepper-Controller')
@@ -68,14 +69,14 @@ class MotionParser:
                 args[-1] = reps
             func(*args)
 
+    def play_music(self, song):
+        qi.async(lambda: self.robot.play_sound(song))
+
+    def stop_music(self):
+        self.robot.stop_sound()
 
 if __name__ == "__main__":
-    #conf = yaml.safe_load(open("workout_conf.yaml"))
-
-    # print(conf["excercises"])
-
-    #robot = init()
-    #robot = Pepper("10.37.1.243", 9559)
-    mp = MotionParser("../workout/workout_conf.json", None)
-
-    mp.do_workout("shoulders", 0)
+    robot = Pepper("10.37.1.206", 9559)
+    mp = MotionParser("workout_conf.json", robot)
+    mp.stop_music()
+    mp.do_workout("15_minutes", 0)
