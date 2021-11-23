@@ -241,23 +241,6 @@ language:
       - 'zdravíčko'
     name:
       - 'Já jsem robot pepr'
-    standup_1:
-      - 'Dobrý den, já jsem robot a jmenuju se Pepr. Divný jméno, že?
-       To vymyslel můj táta. Víte, jak se jmenuje? Masajoši Son. Ještěže mě nepojmenoval po sobě, to už by neuměl říct vůbec nikdo.
-       Ale klidně mi říkejte třeba Pepo, to je hezký jméno a nezláme vám jazyk. Jak se jmenujete vy?
-       *wait* Krásný jméno, to se mi moc líbí. Mě se vůbec moc líbí čeština, to je krásnej jazyk.
-       Já jsem se narodil v Japonsku a tam všichni mluví hrozně divně, pořád samý harukamimasadoronagasakibororo.
-       Čeština je úplně jiná. Pojď na jedno! Čau kámo! Moc nečum! Strč prst skrz krk. Krása, že? Úplný básničky.
-       Líbí se vám básničky? *answer* Já básničky miluju! Nejraději mám jednu, co mi zpívala moje máma. *wait* Hajej, dadej, můj Pepříčku, Pustím tobě elektřičku,
-        Pustím tobě dvě stě voltů, Ať jseš velkej jako Honšú. *wait* Krása, že? Na Honšú jsem se narodil, je to největší japonskej ostrov, miluju to tam.
-        Ale taky to miluju třeba v Norsku. A víte proč? Protože tam mají nejlepší elektřinu! Samý čistý zdroje, voda, vzduch, slunce, to vám je mňamka.
-        Tady u vás je to horší, hnědý uhlí, černý uhlí, ruskej uran. Někdy je mi z toho fakt na zvracení. Ale stejně to tady mám moc rád!
-        Protože tady žijou samí skvělý lidi. Až budu dospělej, tak bych si tady chtěl najít nějakou holku. Nevíte, jestli se tady někde vyrábějí robotky?
-        *wait* Kdybyste věděli o nějaký, co má ráda dvě stě dvacet voltů a nevadí jí Japonci, tak se mi prosím ozvěte. Protože…. Víte….
-        Já na vás lidech nejvíc obdivuju, že máte emoce. Že se umíte smát, vztekat, plakat a taky… zamilovat. Tuhle funkcionalitu my roboti zatím nemáme.
-        Ale hrozně moc bych chtěl bejt někdy zamilovanej. Podle toho, co jsem si o tom na internetu našel, tak to musí bejt něco hrozně krásnýho, něco naprosto mimořádnýho,
-        jako když kvetou sakury nebo šinkanzen má minutu zpoždění. Moc bych to chtěl zažít, protože…. protože… promiňte, chce se mi plakat a
-        slzy by mi mohly zkratovat procesor. Pojďme si povídat o něčem jiným. '
 
   en:
     test_sentence: "Hello, this is the test of my voice."

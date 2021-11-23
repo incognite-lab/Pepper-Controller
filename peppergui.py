@@ -45,6 +45,7 @@ class PepperControllerApp:
         self.chatbot_voice_stop = 500
         self.chatbot_voice_sens = 0.5
         self.chatbot_person_left = 7000
+        self.load_standup_config()
         builder.import_variables(self, [u'move_speed', u'text_to_say',
                                         u'volume', u'voice_pitch', u'voice_speed', u'ipaddress', u'port'])
 
@@ -114,6 +115,7 @@ class PepperControllerApp:
         self.arms_combobox = self.builder.get_object('arms_submove')
         self.torso_combobox = self.builder.get_object('torso_submove')
         self.head_combobox = self.builder.get_object('head_submove')
+        self.standup_combobox = self.builder.get_object('comboboxstd')
 
         reps = self.builder.get_object('reps').get()
         reps_label = self.builder.get_object('reps_label')
@@ -121,6 +123,10 @@ class PepperControllerApp:
 
     def run(self):
         self.mainwindow.mainloop()
+
+    def load_standup_config(self):
+        with open("./data/standups.yaml", 'r') as stream:
+            self.standup_cfg = yaml.safe_load(stream)
 
     def on_closing(self):
         """ Close operation. """
@@ -193,6 +199,7 @@ class PepperControllerApp:
                               "short_torso": random.sample(range(len(self.mp.get_conf()["workouts"]["short_torso"])), len(self.mp.get_conf()["workouts"]["short_torso"])),
                               "short_shoulders": random.sample(range(len(self.mp.get_conf()["workouts"]["short_shoulders"])), len(self.mp.get_conf()["workouts"]["short_shoulders"]))
                               }
+            self.standup_combobox["values"] = self.standup_cfg["Names"]
             #print(self.work_dict)
         else:
             self.output_text("[INFO]: Already connected to " + self.ip_address)
@@ -365,10 +372,6 @@ class PepperControllerApp:
             self.configuration.conf[widget_id]["path_list"])
         self.animation_from_path(path)
 
-    def on_learn_face_clicked(self):
-        self.output_text("[INFO]: Learning face.")
-        learn_person(self.robot, self.language)
-
     def on_recognize_clicked(self):
         self.output_text("[INFO]: Recognizing human.")
         recognize_person(self.robot, self.language)
@@ -467,9 +470,30 @@ class PepperControllerApp:
         text = np.random.choice(text_list).encode("utf-8")
         qi.async(lambda: self.robot.say(text))
 
-    def on_learn_name_clicked(self):
-        self.output_text("[INFO]: Trying to learn person's name")
-        learn_person(self.robot, self.language)
+    def on_say_standup(self):
+        self.output_text("[INFO]: Saying standup")
+        title = self.builder.get_object('comboboxstd').get()
+        for k in self.standup_cfg.keys():
+            if not isinstance(self.standup_cfg[k], list):
+                if self.standup_cfg[k]["id"] == title:
+                    text = self.standup_cfg[k]["text"].encode("utf-8")
+        if not "centrum" in title:
+            if self.ask_for_standup(title):
+                qi.async(lambda: self.robot.say(text.replace("*wait*", "\\pau=4000\\")))
+            else:
+                self.robot.say(random.choice(["Dobře", "ok", "nevadí"]))
+        else:
+            qi.async(lambda: self.robot.say(text))
+
+    def ask_for_standup(self, title):
+        self.robot.say(random.choice(self.standup_cfg["Dotaz"]).format(title).encode("utf-8"))
+        positive_answers = ["ano", "dobře", "tak dobře", "tak jo", "ok", "chci", "ale jo", "chceme", "jasně", "určite", "jo", "nevím"]
+        vocab = positive_answers + ["ne", "nechci", "nechceme", "to ne", "ale ne"]
+        answer = self.robot.listen_to(vocabulary=vocab)
+        if answer[0].lower() in positive_answers:
+            return True
+        else:
+            return False
 
 
     def on_update_sound_clicked(self):

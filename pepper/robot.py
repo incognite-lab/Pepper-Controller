@@ -114,6 +114,9 @@ class Pepper:
     def stop_video(self):
         self.tablet_service.stopVideo()
 
+    def play_sound(self, soundPath):
+        self.audio_service.playSoundSetFile("Aldebaran", soundPath)
+
     def set_czech_language(self):
         self.dialog_service.setLanguage("Czech")
         print("Czech language was set up")

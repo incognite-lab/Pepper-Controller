@@ -730,60 +730,6 @@
                   </object>
                 </child>
                 <child>
-                  <object class="ttk.Button" id="button5">
-                    <property cbtype="simple" name="command" type="command">on_standup1_clicked</property>
-                    <property name="text" translatable="yes">Standup 1</property>
-                    <layout manager="grid">
-                      <property name="column">0</property>
-                      <property name="propagate">True</property>
-                      <property name="row">1</property>
-                      <property name="sticky">nsew</property>
-                      <property id="0" name="weight" type="col">1</property>
-                      <property id="1" name="minsize" type="row">0</property>
-                      <property id="1" name="pad" type="row">0</property>
-                      <property id="1" name="uniform" type="row" />
-                      <property id="1" name="weight" type="row">1</property>
-                    </layout>
-                  </object>
-                </child>
-                <child>
-                  <object class="ttk.Button" id="button6">
-                    <property cbtype="simple" name="command" type="command">on_standup2_clicked</property>
-                    <property name="text" translatable="yes">Standup 2</property>
-                    <layout manager="grid">
-                      <property name="column">1</property>
-                      <property name="propagate">True</property>
-                      <property name="row">1</property>
-                      <property name="sticky">nsew</property>
-                      <property id="1" name="minsize" type="col">0</property>
-                      <property id="1" name="pad" type="col">0</property>
-                      <property id="1" name="uniform" type="col" />
-                      <property id="1" name="weight" type="col">1</property>
-                      <property id="1" name="minsize" type="row">0</property>
-                      <property id="1" name="pad" type="row">0</property>
-                      <property id="1" name="uniform" type="row" />
-                      <property id="1" name="weight" type="row">1</property>
-                    </layout>
-                  </object>
-                </child>
-                <child>
-                  <object class="ttk.Button" id="button7">
-                    <property cbtype="simple" name="command" type="command">on_standup3_clicked</property>
-                    <property name="text" translatable="yes">Standup 3</property>
-                    <layout manager="grid">
-                      <property name="column">2</property>
-                      <property name="propagate">True</property>
-                      <property name="row">1</property>
-                      <property name="sticky">nsew</property>
-                      <property id="2" name="weight" type="col">1</property>
-                      <property id="1" name="minsize" type="row">0</property>
-                      <property id="1" name="pad" type="row">0</property>
-                      <property id="1" name="uniform" type="row" />
-                      <property id="1" name="weight" type="row">1</property>
-                    </layout>
-                  </object>
-                </child>
-                <child>
                   <object class="ttk.Button" id="button8">
                     <property cbtype="simple" name="command" type="command">on_sorry_clicked</property>
                     <property name="text" translatable="yes">Omluva</property>
@@ -866,7 +812,7 @@
                     <layout manager="grid">
                       <property name="column">0</property>
                       <property name="propagate">True</property>
-                      <property name="row">3</property>
+                      <property name="row">1</property>
                       <property name="sticky">nsew</property>
                       <property id="3" name="weight" type="col">1</property>
                       <property id="2" name="weight" type="row">1</property>
@@ -880,7 +826,7 @@
                     <layout manager="grid">
                       <property name="column">1</property>
                       <property name="propagate">True</property>
-                      <property name="row">3</property>
+                      <property name="row">1</property>
                       <property name="sticky">nsew</property>
                       <property id="3" name="weight" type="col">1</property>
                       <property id="2" name="weight" type="row">1</property>
@@ -894,7 +840,7 @@
                     <layout manager="grid">
                       <property name="column">2</property>
                       <property name="propagate">True</property>
-                      <property name="row">3</property>
+                      <property name="row">1</property>
                       <property name="sticky">nsew</property>
                       <property id="3" name="weight" type="col">1</property>
                       <property id="2" name="weight" type="row">1</property>
@@ -903,8 +849,8 @@
                 </child>
                 <child>
                   <object class="ttk.Button" id="button18">
-                    <property cbtype="simple" name="command" type="command">on_learn_name_clicked</property>
-                    <property name="text" translatable="yes">Naucit se jmeno</property>
+                    <property cbtype="simple" name="command" type="command">on_say_standup</property>
+                    <property name="text" translatable="yes">Rict Standup</property>
                     <layout manager="grid">
                       <property name="column">3</property>
                       <property name="propagate">True</property>
@@ -912,6 +858,28 @@
                       <property name="sticky">nsew</property>
                       <property id="3" name="weight" type="col">1</property>
                       <property id="2" name="weight" type="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Combobox" id="comboboxstd">
+                    <layout manager="grid">
+                      <property name="column">1</property>
+                      <property name="columnspan">2</property>
+                      <property name="propagate">True</property>
+                      <property name="row">3</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Label" id="stdlabel">
+                    <property name="text" translatable="yes">Standupy:</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="padx">0</property>
+                      <property name="propagate">True</property>
+                      <property name="row">3</property>
+                      <property name="sticky">e</property>
                     </layout>
                   </object>
                 </child>
