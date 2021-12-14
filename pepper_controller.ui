@@ -793,8 +793,8 @@
                 </child>
                 <child>
                   <object class="ttk.Button" id="button12">
-                    <property cbtype="simple" name="command" type="command">on_getname_clicked</property>
-                    <property name="text" translatable="yes">Rozpoznat jmeno</property>
+                    <property cbtype="simple" name="command" type="command">on_goodbye_clicked</property>
+                    <property name="text" translatable="yes">Rozloucit se</property>
                     <layout manager="grid">
                       <property name="column">3</property>
                       <property name="propagate">True</property>
@@ -1459,7 +1459,7 @@
                               <property name="expand">true</property>
                               <property name="fill">x</property>
                               <property name="propagate">True</property>
-                              <property name="side">left</property>
+                              <property name="side">right</property>
                             </layout>
                             <child>
                               <object class="ttk.Scale" id="reps">
@@ -1469,9 +1469,10 @@
                                 <property name="to">5.99</property>
                                 <property name="value">3.5</property>
                                 <layout manager="pack">
+                                  <property name="anchor">s</property>
                                   <property name="fill">x</property>
                                   <property name="propagate">True</property>
-                                  <property name="side">top</property>
+                                  <property name="side">bottom</property>
                                 </layout>
                               </object>
                             </child>
@@ -1479,6 +1480,18 @@
                               <object class="ttk.Label" id="reps_label">
                                 <property name="text" translatable="yes">Reps: </property>
                                 <layout manager="pack">
+                                  <property name="propagate">True</property>
+                                  <property name="side">bottom</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="workintro">
+                                <property cbtype="simple" name="command" type="command">on_workintro_clicked</property>
+                                <property name="text" translatable="yes">Workout Intro</property>
+                                <layout manager="pack">
+                                  <property name="anchor">n</property>
+                                  <property name="fill">x</property>
                                   <property name="propagate">True</property>
                                   <property name="side">top</property>
                                 </layout>

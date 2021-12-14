@@ -176,7 +176,7 @@ application_12:
   package: psychotest_stop/behavior_1
 
 configuration:
-  default_ip: 10.37.1.206
+  default_ip: 192.168.0.184
   default_port: 9559
   default_sentence: Hello, I am so glad to be here!!!
   logo: http://people.ciirc.cvut.cz/sejnogab/logo.jpg
@@ -190,6 +190,14 @@ language:
     and_you:
       - "a co vy?"
       - "a vy?"
+    bye:
+      - "nashle"
+      - "tak ahoj"
+      - "brzy na viděnou"
+      - "mějte se krásně"
+      - "měj se hezky, člověče"
+    workout:
+      - "Pojďme si společně zacvičit. Udělejte mi prosím trochu prostor, abych se mohl pohybovat."
     how_are_you:
       - "jak se dnes daří?"
       - "jakpak se máte?"

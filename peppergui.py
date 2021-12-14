@@ -125,7 +125,7 @@ class PepperControllerApp:
         self.mainwindow.mainloop()
 
     def load_standup_config(self):
-        with open("./data/standups.yaml", 'r') as stream:
+        with open("/home/martin/Pepper-Controller/data/standups.yaml", 'r') as stream:
             self.standup_cfg = yaml.safe_load(stream)
 
     def on_closing(self):
@@ -372,9 +372,17 @@ class PepperControllerApp:
             self.configuration.conf[widget_id]["path_list"])
         self.animation_from_path(path)
 
-    def on_recognize_clicked(self):
-        self.output_text("[INFO]: Recognizing human.")
-        recognize_person(self.robot, self.language)
+    def on_goodbye_clicked(self):
+        self.output_text("[INFO]: Saying goodbye")
+        text_list = self.configuration.conf["language"][self.language]["bye"]
+        text = np.random.choice(text_list).encode("utf-8")
+        qi.async(lambda: self.robot.say(text))
+
+    def on_workintro_clicked(self):
+        self.output_text("[INFO]: Saying work intro")
+        text_list = self.configuration.conf["language"][self.language]["workout"]
+        text = np.random.choice(text_list).encode("utf-8")
+        qi.async(lambda: self.robot.say(text))
 
     def on_take_picture_clicked(self):
         self.output_text("[INFO]: Taking picture.")
@@ -409,12 +417,6 @@ class PepperControllerApp:
         text = np.random.choice(text_list).encode("utf-8")
         qi.async(lambda: self.robot.say(text))
 
-    def on_standup1_clicked(self):
-        self.output_text("[INFO]: Running standup 1.")
-        text_list = self.configuration.conf["language"][self.language]["standup_1"]
-        text = np.random.choice(text_list).encode("utf-8").replace("*wait*", "\\pau=4000\\")
-        text = text.replace("*waitshort*", "\\pau=1000\\")
-        qi.async(lambda: self.robot.say(text))
 
     def on_sorry_clicked(self):
         self.output_text("[INFO]: Saying sorry")
@@ -443,10 +445,6 @@ class PepperControllerApp:
         self.output_text("[INFO]: Dancing")
         self.robot.start_behavior("date_dance-896e88/")
 
-    def on_getname_clicked(self):
-        self.output_text("[INFO]: Trying to recognize person")
-        recognize_person(self.robot, self.language)
-
     def on_howdy_clicked(self):
         self.output_text("[INFO]: Asking how are you")
         text_list = self.configuration.conf["language"][self.language]["how_are_you"]
@@ -474,11 +472,12 @@ class PepperControllerApp:
                     text = self.standup_cfg[k]["text"].encode("utf-8")
         if not "centrum" in title:
             if self.ask_for_standup(title):
+                self.robot.set_awareness(on=False)
                 qi.async(lambda: self.robot.say(text.replace("*wait*", "\\pau=6000\\").replace("*waitshort*", "\\pau=500\\")))
             else:
                 self.robot.say(random.choice(["Dobře", "ok", "nevadí"]))
         else:
-            qi.async(lambda: self.robot.say(text))
+            qi.async(lambda: self.robot.say(text.replace("*waitshort*", "\\pau=500\\")))
 
     def ask_for_standup(self, title):
         self.robot.say(random.choice(self.standup_cfg["Dotaz"]).format(title).encode("utf-8"))
@@ -576,7 +575,6 @@ class PepperControllerApp:
         if state != "disabled":
             self.robot.autonomous_life_off()
         #work = self.work_list[widget_id]
-        self.robot.say("Pojďme si společně zacvičit. Udělejte mi prosím trochu prostor, abych se mohl pohybovat.")
         reps = self.builder.get_object('reps').get()
         reps = int(float(reps))
         # order = {0: "short_neck",
