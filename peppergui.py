@@ -413,13 +413,8 @@ class PepperControllerApp:
         self.output_text("[INFO]: Running standup 1.")
         text_list = self.configuration.conf["language"][self.language]["standup_1"]
         text = np.random.choice(text_list).encode("utf-8").replace("*wait*", "\\pau=4000\\")
+        text = text.replace("*waitshort*", "\\pau=1000\\")
         qi.async(lambda: self.robot.say(text))
-
-    def on_standup2_clicked(self):
-        self.output_text("[INFO]: Standup 2 is not defined!")
-
-    def on_standup3_clicked(self):
-        self.output_text("[INFO]: Standup 3 is not defined!")
 
     def on_sorry_clicked(self):
         self.output_text("[INFO]: Saying sorry")
@@ -479,7 +474,7 @@ class PepperControllerApp:
                     text = self.standup_cfg[k]["text"].encode("utf-8")
         if not "centrum" in title:
             if self.ask_for_standup(title):
-                qi.async(lambda: self.robot.say(text.replace("*wait*", "\\pau=4000\\")))
+                qi.async(lambda: self.robot.say(text.replace("*wait*", "\\pau=6000\\").replace("*waitshort*", "\\pau=500\\")))
             else:
                 self.robot.say(random.choice(["Dobře", "ok", "nevadí"]))
         else:
@@ -581,6 +576,7 @@ class PepperControllerApp:
         if state != "disabled":
             self.robot.autonomous_life_off()
         #work = self.work_list[widget_id]
+        self.robot.say("Pojďme si společně zacvičit. Udělejte mi prosím trochu prostor, abych se mohl pohybovat.")
         reps = self.builder.get_object('reps').get()
         reps = int(float(reps))
         # order = {0: "short_neck",

@@ -158,7 +158,7 @@ application_6:
   package: cz-g-testspokojenosti-dc9982/behavior_1
 application_7:
   name: Kvíz Osobnosti
-  package: untitled-4fccc1/behavior_1
+  package: osobnosti-4fccc1/behavior_1
 application_8:
   name: Kognitivní Trénink
   package: kognitiv-7095f1/behavior_1
@@ -211,7 +211,7 @@ language:
       - "moc mě to mrzí, ale nějak jsem se popletl."
       - "promiňte, pořád se ještě učím."
     offer:
-      - "Zatím bohužel neumím odpovídat na jakékoliv otázky. Můžeme si ale spolu popovídat na různá témata, zahrát si kvízy, trošku si zacvičit nebo vám můžu jenom tak něco vyprávět. Co byste nejradši?"
+      - "Zatím umím odpovídat jen na některé konkrétní otázky. Můžeme si ale spolu popovídat na různá témata, zahrát si kvízy, trošku si zacvičit nebo vám můžu jenom tak něco vyprávět. Co byste nejradši?"
       - "Co pro vás můžu udělat? Chcete si popovídat na nějaké téma, zahrát si kvíz nebo vědomostní hru, nebo si třeba zacvičit? Taky můžu jenom tak povídat o tom, co mě zrovna napadne."
       - "Chcete si se mnou popovídat na nějaké téma, nebo si třeba zahrát kvíz? Taky si můžeme zacvičit nebo můžu jenom tak něco povídat. Vyberte si."
     how_to:
