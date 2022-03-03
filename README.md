@@ -1,6 +1,6 @@
 # Pepper Controller
 
-This is a python API for controlling the humanoid robot Pepper. You can easily connect to the robot and control it either from the command line or you can implement the robot control into your existing python scripts. This software serves as an alternative to the official Choregraphe tool, which offers only graphical programming instead of full Python support. You can also control the robot, launch apps installed on the robot or teleoperate the robot from the GUI interface. The example scripts will help you to learn how to write your own Pepper app in a few lines of Python code, without the necessity to use Softbank software.   
+This is a software for controlling the humanoid robot Pepper. You can easily connect to the robot and control it either from the command line or you can implement the robot control into your existing python scripts. This software serves as an alternative to the official Choregraphe tool, which offers only graphical programming instead of full Python support. You can also control the robot, launch apps installed on the robot or teleoperate the robot from the GUI interface. The example scripts will help you to learn how to write your own Pepper app in a few lines of Python code, without the necessity to use Softbank software.   
 
 ## System requirements
 
