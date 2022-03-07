@@ -210,6 +210,9 @@ The core module of uour software is a Pepper class. There are basic functions to
 
 [Anastasia Ostapenko](https://www.linkedin.com/in/anastasia-ostapenko-1652561b3/)
 
+Daniel Kubista
+
+Petr Schimperk
 
 ## Licensing
 
@@ -218,7 +221,9 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 
+## Acknowledgement
 
+The software development was supported by the Technological Agency of the Czech Republic grant No. TL02000362 HUMR - The Use of Humanoid Robot in Promoting Active Ageing in Older Men and Women.
 
 
 
