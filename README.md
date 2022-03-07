@@ -1,3 +1,4 @@
+
 # Pepper Controller
 
 This is a software for controlling the humanoid robot Pepper. You can easily connect to the robot and control it either from the command line or you can implement the robot control into your existing python scripts. This software serves as an alternative to the official Choregraphe tool, which offers only graphical programming instead of full Python support. You can also control the robot, launch apps installed on the robot or teleoperate the robot from the GUI interface. The example scripts will help you to learn how to write your own Pepper app in a few lines of Python code, without the necessity to use Softbank software.   
@@ -48,6 +49,7 @@ Install dependencies
 
 `pip2 install -r ./requirements.txt` 
 
+
 ## GUI Interface
 
 The easist way to control Pepper robot is via the GUI interface:
@@ -59,7 +61,7 @@ The easist way to control Pepper robot is via the GUI interface:
 The window will appear:
 
 
-![Image](gui.png)
+![Image](https://github.com/incognite-lab/Pepper-Controller/blob/main/gui.png)
 
 
 Firstly, you need to enter the correct IP address (press the robot's chest button to obtain it) to the upper left box and press "Connect"
@@ -75,8 +77,9 @@ The GUI provides support for running Choregraphe projects that are already insta
 
 Other properties of the GUI can be edited through the [conf.yaml](conf.yaml) file.
 
-## GUI edit tutorial
-GUI was made in Pygubu Designer (https://github.com/alejandroautalan/pygubu-designer)
+## GUI customization
+
+If you want to customize GUI, there is a tool to easily edit the layout without programming skills. The GUI layout is based on Pygubu Designer (https://github.com/alejandroautalan/pygubu-designer)
 
 Install Pygubu Designer:
 
@@ -89,6 +92,9 @@ Run Pygubu Designer:
 Open .ui file
 
 File > Open > Pick "pepper_controller.ui" 
+
+You can modify the basic structure of the layout, add new fuctions or assign commands or applications to the specific buttons. The ui file contains whole structure of the the GUI.
+
 
 ## Command line examples
 
@@ -152,11 +158,14 @@ The second example shows a more complex application:
 
 You can also use this [script](demo.py) as a starting point to write your application.
 
+## Pepper class
+
+The core module of uour software is a Pepper class. There are basic functions to operate robot from the Python environement. You can easily write your own software for the robot based on these functions. 
+
 
 ## List of methods
 
-
-The core of our software is Pepper class, a wrapper around naoqi. It will help you to write Python applications. Here is a list all methods in Pepper class.
+ Here is a list all methods in Pepper class.
 
 | Language | Vision | Motorics | System |
 | - | - | - | - |
@@ -186,7 +195,7 @@ The core of our software is Pepper class, a wrapper around naoqi. It will help y
 ## Authors
 
 
-![alt text](incognitelogo.png "test_work")
+![alt text](https://github.com/incognite-lab/Pepper-Controller/blob/main/incognitelogo.png "test_work")
 
 
 [Incognite lab - CIIRC CTU](https://incognite.ciirc.cvut.cz) 
@@ -202,6 +211,11 @@ The core of our software is Pepper class, a wrapper around naoqi. It will help y
 [Anastasia Ostapenko](https://www.linkedin.com/in/anastasia-ostapenko-1652561b3/)
 
 
+## Licensing
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 
 
