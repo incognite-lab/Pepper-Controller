@@ -7,6 +7,6 @@ scp==0.14.1
 numpy
 pillow
 pygubu
-speechrecognition
+speechrecognition==3.8.1
 tk
 gtts
