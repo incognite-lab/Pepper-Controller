@@ -7,48 +7,58 @@ This is a software for controlling the humanoid robot Pepper. You can easily con
 
 Ubuntu up to 20.04 
 
-Python 2.7
+Python 2.7 (or Python 3.5.6 with limited functionality)
 
-Pepper humanoid robot with NAOqi 2.5 (will not work with NAOqi 2.9.5 or newer)
+Pepper humanoid robot with NAOqi 2.5 (will not work with NAOqi 2.9 or newer)
 
 
 ## Installation
 
-Install dependencies:
+Install dependencies for the GUI:
 
 
-`sudo apt install python-tk opencv-python`
-
-
-Install Pepper SDK 2.5.10 library for Python 2.7 from: https://www.softbankrobotics.com/emea/en/support/pepper-naoqi-2-9/downloads-softwares
-
-
-Add path to your .bashrc: 
-
-
-`export PYTHONPATH=${PYTHONPATH}:~/pynaoqi/lib/python2.7/site-packages` 
-
-
-Test the library:
-
-
-`python2`
-
-
-`import naoqi`
-
+`sudo apt-get install python-tk opencv-python`
 
 Clone this repository to your computer:
 
 `git clone https://github.com/incognite-lab/Pepper-Controller.git`
 
-
 `cd Pepper-Controller`
 
-Install dependencies
+### Python 2.7
+
+If you want to use all functions from robot.py, you need the Python 2.7 version. Here is the installation procedure.
+
+
+- Download the Pepper SDK 2.5.10 library for Python 2.7 from: https://www.softbankrobotics.com/emea/en/support/pepper-naoqi-2-9/downloads-softwares
+
+
+- Add path to the downloaded pynaoqi SDK to your .bashrc: 
+
+
+`export PYTHONPATH=${PYTHONPATH}:~/pynaoqi/lib/python2.7/site-packages` 
+
+
+- Test the library:
+
+
+`python2`
+
+
+`import qi`
+
+- Install dependencies
 
 `pip2 install -r ./requirements.txt` 
 
+### Python 3.5.6
+
+Alternatively, you can install the conda env for Python 3.5.6, which uses a half-remade [qi library](https://pypi.org/project/qi/). However, some functionalities like touch detection etc. will not work. You can install it as follows:
+
+```
+conda env create -f python3env.yml
+conda activate pepperenv                
+```
 
 ## GUI Interface
 
