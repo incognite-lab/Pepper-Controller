@@ -9,7 +9,7 @@ Ubuntu up to 20.04
 
 Python 2.7
 
-Pepper humanoid robot
+Pepper humanoid robot with NAOqi 2.5 (will not work with NAOqi 2.9.5 or newer)
 
 
 ## Installation
