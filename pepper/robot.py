@@ -157,8 +157,21 @@ class Pepper:
         :Example:
         >>> pepper.point_at(1.0, 1.0, 0.0, "RArm", 0)
         """
-        speed = 0.5  # 50 % of speed
+        speed = 0.2  # 50 % of speed
         self.tracker_service.pointAt(effector_name, [x, y, z], frame, speed)
+    
+    def point_at_face(self):
+        """
+        Point end-effector in cartesian space
+        :Example:
+        >>> pepper.point_at(1.0, 1.0, 0.0, "RArm", 0)
+        """
+        self.tracker_service.registerTarget("Face", 0.1)
+        self.tracker_service.track("Face")
+
+        self.tracker_service.pointAt("Face", 0, 0, 0.3)
+        #speed = 0.5  # 50 % of speed
+        #self.tracker_service.pointAt(effector_name, [x, y, z], frame, speed)
 
     def turn_around(self, speed):
         """
