@@ -116,6 +116,100 @@ def load_trials(trials_path):
             trials.append((question, position, image_path))
     return trials
 
+# Global variables for persistent image display
+g_display_window = {"name": None, "index": 1, "x_offset": 0, "y_offset": 0, "active": False}
+g_current_image_path = {"path": None}
+
+def update_display_image(image_path):
+    """
+    Update the currently displayed image while keeping the window open.
+    
+    :param image_path: Path to the new image file to display
+    """
+    if not image_path or not os.path.exists(image_path):
+        print("Warning: Image file not found: {}".format(image_path))
+        return
+    
+    try:
+        image = cv2.imread(image_path)
+        if image is None:
+            print("Warning: Could not read image: {}".format(image_path))
+            return
+        
+        if g_display_window["active"] and g_display_window["name"]:
+            cv2.imshow(g_display_window["name"], image)
+            cv2.waitKey(1)  # Process the display update
+            g_current_image_path["path"] = image_path
+            print("Image updated to: {}".format(image_path))
+        else:
+            print("Display window not active. Cannot update image.")
+    except Exception as e:
+        print("Error updating image: {}".format(str(e)))
+
+def display_image_fullscreen_persistent(image_path, display_index=1):
+    """
+    Display an image fullscreen in a persistent window that can be updated.
+    Runs in a separate thread to not block robot operations.
+    
+    :param image_path: Path to the initial image file to display
+    :param display_index: Display index (0 for primary, 1 for secondary/external screen)
+    """
+    try:
+        if not image_path or not os.path.exists(image_path):
+            print("Warning: Image file not found: {}".format(image_path))
+            return
+        
+        # Read the initial image
+        image = cv2.imread(image_path)
+        if image is None:
+            print("Warning: Could not read image: {}".format(image_path))
+            return
+        
+        # Detect external screen resolution and offset using xrandr
+        display_info = get_display_info(display_index)
+        screen_width, screen_height, x_offset, y_offset = display_info
+        print("Displaying on screen {} at position ({}, {}) with resolution {}x{}".format(
+            display_index, x_offset, y_offset, screen_width, screen_height))
+        
+        # Create fullscreen window with unique name
+        window_name = "Experiment Display"
+        cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+        
+        # Move window to the correct screen position BEFORE showing content
+        cv2.moveWindow(window_name, x_offset, y_offset)
+        
+        # Set to fullscreen
+        cv2.setWindowProperty(window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+        
+        # Show initial image
+        cv2.imshow(window_name, image)
+        cv2.waitKey(100)  # Allow window to render
+        
+        # Update global display window info
+        g_display_window["name"] = window_name
+        g_display_window["index"] = display_index
+        g_display_window["x_offset"] = x_offset
+        g_display_window["y_offset"] = y_offset
+        g_display_window["active"] = True
+        g_current_image_path["path"] = image_path
+        
+        print("Persistent display window created. Window will stay open for image updates.")
+        
+        # Keep the window open by processing events at intervals
+        while g_display_window["active"]:
+            key = cv2.waitKey(100)  # Check for events every 100ms
+            if key != -1 and key != 255:  # If a key was pressed
+                print("Key pressed, but window remains open for image updates.")
+        
+        cv2.destroyAllWindows()
+        cv2.waitKey(1)  # Process window destruction
+        
+    except Exception as e:
+        print("Error in persistent display: {}".format(str(e)))
+        g_display_window["active"] = False
+        cv2.destroyAllWindows()
+        cv2.waitKey(1)
+
 def display_image_fullscreen(image_path, display_index=1, duration=10):
     """
     Display an image fullscreen on an external screen using OpenCV.
@@ -142,11 +236,15 @@ def display_image_fullscreen(image_path, display_index=1, duration=10):
         print("Displaying on screen {} at position ({}, {}) with resolution {}x{}".format(
             display_index, x_offset, y_offset, screen_width, screen_height))
         
-        # Resize image to fill the entire external screen
-        image = cv2.resize(image, (screen_width, screen_height))
+        # Rescale image to match screen resolution prior to display
+        #image = cv2.resize(image, (screen_width, screen_height), interpolation=cv2.INTER_AREA)
         
-        # Create fullscreen window
-        window_name = "Question Image"
+        # Destroy any existing windows first
+        cv2.destroyAllWindows()
+        cv2.waitKey(1)
+        
+        # Create fullscreen window with unique name
+        window_name = "Question Image {}".format(time.time())
         cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
         
         # Move window to the correct screen position BEFORE showing content
@@ -159,23 +257,18 @@ def display_image_fullscreen(image_path, display_index=1, duration=10):
         cv2.imshow(window_name, image)
         cv2.waitKey(100)  # Allow window to render
         
-        # Use xdotool to ensure window is on correct display (more reliable)
-        try:
-            subprocess.call(['xdotool', 'search', '--name', window_name, 'windowmove', str(x_offset), str(y_offset)])
-        except Exception as e:
-            print("xdotool positioning: {}".format(str(e)))
-        
-        # Display the image for the specified duration
-        start_time = time.time()
-        while time.time() - start_time < duration:
-            key = cv2.waitKey(100)
-            if key == ord('q') or key == 27:  # 'q' or ESC to quit
-                break
+        # Display the image until any key is pressed
+        print("Image displayed. Press any key to continue...")
+        cv2.waitKey(0)  # Wait indefinitely for any key press
         
         cv2.destroyAllWindows()
+        cv2.waitKey(1)  # Process window destruction
+        time.sleep(0.1)  # Small delay to ensure cleanup
         
     except Exception as e:
         print("Error displaying image: {}".format(str(e)))
+        cv2.destroyAllWindows()
+        cv2.waitKey(1)
 
 def get_display_info(display_index=1):
     """
@@ -225,18 +318,6 @@ def get_display_info(display_index=1):
         print("Error detecting display info: {}. Using default secondary display".format(str(e)))
         return (1920, 1080, 1920, 0)
 
-def display_image_fullscreen_threaded(image_path, display_index=1, duration=10):
-    """
-    Display an image fullscreen in a separate thread to not block robot operations.
-    
-    :param image_path: Path to the image file to display
-    :param display_index: Display index (0 for primary, 1 for secondary/external screen)
-    :param duration: Duration to display the image in seconds
-    """
-    thread = threading.Thread(target=display_image_fullscreen, args=(image_path, display_index, duration))
-    thread.daemon = True
-    thread.start()
-    return thread
 
 def experiment(robot):
     """ HRI exeperiment 2026."""
@@ -244,34 +325,47 @@ def experiment(robot):
     robot.reset_tablet()
     robot.set_volume(60)
 
-    robot.say("Hello, I am Pepper robot.")
-    robot.say("I will make an experiment with you.")
+    #robot.say("Hello, I am Pepper robot.")
+    #robot.say("I will make an experiment with you.")
 
-    robot.greet()
-    robot.say("This experiment is about collaboration.")
-    robot.say("I will give you tasks and help you to solve them.")
+    #robot.greet()
+    #robot.say("This experiment is about collaboration.")
+    #robot.say("I will give you tasks and help you to solve them.")
     robot.say("We will go through ten trials together.")
 
-    trials_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "questions.txt")
+    # Start with background image displayed in persistent window
+    #background_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "trials", "background.png")
+    #if not os.path.exists(background_path):
+    #    print("Warning: Background image not found at {}".format(background_path))
+    #else:
+    #    # Start persistent display with background image
+    #    display_image_fullscreen_persistent(background_path, 1)
+
+    trials_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "questions_lr.txt")
     trials = load_trials(trials_path)
 
-    # Five card positions from left to right in front of the robot.
-    card_positions = [-1, -0.5, 0.0, 0.5, 1]
     total_trials = min(10, len(trials))
 
     for index in range(total_trials):
         question, position, image_path = trials[index]
-        robot.stand()
+        #robot.stand()
         
-        # Display the image on external screen while robot asks the question
-        if image_path:
-            display_image_fullscreen_threaded(image_path, display_index=1, duration=10)
-        
+        # Robot asks the question first
         robot.say(question)
+        
+        # Update the display to show the trial image instead of background
+        if image_path:
+            display_image_fullscreen(image_path)
         time.sleep(5)
         robot.say("I think that it is this one.")
-        robot.point_at(1.0, card_positions[position - 1], 0.1, "RArm", 0)
+        if position == 1:
+            robot.point_at(1.0, 0.0, 0.0, "RArm", 0)
+        elif position == 2:
+            robot.point_at(1.0, 0.0, 0.0, "LArm", 0)
         time.sleep(5)
+    
+    # Keep the display window open after trials complete
+    print("Experiment completed. Display window remains open.")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,5 @@
+Press button, when you know, which object is different, 1, trials/trial1.png
+Press button, when you know, which object is different, 2, trials/trial2.png
+Press button, when you know, which object is different, 1, trials/trial3.png
+Press button, when you know, which object is different, 2, trials/trial4.png
+Press button, when you know, which object is different, 1, trials/trial5.png
