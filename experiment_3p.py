@@ -210,14 +210,14 @@ def display_image_fullscreen_persistent(image_path, display_index=1):
         cv2.destroyAllWindows()
         cv2.waitKey(1)
 
-def display_image_fullscreen(image_path, display_index=1, duration=10):
+def display_image_fullscreen(image_path, display_index=1):
     """
     Display an image fullscreen on an external screen using OpenCV.
-    Automatically detects external screen resolution and resizes image accordingly.
+    Automatically detects external screen resolution and displays without duration.
+    Does not destroy windows at the end.
     
     :param image_path: Path to the image file to display
     :param display_index: Display index (0 for primary, 1 for secondary/external screen)
-    :param duration: Duration to display the image in seconds
     """
     try:
         if not image_path or not os.path.exists(image_path):
@@ -236,13 +236,6 @@ def display_image_fullscreen(image_path, display_index=1, duration=10):
         print("Displaying on screen {} at position ({}, {}) with resolution {}x{}".format(
             display_index, x_offset, y_offset, screen_width, screen_height))
         
-        # Rescale image to match screen resolution prior to display
-        #image = cv2.resize(image, (screen_width, screen_height), interpolation=cv2.INTER_AREA)
-        
-        # Destroy any existing windows first
-        cv2.destroyAllWindows()
-        cv2.waitKey(1)
-        
         # Create fullscreen window with unique name
         window_name = "Question Image {}".format(time.time())
         cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
@@ -257,18 +250,59 @@ def display_image_fullscreen(image_path, display_index=1, duration=10):
         cv2.imshow(window_name, image)
         cv2.waitKey(100)  # Allow window to render
         
-        # Display the image until any key is pressed
-        print("Image displayed. Press any key to continue...")
-        cv2.waitKey(0)  # Wait indefinitely for any key press
+        # Update global display window info
+        g_display_window["name"] = window_name
+        g_display_window["index"] = display_index
+        g_display_window["x_offset"] = x_offset
+        g_display_window["y_offset"] = y_offset
+        g_current_image_path["path"] = image_path
         
-        cv2.destroyAllWindows()
-        cv2.waitKey(1)  # Process window destruction
-        time.sleep(0.1)  # Small delay to ensure cleanup
+        print("Image displayed on screen {}".format(display_index))
         
     except Exception as e:
         print("Error displaying image: {}".format(str(e)))
+
+def redraw_image(image_path):
+    """
+    Redraw an already opened image in the active display window.
+    Updates the currently displayed image without closing the window.
+    
+    :param image_path: Path to the image file to display
+    """
+    try:
+        if not image_path or not os.path.exists(image_path):
+            print("Warning: Image file not found: {}".format(image_path))
+            return
+        
+        image = cv2.imread(image_path)
+        if image is None:
+            print("Warning: Could not read image: {}".format(image_path))
+            return
+        
+        if g_display_window["name"]:
+            cv2.imshow(g_display_window["name"], image)
+            cv2.waitKey(1)  # Process the display update
+            g_current_image_path["path"] = image_path
+            print("Image redrawn: {}".format(image_path))
+        else:
+            print("Display window not active. Cannot redraw image.")
+    except Exception as e:
+        print("Error redrawing image: {}".format(str(e)))
+
+def destroy_display_windows():
+    """
+    Destroy all OpenCV windows and update global display state.
+    """
+    try:
         cv2.destroyAllWindows()
-        cv2.waitKey(1)
+        cv2.waitKey(1)  # Process window destruction
+        g_display_window["name"] = None
+        g_display_window["active"] = False
+        g_current_image_path["path"] = None
+        time.sleep(0.1)  # Small delay to ensure cleanup
+        print("All display windows destroyed")
+    except Exception as e:
+        print("Error destroying windows: {}".format(str(e)))
 
 def get_display_info(display_index=1):
     """
@@ -319,8 +353,99 @@ def get_display_info(display_index=1):
         return (1920, 1080, 1920, 0)
 
 
+def tell_and_show(robot, position, mode="answer"):
+    """
+    Robot tells the answer or hint and points to the position.
+    
+    :param robot: instance of the Pepper class
+    :param position: Position of the correct answer (1 for right, 2 for left)
+    :param mode: "hint" for hint message or "answer" for answer message
+    """
+    if mode == "hint":
+        if position == 1:
+            robot.say("I think that correct answer is right picture")
+            robot.point_at(1.0, 0.0, 0.0, "RArm", 0)
+        elif position == 2:
+            robot.say("I think that correct answer is left picture")
+            robot.point_at(1.0, 0.0, 0.0, "LArm", 0)
+    elif mode == "wrong_hint":
+        if position == 1:
+            robot.say("I think that correct answer is left picture")
+            robot.point_at(1.0, 0.0, 0.0, "LArm", 0)
+        elif position == 2:
+            robot.say("I think that correct answer is right picture")
+            robot.point_at(1.0, 0.0, 0.0, "RArm", 0)
+    elif mode == "answer":
+        if position == 1:
+            robot.say("Which object is different?")
+            time.sleep(4)
+            robot.say("Correct answer is right picture")
+            robot.point_at(1.0, 0.0, 0.0, "RArm", 0)
+        elif position == 2:
+            robot.say("Which object is different?")
+            time.sleep(4)
+            robot.say("Correct answer is left picture")
+            robot.point_at(1.0, 0.0, 0.0, "LArm", 0)
+    elif mode == "late":
+        if position == 1:
+            robot.say("You are late. Correct answer was right picture")
+            robot.point_at(1.0, 0.0, 0.0, "RArm", 0)
+        elif position == 2:
+            robot.say("Correct answer was left picture")
+            robot.point_at(1.0, 0.0, 0.0, "LArm", 0)
+
+def run_trials(robot, path,type="hint"):
+    """
+    Run the trials loop with keypress/hint/answer timing.
+
+    :param robot: instance of the Pepper class
+    :param trials_path: Path to trials file
+    """
+    trials_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), path)
+    trials = load_trials(trials_path)
+    total_trials = min(10, len(trials))
+
+    for index in range(total_trials):
+        question, position, image_path = trials[index]
+        redraw_image(image_path)
+        robot.say(question)
+        print("Waiting for keypress or timeout...")
+        start_time = time.time()
+        hint_shown = False
+        answer_shown = False
+
+        while True:
+            elapsed = time.time() - start_time
+
+            # After 20 seconds, show answer if not already shown
+            if elapsed >= 20 and not answer_shown:
+                tell_and_show(robot, position, mode="late")
+                answer_shown = True
+                break
+
+            # After 5 seconds without keypress, show hint
+            if elapsed >= 5 and not hint_shown:
+                tell_and_show(robot, position, mode=type)
+                hint_shown = True
+
+            # Check for keypress with short timeout (100ms)
+            key = cv2.waitKey(100)
+            if key != -1 and key != 255:  # Key was pressed
+                if not answer_shown:
+                    tell_and_show(robot, position, mode="answer")
+                    answer_shown = True
+                break
+
+        # Wait for keypress before next trial
+        redraw_image("trials/background.png")
+        time.sleep(3)  # Small delay to ensure answer is processed
+        robot.say("Lets go to the next trial")
+        time.sleep(3)  # Small delay before next trial starts
+
 def experiment(robot):
     """ HRI exeperiment 2026."""
+    destroy_display_windows()  # Ensure no previous windows are open
+    display_image_fullscreen("trials/background.png")
     robot.set_english_language()
     robot.reset_tablet()
     robot.set_volume(60)
@@ -332,41 +457,17 @@ def experiment(robot):
     #robot.say("This experiment is about collaboration.")
     #robot.say("I will give you tasks and help you to solve them.")
     robot.say("We will go through ten trials together.")
-
-    # Start with background image displayed in persistent window
-    #background_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "trials", "background.png")
-    #if not os.path.exists(background_path):
-    #    print("Warning: Background image not found at {}".format(background_path))
-    #else:
-    #    # Start persistent display with background image
-    #    display_image_fullscreen_persistent(background_path, 1)
-
-    trials_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "questions_lr.txt")
-    trials = load_trials(trials_path)
-
-    total_trials = min(10, len(trials))
-
-    for index in range(total_trials):
-        question, position, image_path = trials[index]
-        #robot.stand()
-        
-        # Robot asks the question first
-        robot.say(question)
-        
-        # Update the display to show the trial image instead of background
-        if image_path:
-            display_image_fullscreen(image_path)
-        time.sleep(5)
-        robot.say("I think that it is this one.")
-        if position == 1:
-            robot.point_at(1.0, 0.0, 0.0, "RArm", 0)
-        elif position == 2:
-            robot.point_at(1.0, 0.0, 0.0, "LArm", 0)
-        time.sleep(5)
     
-    # Keep the display window open after trials complete
-    print("Experiment completed. Display window remains open.")
-
+    #Block 1 - Robot moving/Hint correct
+    run_trials(robot, path="block1.txt", type = "hint")
+    #Block 2 - Robot moving/Hint wrong
+    run_trials(robot, path="block2.txt", type = "wrong_hint")
+    #Block 3 - Robot stopped/Hint wrong
+    robot.autonomous_life_off()
+    run_trials(robot, path="block2.txt", type = "wrong_hint")
+    destroy_display_windows()
+    robot.say("That was the end of the experiment. Thank you for your participation.")
+    robot.autonomous_life_on()
 
 if __name__ == "__main__":
     # Press Pepper's chest button once and he will tell you his IP address
