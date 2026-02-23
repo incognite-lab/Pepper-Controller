@@ -450,12 +450,12 @@ def experiment(robot):
     robot.reset_tablet()
     robot.set_volume(60)
 
-    #robot.say("Hello, I am Pepper robot.")
-    #robot.say("I will make an experiment with you.")
+    robot.say("Hello, I am Pepper robot.")
+    robot.say("I will make an experiment with you.")
 
-    #robot.greet()
-    #robot.say("This experiment is about collaboration.")
-    #robot.say("I will give you tasks and help you to solve them.")
+    robot.greet()
+    robot.say("This experiment is about collaboration.")
+    robot.say("I will give you tasks and help you to solve them.")
     robot.say("We will go through ten trials together.")
     
     #Block 1 - Robot moving/Hint correct
